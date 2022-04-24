@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2C2BC0B5-3754-442A-8DE1-D80B40069065}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DivinationApp</RootNamespace>
+    <AssemblyName>DivinationApp</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.2.10, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.2\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common.cs" />
+    <Compile Include="Const.cs" />
+    <Compile Include="DataGridViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DrawInsen.cs" />
+    <Compile Include="DrawIsouhouBase.cs" />
+    <Compile Include="DrawJuniSinKanHou.cs" />
+    <Compile Include="DrawKoutenUn.cs" />
+    <Compile Include="DrawShukumei.cs" />
+    <Compile Include="EiseiHou.cs" />
+    <Compile Include="ExcelReader.cs" />
+    <Compile Include="ExplanationReader.cs" />
+    <Compile Include="Finder.cs" />
+    <Compile Include="FinderCustom.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddTab.Designer.cs">
+      <DependentUpon>FormAddTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditCareer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditCareer.Designer.cs">
+      <DependentUpon>FormEditCareer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormExcelPictureTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormExcelPictureTest.Designer.cs">
+      <DependentUpon>FormExcelPictureTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormExplanation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormExplanation.Designer.cs">
+      <DependentUpon>FormExplanation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFinder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFinder.Designer.cs">
+      <DependentUpon>FormFinder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFinderCustom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFinderCustom.Designer.cs">
+      <DependentUpon>FormFinderCustom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormJuniSinKanHou.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormJuniSinKanHou.Designer.cs">
+      <DependentUpon>FormJuniSinKanHou.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormKonkihou.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKonkihou.Designer.cs">
+      <DependentUpon>FormKonkihou.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOption.Designer.cs">
+      <DependentUpon>FormOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPersonInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPersonInfo.Designer.cs">
+      <DependentUpon>FormPersonInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShugoSinHou.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShugoSinHou.Designer.cs">
+      <DependentUpon>FormShugoSinHou.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUnseiViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUnseiViewer.Designer.cs">
+      <DependentUpon>FormUnseiViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FromKyokiSimulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromKyokiSimulation.Designer.cs">
+      <DependentUpon>FromKyokiSimulation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicHelper.cs" />
+    <Compile Include="IniFile.cs" />
+    <Compile Include="InsenYousen.cs" />
+    <Compile Include="Insen\AngouSouren.cs" />
+    <Compile Include="Insen\Chusatu.cs" />
+    <Compile Include="Insen\DaiSangouKaikyokuDaiHankai.cs" />
+    <Compile Include="Insen\Heihitumeisiki.cs" />
+    <Compile Include="Insen\JozaiJoboJokan.cs" />
+    <Compile Include="Insen\KakeiShuuin.cs" />
+    <Compile Include="Insen\KansiHou.cs" />
+    <Compile Include="Insen\KansiSouha.cs" />
+    <Compile Include="Insen\KansiSouren.cs" />
+    <Compile Include="Insen\KyokiToukan.cs" />
+    <Compile Include="Insen\RitinAndNetin.cs" />
+    <Compile Include="Insen\ShunSui.cs" />
+    <Compile Include="Insen\ZensiShuuin.cs" />
+    <Compile Include="JundakuHou.cs" />
+    <Compile Include="JuniSinKanHou.cs" />
+    <Compile Include="JunkanHou.cs" />
+    <Compile Include="Konkihou.cs" />
+    <Compile Include="KyokiSimulation.cs" />
+    <Compile Include="Kyokuhou.cs" />
+    <Compile Include="ListViewEx.cs" />
+    <Compile Include="MIkyouMichuMijaku.cs" />
+    <Compile Include="OutputPDF.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetuiribiTable.cs" />
+    <Compile Include="ShugosinUtil.cs" />
+    <Compile Include="TabControlEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TableMng.cs" />
+    <Compile Include="types.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddTab.resx">
+      <DependentUpon>FormAddTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditCareer.resx">
+      <DependentUpon>FormEditCareer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormExcelPictureTest.resx">
+      <DependentUpon>FormExcelPictureTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormExplanation.resx">
+      <DependentUpon>FormExplanation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFinder.resx">
+      <DependentUpon>FormFinder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFinderCustom.resx">
+      <DependentUpon>FormFinderCustom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormJuniSinKanHou.resx">
+      <DependentUpon>FormJuniSinKanHou.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKonkihou.resx">
+      <DependentUpon>FormKonkihou.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOption.resx">
+      <DependentUpon>FormOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPersonInfo.resx">
+      <DependentUpon>FormPersonInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShugoSinHou.resx">
+      <DependentUpon>FormShugoSinHou.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUnseiViewer.resx">
+      <DependentUpon>FormUnseiViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromKyokiSimulation.resx">
+      <DependentUpon>FromKyokiSimulation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
