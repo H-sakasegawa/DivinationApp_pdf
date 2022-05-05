@@ -43,7 +43,7 @@ namespace DivinationApp
         PictureBox pictureBox = null;
         //Graphics g;
         protected PointF drawAreaOffset = new PointF(0,0);
-        GraphicsBase g;
+        public GraphicsBase g;
 
         protected int offsetX = 5;
         protected int offsetY = 20;
@@ -267,7 +267,7 @@ namespace DivinationApp
         /// <returns></returns>
         public int GetLineOffsetX()
         {
-            return offsetX;
+            return offsetX ;
         }
         /// <summary>
         /// ライン描画位置 Y方向オフセット値取得

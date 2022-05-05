@@ -213,75 +213,86 @@ namespace DivinationApp
         /// <param name="person"></param>
         public void DispInsenDetailInfo(Person person, ListBox listBox)
         {
+            List<InsenDetail> lstDetail = new List<InsenDetail>();
+            GetInsenDetailInfo(person, ref lstDetail);
+            listBox.Items.Clear();
+            foreach ( var item in lstDetail)
+            {
+                listBox.Items.Add(item);
+            }
+        }
+        public void GetInsenDetailInfo(Person person, ref List<InsenDetail> lstDetail)
+        {
             string sExpressionType = "陰占特徴";
             string str = "";
 
-            listBox.Items.Clear();
+            lstDetail.Clear();
+
             //三角暗合
             if (person.IsSankakuAngou())
             {
                 str = "三角暗合";
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SANKAKUANGOU));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SANKAKUANGOU));
             }
             //虚気透干
             KyokiToukan kyokiToukan = new KyokiToukan();
             if (kyokiToukan.IsKyokiTokan_Shukumei(person))
             {
                 str = "虚気透干";
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KYOKITOUKAN0));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KYOKITOUKAN0));
             }
             //閉畢命式
             str = Heihitumeisiki.GetHeihitumeisiki(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_HEIHITUMEISIKI));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_HEIHITUMEISIKI));
             }
             //閟畢命式
             str = Hihitumeisiki.GetHihitumeisiki(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_HIHITUMEISIKI));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_HIHITUMEISIKI));
             }
             //争財、争母、争官
             str = JozaiJoboJokan.GetJouzai(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_JOUZAI));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_JOUZAI));
             }
             str = JozaiJoboJokan.GetJoubo(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_JOUBO));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_JOUBO));
             }
             str = JozaiJoboJokan.GetJoukan(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_JOUKAN));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_JOUKAN));
             }
             //春水
             str = ShunSui.GetShunSuii(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUNSUI));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUNSUI));
             }
             //日座中殺
             str = Chusatu.GetNichizaChusatu(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_NITIZACHUSATUI));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_NITIZACHUSATUI));
             }
             //日居中殺
             str = Chusatu.GetNikkyoChusatu(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_NIKKYOCHUSATUI));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_NIKKYOCHUSATUI));
             }
             
             //宿命全中殺
             str = Chusatu.GetShukumeiZenChusatu(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUKUMEI_ZENCHUSATU));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUKUMEI_ZENCHUSATU));
             }
             else
             {
@@ -289,68 +300,68 @@ namespace DivinationApp
                 str = Chusatu.GetShukumeiNiChusatu(person);
                 if (!string.IsNullOrEmpty(str))
                 {
-                    listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUKUMEI_NICHUSATU));
+                    lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUKUMEI_NICHUSATU));
                 }
                 //互換中殺
                 str = Chusatu.GetShukumeiGokanChusatu(person);
                 if (!string.IsNullOrEmpty(str))
                 {
-                    listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUKUMEI_GOKANCHUSATU));
+                    lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_SHUKUMEI_GOKANCHUSATU));
                 }
             }
             //天合地破
             str = KansiHou.GetTengouChiha(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENGOU_CHIHA));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENGOU_CHIHA));
             }
             //天殺地合
             str = KansiHou.GetTensatuChigou(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENSATU_CHIGOU));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENSATU_CHIGOU));
             }
             //天剋地合
             str = KansiHou.GetTenkokuChigou(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENKOKU_CHIGOU));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENKOKU_CHIGOU));
             }
             //天殺地冲
             str = KansiHou.GetTensatuChichu(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENSATU_CHICHU));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENSATU_CHICHU));
             }
             //天殺地破
             str = KansiHou.GetTensatuChiha(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENSATU_CHIHA));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENSATU_CHIHA));
             }
             //天剋地破
             str = KansiHou.GetTenkokuChiha(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENKOKU_CHIHA));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENKOKU_CHIHA));
             }
             //天合地合
             str = KansiHou.GetTengouChigou(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENGOU_CHIGOU));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENGOU_CHIGOU));
             }
             //家系集印
             str = KakeiShuuin.GetKakeiShuuin(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KAKEI_SHUUIN));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KAKEI_SHUUIN));
             }
             //全支集印
             str = ZensiShuuin.GetZensiShuuin(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_ZENSI_SHUUIN));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_ZENSI_SHUUIN));
             }
 
             //律音と納音
@@ -358,32 +369,32 @@ namespace DivinationApp
             if (!string.IsNullOrEmpty(str))
             {
                 string s = "干支圧伏";
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_RITIN_NATIN));
-                listBox.Items.Add(new InsenDetail(s, s, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANSI_ATUJOU));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_RITIN_NATIN));
+                lstDetail.Add(new InsenDetail(s, s, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANSI_ATUJOU));
             }
             //暗合双連
             str = AngouSouren.GetAngouSouren(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_ANGOU_SOUREN));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_ANGOU_SOUREN));
             }
             //大三合会局、大半会
             str = DaiSangouKaikyokuDaiHankai.GetDaiSangouKaikyokuDaiHankai(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_DAISANGOU_DAIHANKAI));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_DAISANGOU_DAIHANKAI));
             }
             //干支双連
             str = KansiSouren.GetKansiSouren(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANSI_SOUREN));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANSI_SOUREN));
             }
             //干支双破
             str = KansiSouha.GetKansiSouha(person);
             if (!string.IsNullOrEmpty(str))
             {
-                listBox.Items.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANSI_SOUHA));
+                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANSI_SOUHA));
             }
 
         }
@@ -400,15 +411,54 @@ namespace DivinationApp
         {
             person = _person;
         }
+
+        /// <summary>
+        /// 五行循環
+        /// </summary>
+        /// <returns></returns>
+        public bool GetJunkanHou(out int[] junkanHouNo)
+        {
+            string kiseiAttr = "";
+            string siseiAttr = "";
+            bool bGogyoJunkan = JunkanHou.GetJunkanHouAttr(person, ref siseiAttr, ref kiseiAttr);
+
+            junkanHouNo = new int[5];
+            if (!string.IsNullOrEmpty(siseiAttr))
+            {
+                for (int i = 0; i < person.judaiShuseiAry.Length; i++)
+                {
+                    junkanHouNo[i] = JunkanHou.GetCreateDistanceFromSiseiToN(siseiAttr, kiseiAttr, person.judaiShuseiAry[i]);
+                }
+                bGogyoJunkan = JunkanHou.GetJunkanHouAttr(person, ref siseiAttr, ref kiseiAttr);
+            }
+
+            return bGogyoJunkan;
+        }
+
+
+
+
         /// <summary>
         /// 陽占 特徴表示
         /// </summary>
         /// <param name="person"></param>
         public void DispYousennDetailInfo(ListBox listBox)
         {
+            List<YousenDetail> lstDetail = new List<YousenDetail>();
+            GetYousennDetailInfo(lstDetail);
+            listBox.Items.Clear();
+            foreach (var item in lstDetail)
+            {
+                listBox.Items.Add(item);
+            }
+
+
+        }
+        public void GetYousennDetailInfo(List<YousenDetail> lstDetail)
+        {
             string sExpressionType = "陽占特徴";
             string str = "";
-            listBox.Items.Clear();
+            lstDetail.Clear();
 
             //局法（凶運）表示
             Kyokuhou kyokuHou = new Kyokuhou();
@@ -420,7 +470,7 @@ namespace DivinationApp
                 if (item.chkResult.matchCount > 1) str += string.Format("[{0}]", item.chkResult.matchCount);
 
 
-                listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_KYOKUHOU_KYOUN));
+                lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_KYOKUHOU_KYOUN));
             }
 
             //局法（幸運）表示
@@ -429,25 +479,25 @@ namespace DivinationApp
             {
                 str = item.name;
                 if (item.chkResult.matchCount > 1) str += string.Format("[{0}]", item.chkResult.matchCount);
-                listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_KYOKUHOU_KOUUN));
+                lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_KYOKUHOU_KOUUN));
             }
             //別格表示
             result = kyokuHou.GetBekkakku(person);
             foreach (var item in result)
             {
                 str = item.name;
-                listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_BEKKAKU));
+                lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_BEKKAKU));
             }
             //特殊五局表示
             result = kyokuHou.GetTokushuGokyoku(person);
             foreach (var item in result)
             {
                 str = item.name;
-                listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_TOKUSHU_GOKYOKU));
+                lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_TOKUSHU_GOKYOKU));
             }
             //純濁法
             str = JundakuHou.GetJundakuHou(person);
-            listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_JUNDAKU));
+            lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_JUNDAKU));
 
             //循環法
             string sisei="", kisei = "";
@@ -455,18 +505,18 @@ namespace DivinationApp
             if (!string.IsNullOrEmpty(sisei))
             {
                 str = string.Format("始星 : {0}", sisei);
-                listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_JUNKAN));
+                lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_JUNKAN));
                 str = string.Format("帰星 : {0}", kisei);
-                listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_JUNKAN));
+                lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_JUNKAN));
             }
  
             //影星法
             str = string.Format("影星 : {0}", EiseiHou.GetEiseiHou(person));
-            listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_EISEIHOU));
+            lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_EISEIHOU));
 
             //身強、身中、身弱
             str = MikyouMichuMijaku.GetMikyouMichuMijaku(person);
-            listBox.Items.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_MIKYO_MICHU_MIJSKU));
+            lstDetail.Add(new YousenDetail(str, str, sExpressionType, Const.YousenDetailType.INSEN_DETAIL_MIKYO_MICHU_MIJSKU));
 
          }
 

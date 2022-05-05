@@ -158,6 +158,20 @@ namespace DivinationApp
             }
 
         }
+
+
+        public Form1 GetActiveForm()
+        {
+            var tab = tabControl1.SelectedTab;
+            return (Form1)tab.Controls[0];
+
+        }
+        public Person GetActiveFormPerson()
+        {
+            var frm = GetActiveForm();
+            return frm.GetCurrentPerson();
+
+        }
         private void mnuSerch_Click(object sender, EventArgs e)
         {
             if(frmFinder!=null)
@@ -383,13 +397,10 @@ namespace DivinationApp
         /// <param name="e"></param>
         private void mnuPDF_Click(object sender, EventArgs e)
         {
-            //アクティブタブ
-            var tab = tabControl1.SelectedTab;
-            Form1 frm = (Form1)tab.Controls[0];
-
-            PDFOutput pdf =new PDFOutput(frm.GetCurrentPerson());
-            pdf.WritePDF(@"c:\temp\01_Hello.pdf");
+            FormPDF frm = new FormPDF( );
+            frm.Show();
 
         }
+
     }
 }

@@ -19,7 +19,6 @@ namespace DivinationApp
         public delegate void CloseHandler();
 
         Person person;
-        PictureBox pictureBox;
         StringFormat stringFormat;
         public Pen blackPen = null;
 
@@ -80,9 +79,49 @@ namespace DivinationApp
             //派生先クラスの描画I/F呼び出し
             Bitmap canvas = new Bitmap(pictureBox.Width, pictureBox.Height);
             // Graphicsオブジェクトの作成
-            var g = Graphics.FromImage(canvas);
-            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            Graphics graphic = Graphics.FromImage(canvas);
+            graphic.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            GraphicsBase g = new FormGraphics(graphic);
+
             pictureBox.Image = canvas;
+
+            DrawMain(g, node);
+
+        }
+
+        /// <summary>
+        /// PDFへの描画
+        /// </summary>
+        /// <param name="pdfUtil"></param>
+        /// <param name="_person"></param>
+        /// <param name="node"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void DrawPDF(PDFUtility pdfUtil,
+                            Person _person,
+                            Node node,
+                            float x, 
+                            float y
+            )
+        {
+
+            person = _person;
+            // Graphicsオブジェクトの作成
+            GraphicsBase g = new PDFGraphics(pdfUtil);
+
+            DrawMain(g, node, x, y);
+
+        }
+        private void DrawMain(
+                            GraphicsBase g,
+                            Node node,
+                            float ofsX=0,
+                            float ofsY=0
+                             )
+        {
+
+
 
             Point ofsPnt = new Point(0, 0);
             //親方向
@@ -91,6 +130,10 @@ namespace DivinationApp
             Point drawPnt = ofsPnt;
             drawPnt.X += 10; //左側を少しだけ隙間を開ける
             drawPnt.Y += 10; //上側を少しだけ隙間を開ける
+
+            //左上の描画開始座標をオフセット
+            drawPnt.X += (int)ofsX; 
+            drawPnt.Y += (int)ofsY; 
 
             //自身描画
             Rectangle rectKan = new Rectangle(drawPnt.X, drawPnt.Y, strWidth, strHeight);
@@ -156,7 +199,7 @@ namespace DivinationApp
         /// <param name="parentNode"></param>
         /// <param name="drawPnt"></param>
         /// <param name="dirc"></param>
-        void DrawNodeToParent(Graphics g, Node parentNode, Point drawPnt, DIRC dirc)
+        void DrawNodeToParent(GraphicsBase g, Node parentNode, Point drawPnt, DIRC dirc)
         {
             if (parentNode == null) return;
             Point pnt = drawPnt;
@@ -198,7 +241,7 @@ namespace DivinationApp
         /// <param name="partnerNode"></param>
         /// <param name="drawPnt"></param>
         /// <param name="dirc"></param>
-        void DrawNodeToPartner(Graphics g, Node partnerNode, Point drawPnt, DIRC dirc)
+        void DrawNodeToPartner(GraphicsBase g, Node partnerNode, Point drawPnt, DIRC dirc)
         {
             if (partnerNode == null) return;
             Point pnt = drawPnt;
@@ -249,7 +292,7 @@ namespace DivinationApp
         /// <param name="ChildNode"></param>
         /// <param name="drawPnt"></param>
         /// <param name="dirc"></param>
-        void DrawNodeToChild(Graphics g, Node ChildNode, Point drawPnt, DIRC dirc)
+        void DrawNodeToChild(GraphicsBase g, Node ChildNode, Point drawPnt, DIRC dirc)
         {
             if (ChildNode == null) return;
 
@@ -293,7 +336,7 @@ namespace DivinationApp
         /// <param name="str"></param>
         /// <param name="rect"></param>
         /// <param name="shugosinOrImigami">1..守護神  2..忌神</param>
-        void DrawString(Graphics g, string str, Rectangle rect, int shugosinOrImigami)
+        void DrawString(GraphicsBase g, string str, Rectangle rect, int shugosinOrImigami)
         {
 
             if (string.IsNullOrEmpty(str))

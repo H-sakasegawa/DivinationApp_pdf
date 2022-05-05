@@ -172,12 +172,17 @@ namespace DivinationApp
         {
             int ofsX = GetLineOffsetX();
             int ofsY = (topLineCnt) * GetLineOffsetY() + 10;
+
+            //PDF出力時に指定された描画開始位置オフセット（通常は0)
+            ofsX += (int)drawAreaOffset.X;
+            ofsY += (int)drawAreaOffset.Y;
+
             if (bDispGetuun)
             {
                 //月運表示開始位置
                 getuun.X = ofsX;
                 getuun.Y = ofsY;
-                getuunCenterX = nenun.X + rangeWidth / 2;
+                getuunCenterX = getuun.X + rangeWidth / 2;
                 ofsX += rangeWidth;
             }
 

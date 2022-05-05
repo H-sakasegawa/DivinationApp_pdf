@@ -60,6 +60,11 @@ namespace DivinationApp
             nikkansi.X = GetLineOffsetX(); 
             //nikkansi.Y = GetDrawArea().Height / 2 - rangeHeight;
             nikkansi.Y = (idxMtx + 1) * GetLineOffsetY() + 10;
+
+            //PDF出力時に指定された描画開始位置オフセット（通常は0)
+            nikkansi.X += (int)drawAreaOffset.X;
+            nikkansi.Y += (int)drawAreaOffset.Y;
+
             nikkansiCenterX = nikkansi.X + rangeWidth / 2;
 
             gekkansi.X = nikkansi.X + rangeWidth;

@@ -21,6 +21,7 @@ namespace DivinationApp
     {
         Graphics g;
 
+
         public FormGraphics(Graphics g)
         {
             this.g = g;
@@ -63,7 +64,8 @@ namespace DivinationApp
     }
     public class PDFGraphics : GraphicsBase
     {
-        PDFUtility pdfUtil;
+        public PDFUtility pdfUtil;
+        const float fontHeightRate = 0.7f;
 
         public PDFGraphics(PDFUtility pdfUtil)
         {
@@ -77,6 +79,7 @@ namespace DivinationApp
         }
         public override void DrawString(string s, Font font, Brush brush, RectangleF rect, StringFormat format)
         {
+            iTextSharp.text.BaseColor fontColor = new iTextSharp.text.BaseColor(((SolidBrush)brush).Color);
             iTextSharp.text.Rectangle r = new iTextSharp.text.Rectangle(0,0,0,0);
             r.Left = rect.X;
             r.Top = rect.Y + rect.Height;
@@ -96,20 +99,17 @@ namespace DivinationApp
                     align = iTextSharp.text.Element.ALIGN_RIGHT;
                     break;
             }
+            
+            pdfUtil.SaveState();
+            pdfUtil.SetFontSize(font.Height * fontHeightRate, font.Bold);
+            
+            pdfUtil.DrawString(r, align, fontColor, s);
 
-            pdfUtil.DrawString(r, align, s);
+            pdfUtil.RestoreState();
         }
         public override void FillRectangle(Brush brush, Rectangle rect)
         {
-            iTextSharp.text.BaseColor lineColor_ = new iTextSharp.text.BaseColor(((SolidBrush)brush).Color);
-            iTextSharp.text.Rectangle r = new iTextSharp.text.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
-            r.Left = rect.X;
-            r.Top = rect.Y + rect.Height;
-            r.Right = rect.X + rect.Width;
-            r.Bottom = rect.Y;
-
-
-            pdfUtil.FillRectangle(r, lineColor_);
+            pdfUtil.FillRectangle(rect, ((SolidBrush)brush).Color);
         }
         public override void FillRectangle(Brush brush, int x, int y, int width, int height)
         {
@@ -136,7 +136,12 @@ namespace DivinationApp
             sz.Width = baseFont.GetWidthPoint(text, font.GetHeight());
             sz.Height = font.GetHeight();
 #else
-            return pdfUtil.MeasureString(text);
+            pdfUtil.SaveState();
+            pdfUtil.SetFontSize(font.GetHeight() * fontHeightRate, font.Bold);
+            var sz =  pdfUtil.MeasureString(text);
+
+            pdfUtil.RestoreState();
+            return sz;
 #endif
         }
 

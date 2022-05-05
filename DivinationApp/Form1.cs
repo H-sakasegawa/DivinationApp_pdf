@@ -696,18 +696,12 @@ namespace DivinationApp
             TableMng.GogyouAttrRerationshipTbl relation = tblMng.gogyouAttrRelationshipTbl;
             lblGogyoJunkan.Text = "";
 
-            string kiseiAttr = "";
-            string siseiAttr = "";
-            bool bGogyoJunkan = JunkanHou.GetJunkanHouAttr(person, ref siseiAttr, ref kiseiAttr);
-            int[] junkanHouNo = new int[5];
-            if (!string.IsNullOrEmpty(siseiAttr))
-            {
-                for (int i = 0; i < person.judaiShuseiAry.Length; i++)
-                {
-                    junkanHouNo[i] = JunkanHou.GetCreateDistanceFromSiseiToN(siseiAttr, kiseiAttr, person.judaiShuseiAry[i]);
-                }
-                if (bGogyoJunkan) lblGogyoJunkan.Text = "(五行循環)";
-            }
+            Yousen yousen = new Yousen(person);
+
+            int[] junkanHouNo;
+            bool bGogyoJunkan = yousen.GetJunkanHou(out junkanHouNo);
+            if (bGogyoJunkan) lblGogyoJunkan.Text = "(五行循環)";
+
             //------------------
             //十大主星
             //------------------
@@ -738,7 +732,6 @@ namespace DivinationApp
             lblJunidaiJuseiC.Text = person.junidaiJuseiC.name;
 
             //陽占 特徴表示
-            Yousen yousen = new Yousen(person);
             yousen.DispYousennDetailInfo(listYousenDetail);
 
         }

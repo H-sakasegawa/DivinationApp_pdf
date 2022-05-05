@@ -41,7 +41,7 @@ namespace DivinationApp
         public const int bitFlgNen = 0x01;
 
 
-        public const double dKansiHeightRate = 1.5;
+        public const double dKansiHeightRate = 1.3;
 
         //守護神表示カラー
         public static Brush brusShugosin = Brushes.Yellow;
