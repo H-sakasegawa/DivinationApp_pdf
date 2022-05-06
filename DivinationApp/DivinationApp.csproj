@@ -78,7 +78,7 @@
     <Compile Include="DrawHelper\DrawJuniSinKanHou.cs" />
     <Compile Include="DrawHelper\DrawKoutenUn.cs" />
     <Compile Include="DrawHelper\DrawShukumei.cs" />
-    <Compile Include="InformationSupport\EiseiHou.cs" />
+    <Compile Include="Yousen\EiseiHou.cs" />
     <Compile Include="Excel\ExcelReader.cs" />
     <Compile Include="Excel\ExplanationReader.cs" />
     <Compile Include="Tools\Finder.cs" />
@@ -181,7 +181,7 @@
     </Compile>
     <Compile Include="Tools\GraphicHelper.cs" />
     <Compile Include="Tools\IniFile.cs" />
-    <Compile Include="InformationSupport\InsenYousen.cs" />
+    <Compile Include="Yousen\InsenYousen.cs" />
     <Compile Include="Insen\AngouSouren.cs" />
     <Compile Include="Insen\Chusatu.cs" />
     <Compile Include="Insen\DaiSangouKaikyokuDaiHankai.cs" />
@@ -195,20 +195,20 @@
     <Compile Include="Insen\RitinAndNetin.cs" />
     <Compile Include="Insen\ShunSui.cs" />
     <Compile Include="Insen\ZensiShuuin.cs" />
-    <Compile Include="InformationSupport\JundakuHou.cs" />
-    <Compile Include="InformationSupport\JuniSinKanHou.cs" />
-    <Compile Include="InformationSupport\JunkanHou.cs" />
-    <Compile Include="InformationSupport\Konkihou.cs" />
-    <Compile Include="InformationSupport\KyokiSimulation.cs" />
-    <Compile Include="InformationSupport\Kyokuhou.cs" />
+    <Compile Include="Yousen\JundakuHou.cs" />
+    <Compile Include="OtherFunction\JuniSinKanHou.cs" />
+    <Compile Include="Yousen\JunkanHou.cs" />
+    <Compile Include="OtherFunction\Konkihou.cs" />
+    <Compile Include="OtherFunction\KyokiSimulation.cs" />
+    <Compile Include="Yousen\Kyokuhou.cs" />
     <Compile Include="Tools\ListViewEx.cs" />
-    <Compile Include="InformationSupport\MIkyouMichuMijaku.cs" />
+    <Compile Include="Yousen\MIkyouMichuMijaku.cs" />
     <Compile Include="PDF\OutputPDF.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetuiribiTable.cs" />
-    <Compile Include="InformationSupport\ShugosinUtil.cs" />
+    <Compile Include="OtherFunction\ShugosinUtil.cs" />
     <Compile Include="Tools\TabControlEx.cs">
       <SubType>Component</SubType>
     </Compile>
