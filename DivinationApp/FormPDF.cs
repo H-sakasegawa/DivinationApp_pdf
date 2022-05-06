@@ -24,9 +24,8 @@ namespace DivinationApp
 
             chkShukumeiAndKoutenun.Checked = true;
             chkKyoki.Checked = true;
-            chkTaiun.Checked = true;
-            chkNenun.Checked = true;
-            chkGetuun.Checked = true;
+            chkTaiunNenun.Checked = true;
+            chkGetuun.Checked = false;
             chkShugosin.Checked = false;
             chkKonkihou.Checked = false;
 
@@ -58,9 +57,14 @@ namespace DivinationApp
             param.person = person;
             param.bShukumeiAndKoutenun = chkShukumeiAndKoutenun.Checked;
             param.bKyoki = chkKyoki.Checked;
-            param.bTaiunHyou = chkTaiun.Checked;
-            param.bNenunHyou = chkNenun.Checked;
-            param.bGetuunHyou = chkGetuun.Checked;
+            param.bTaiunHyouAndNenunHyou = chkTaiunNenun.Checked;
+            if (chkTaiunNenun.Checked)
+            {
+                param.bGetuunHyou = chkGetuun.Checked;
+            }else
+            {
+                param.bGetuunHyou = false;
+            }
             param.bShugosinHou = chkShugosin.Checked;
             param.bKonkiHou = chkKonkihou.Checked;
 
@@ -98,6 +102,11 @@ namespace DivinationApp
             DateTime dt = DateTime.Now;
             txtYear.Text = dt.Year.ToString();
             txtMonth.Text = dt.Month.ToString();
+        }
+
+        private void chkTaiunNenun_CheckedChanged(object sender, EventArgs e)
+        {
+            chkGetuun.Enabled = chkTaiunNenun.Checked;
         }
     }
 }

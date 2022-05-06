@@ -392,15 +392,90 @@ namespace DivinationApp
 
         }
 
+        public static int GetTaiunItemIndex(List<TaiunLvItemData> lstTaiunItemData, DateTime today)
+        {
+            List<int> lstStartYear = lstTaiunItemData.ConvertAll(x => x.startYear);
+            return GetTaiunItemIndex(lstStartYear, today.Year, today.Month);
+
+
+            //int year = today.Year;
+
+            ////大運リストビューで年に該当する行を選択
+            //for (int i = 0; i < lstTaiunItemData.Count; i++)
+            //{
+
+            //    TaiunLvItemData itemData = lstTaiunItemData[i];
+            //    if (itemData.startYear > today.Year)
+            //    {
+            //        int index = i - 1;
+            //        if (index < 0) index = 0;
+
+            //        itemData = lstTaiunItemData[index];
+            //        if (itemData.startYear == year)
+            //        {
+            //            //１月の場合、前年を表示する必要がある
+            //            if (today.Month < Const.GetuunDispStartGetu)
+            //            {
+            //                index--;
+            //                if (index < 0) index = 0; //このチェックで引っかかることはない
+            //            }
+            //        }
+            //        return index;
+
+            //    }
+            //}
+            //return -1;
+
+        }
+        public static int GetTaiunItemIndex(List<int> lstStartYear, int year, int month)
+        {
+
+            //大運リストビューで年に該当する行を選択
+            for (int i = 0; i < lstStartYear.Count; i++)
+            {
+
+                int startYear = lstStartYear[i];
+                if (startYear > year)
+                {
+                    int index = i - 1;
+                    if (index < 0) index = 0;
+
+                    int startYear2 = lstStartYear[index];
+                    if (startYear2 == year)
+                    {
+                        //１月の場合、前年を表示する必要がある
+                        if (month < Const.GetuunDispStartGetu)
+                        {
+                            index--;
+                            if (index < 0) index = 0; //このチェックで引っかかることはない
+                        }
+                    }
+                    return index;
+
+                }
+            }
+            return -1;
+
+        }
+
 
         public static NenunGetuunItems GetNenunItems(
                 Person person,
+                int year,
                 string title,
                 Kansi targetKansi, //対象干支（年運）
                 TaiunLvItemData taiunLvItemData
             )
         {
-            return GetNenunGetuunItems(person, title, targetKansi, taiunLvItemData, null, Const.bitFlgNenun);
+            var item =  GetNenunGetuunItems(person, title, targetKansi, taiunLvItemData, null, Const.bitFlgNenun);
+
+            //経歴情報
+            if (person.career != null)
+            {
+                item.sItems[(int)Const.ColUnseiLv.COL_CAREER] = person.career.GetLineString(year); //経歴
+            }
+            return item;
+
         }
         public static NenunGetuunItems GetNenunItems(
                 Person person,
@@ -441,28 +516,28 @@ namespace DivinationApp
             )
         {
             NenunGetuunItems item = new NenunGetuunItems();
-            TableMng tblMng = TableMng.GetTblManage();
+            //TableMng tblMng = TableMng.GetTblManage();
 
-            bool bKyokiTaiun = taiunLvItemData.bKyokiToukan;
+            //bool bKyokiTaiun = taiunLvItemData.bKyokiToukan;
 
             Kansi taiunKansi = taiunLvItemData.kansi;
-            Kansi nenunKansi = null;
-            string nenunKyokiAttr = null;
-            int nenunKyokiBit = 0;
-            if (bitTarget == Const.bitFlgNenun)
-            {
-                nenunKansi = targetKansi;
-            }else{
-                nenunKansi = nenunLvItemData.kansi;
-                nenunKyokiAttr = nenunLvItemData.kyokiTargetAtrr;
-                nenunKyokiBit = nenunLvItemData.kyokiTargetBit;
-            }
+            //Kansi nenunKansi = null;
+            //string nenunKyokiAttr = null;
+            //int nenunKyokiBit = 0;
+            //if (bitTarget == Const.bitFlgNenun)
+            //{
+            //    nenunKansi = targetKansi;
+            //}else{
+            //    nenunKansi = nenunLvItemData.kansi;
+            //    nenunKyokiAttr = nenunLvItemData.kyokiTargetAtrr;
+            //    nenunKyokiBit = nenunLvItemData.kyokiTargetBit;
+            //}
 
-            Kansi getuunKansi = null;
-            if (bitTarget == Const.bitFlgGetuun)
-            {
-                getuunKansi = targetKansi;
-            }
+            //Kansi getuunKansi = null;
+            //if (bitTarget == Const.bitFlgGetuun)
+            //{
+            //    getuunKansi = targetKansi;
+            //}
 
             item.title = title;
             //Kansi targetKansi;

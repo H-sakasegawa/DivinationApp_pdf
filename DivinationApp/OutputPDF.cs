@@ -36,8 +36,7 @@ namespace DivinationApp
             public Person person;
             public bool bShukumeiAndKoutenun;
             public bool bKyoki;
-            public bool bTaiunHyou;
-            public bool bNenunHyou;
+            public bool bTaiunHyouAndNenunHyou;
             public bool bGetuunHyou;
             public bool bShugosinHou;
             public bool bKonkiHou;
@@ -144,44 +143,71 @@ namespace DivinationApp
             WriteInsen(30, 70, ref lastY);
 
             //陽占
-            WriteYousen(50, lastY + 50, ref lastY);
+            WriteYousen(areaLeft, lastY + 30, ref lastY);
 
             //十二支干法
-            WriteJuNisiKanHou(50, lastY + 50, ref lastY);
+            WriteJuNisiKanHou(areaLeft, lastY + 30, ref lastY);
 
             if (param.bShukumeiAndKoutenun)//宿命・後天運
             {
                 if (writeCategoryNum!=0) pdfUtil.NewPage();
                 //宿命
-                WriteShukumei(50, 50, ref lastY);
+                WriteShukumei(areaLeft, 50, ref lastY);
                 //後天運
                 WriteKoutenUn(260, 50, ref lastY);
+            }
+            if (param.bShugosinHou)//守護神法
+            {
+                //                if (writeCategoryNum != 0) pdfUtil.NewPage();
+            }
+            if (param.bKonkiHou)//根気法
+            {
+                //                if (writeCategoryNum != 0) pdfUtil.NewPage();
             }
 
             if (param.bKyoki)   //虚気変化
             {
-                if (writeCategoryNum != 0) pdfUtil.NewPage();
+//                if (writeCategoryNum != 0) pdfUtil.NewPage();
             }
 
-            if (param.bTaiunHyou)//大運表
+            if (param.bTaiunHyouAndNenunHyou)//大運表 & 年運表
             {
-                if (writeCategoryNum != 0) pdfUtil.NewPage();
-            }
-            if (param.bNenunHyou)//年運表
-            {
-                if (writeCategoryNum != 0) pdfUtil.NewPage();
-            }
-            if (param.bGetuunHyou)//月運表
-            {
-                if (writeCategoryNum != 0) pdfUtil.NewPage();
-            }
-            if (param.bShugosinHou)//守護神法
-            {
-                if (writeCategoryNum != 0) pdfUtil.NewPage();
-            }
-            if (param.bKonkiHou)//根気法
-            {
-                if (writeCategoryNum != 0) pdfUtil.NewPage();
+                if (writeCategoryNum != 0) pdfUtil.NewPage(PDFUtility.A4Dirc.Horizontal); //A4横
+                List<TaiunLvItemData> lstTaiunItemData = new List<TaiunLvItemData>();
+                WriteTaiunHyoun(areaLeft, 50, ref lastY, ref lstTaiunItemData);
+
+                DateTime dt = new DateTime(param.year, param.month, 1); //GetTaiunItemIndex()では日を使用していなのでとりあえず1日を設定しておく
+                int index = Common.GetTaiunItemIndex(lstTaiunItemData, dt);
+
+                if (index >= 0)
+                {
+                    TaiunLvItemData taiunItem = lstTaiunItemData[index];
+
+                    int year = param.year;
+                    //年運リストビューで年に該当する行を選択
+                    if (param.month < Const.GetuunDispStartGetu)
+                    {
+                        //月運で選択される月は、次の年度の月となるので、
+                        //年運の選択を１年前に設定する必要がある。
+                        year--;
+                    }
+
+
+                    List<GetuunNenunLvItemData> lstNenunItemData = new List<GetuunNenunLvItemData>();
+                    WriteNenunHyou(areaLeft, lastY+30, year, taiunItem, ref lastY, ref lstNenunItemData);
+
+                    if (param.bGetuunHyou)//月運表
+                    {
+                        if (writeCategoryNum != 0) pdfUtil.NewPage(PDFUtility.A4Dirc.Horizontal); //A4横
+
+                        //年に該当する年運データ取得
+                        GetuunNenunLvItemData nenunItemData = lstNenunItemData.Find(x => x.keyValue == year);
+                        if (nenunItemData != null)
+                        {
+                            WriteGetuunHyou(areaLeft, 50, param.year, taiunItem, nenunItemData, ref lastY);
+                        }
+                    }
+                }
             }
 
             //-------------------------------------------
@@ -208,7 +234,10 @@ namespace DivinationApp
             pdfUtil.DrawLine(areaLeft, y, areaLeft + 500, y, 1, color, dotPattern);
         }
 
-
+        /// <summary>
+        /// メンバ情報
+        /// </summary>
+        /// <returns></returns>
         int WritePersonBaseInfo()
         {
             writeCategoryNum++;
@@ -225,8 +254,9 @@ namespace DivinationApp
             //描画するテキスト
             int row = 1;
             pdfUtil.DrawString( 50, row * fntH,  "氏名　　：{0}", person.name); row++;
-            pdfUtil.DrawString( 50, row * fntH,  "生年月日：{0}", person.birthday.birthday); row++;
             pdfUtil.DrawString( 50, row * fntH,  "性別　　：{0}", (person.gender == Gender.MAN ? "男性" : "女性")); row++;
+            pdfUtil.DrawString( 50, row * fntH,  "生年月日：{0}", person.birthday.birthday); row++;
+
             //     pdfUtil.DrawLine( new System.Drawing.Point(50, lastDrawY + 5), new System.Drawing.Point(300, lastDrawY + 5), 1, BaseColor.BLUE);
 
             //pdfUtil.DrawRectangle( new System.Drawing.Point(100, 100), new System.Drawing.Size(60, 90), BaseColor.RED);
@@ -239,6 +269,9 @@ namespace DivinationApp
         /// <summary>
         /// 陰占表示
         /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
         /// <returns></returns>
         int WriteInsen(float x, float y, ref float lastY)
         {
@@ -271,11 +304,12 @@ namespace DivinationApp
             if(lastY<drawY) lastY = drawY;
             return 0;
         }
-
- 
         /// <summary>
         /// 陽占表示
         /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
         /// <returns></returns>
         int WriteYousen(float x, float y, ref float lastY)
         {
@@ -352,9 +386,9 @@ namespace DivinationApp
         /// <summary>
         /// 十二支干法
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="lastY"></param>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
         /// <returns></returns>
         int WriteJuNisiKanHou(float x, float y, ref float lastY)
         {
@@ -378,13 +412,12 @@ namespace DivinationApp
 
             return 0;
         }
-
         /// <summary>
         /// 宿命
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="lastY"></param>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
         /// <returns></returns>
         int WriteShukumei(float x, float y, ref float lastY)
         {
@@ -409,9 +442,9 @@ namespace DivinationApp
         /// <summary>
         /// 後天運
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="lastY"></param>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
         /// <returns></returns>
         int WriteKoutenUn(float x, float y, ref float lastY)
         {
@@ -451,8 +484,301 @@ namespace DivinationApp
 
             return 0;
         }
- 
-        
+
+
+
+
+        /// <summary>
+        /// 大運表
+        /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
+        /// <returns></returns>
+        int WriteTaiunHyoun(float x, float y, ref float lastY, ref List<TaiunLvItemData> lstTaiunLvItemData)
+        {
+            writeCategoryNum++;
+            // TEST_Y(y);
+            pdfUtil.DrawString(x, y, "■大運表");
+            y += 20;
+
+            Person person = param.person;
+
+            var lv = FormMain.GetFormMain().GetActiveForm().GetTaiunListView();
+            DrawTableMng drawTableMng = new DrawTableMng( pdfUtil);
+            DrawTableMng.Table tbl = drawTableMng.table;
+
+            for (int i=0; i< lv.Columns.Count; i++)
+            {
+                tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
+            }
+
+            //大運表示用の干支リストを取得
+            var lstTaiunKansi = person.GetTaiunKansiList();
+
+            List<int> lstStartYear = lstTaiunKansi.ConvertAll(item => item.year);
+            int selectYearIndex = Common.GetTaiunItemIndex(lstStartYear, param.year, param.month);
+
+
+            for (int iRow = 0; iRow < lstTaiunKansi.Count; iRow++)
+            {
+                var kansiItem = lstTaiunKansi[iRow];
+                string title;
+                int startYear;
+                if (iRow == 0)
+                {
+                    title = "初旬 0～";
+                    startYear = 0;
+                }
+                else
+                {
+                    title = string.Format("{0}旬 {1}～", iRow, kansiItem.startYear);
+                    startYear = kansiItem.startYear;
+                }
+
+                var item = Common.GetTaiunItem(person, title, kansiItem.kansiNo, startYear);
+                var rowItem = tbl.AddRow( item.title );
+                rowItem.foreColor = item.colorTenchusatu;
+                rowItem.backColor = System.Drawing.Color.White;
+
+                if (selectYearIndex == iRow)
+                {
+                    rowItem.backColor = System.Drawing.Color.Aquamarine;
+                }
+
+
+                for (int iCol = (int)Const.ColUnseiLv.COL_KANSI; iCol < item.sItems.Length; iCol++)
+                {
+                    var cell = rowItem.AddCell(item.sItems[iCol]);
+                    if (iCol == 1)
+                    {
+                        if (item.bShugosin)
+                        {
+                            cell.backColor = Const.colorShugosin;
+                        }
+                        else if (item.bImigami)
+                        {
+                            cell.backColor = Const.colorImigami;
+                        }
+                    }
+                }
+
+
+                TaiunLvItemData itemData = new TaiunLvItemData();
+                itemData.startNen = startYear;   //開始年
+                itemData.startYear = startYear + person.birthday.year;
+                itemData.kansi = item.targetKansi;    //干支
+                itemData.bShugosin = item.bShugosin;  //守護神
+                itemData.bImigami = item.bImigami;  //忌神
+                itemData.bKyokiToukan = item.bKyokiToukan;  //虚気
+                itemData.kyokiTargetAtrr = item.kyokiTargetAtrr;  //虚気となった属性
+                itemData.kyokiTargetBit = item.kyokiTargetBit;  //虚気となった干支のビット
+                itemData.bTenchusatu = item.bTenchusatu;
+                //if (item.bShugosin)
+                //{
+                //    itemData.lstItemColors.Add(new LvItemColor(1, Const.colorShugosin));
+                //}
+                //else if (item.bImigami)
+                //{
+                //    itemData.lstItemColors.Add(new LvItemColor(1, Const.colorImigami));
+                //}
+
+                lstTaiunLvItemData.Add(itemData);
+            }
+
+            drawTableMng.DrawTable(x, y, tbl, ref lastY);
+
+            return 0;
+        }
+        /// <summary>
+        /// 年運表
+        /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
+        /// <returns></returns>
+        int WriteNenunHyou(float x, float y,int startNen, TaiunLvItemData taiunItemData, ref float lastY, ref List<GetuunNenunLvItemData> lstNnenunItemData)
+        {
+            writeCategoryNum++;
+            // TEST_Y(y);
+            pdfUtil.DrawString(x, y, "■年運表");
+            y += 20;
+
+            Person person = param.person;
+
+            int baseYear = person.birthday.year + taiunItemData.startNen;
+
+            var lv = FormMain.GetFormMain().GetActiveForm().GetNenunListView();
+            DrawTableMng drawTableMng = new DrawTableMng(pdfUtil);
+            DrawTableMng.Table tbl = drawTableMng.table;
+
+            for (int i = 0; i < lv.Columns.Count; i++)
+            {
+                tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
+            }
+
+            int selectYear = param.year;
+            //年運リストビューで年に該当する行を選択
+            if (param.month < Const.GetuunDispStartGetu)
+            {
+                //月運で選択される月は、次の年度の月となるので、
+                //年運の選択を１年前に設定する必要がある。
+                selectYear--;
+            }
+
+
+            //年運表示用の干支リストを取得
+            int nenkansiNo = person.GetNenkansiNo(baseYear, true);
+            for (int iRow = 0; iRow < 10 + 1; iRow++)
+            {
+                //順行のみなので、60超えたら1にするだけ
+                if (nenkansiNo > 60) nenkansiNo = 1;
+
+                int year = baseYear + iRow;
+                Kansi nenunKansi = person.GetKansi(nenkansiNo);
+                var item = Common.GetNenunItems(person,
+                                            year,
+                                            string.Format("{0}歳({1})", (baseYear + iRow) - person.birthday.year, baseYear + iRow),
+                                            nenunKansi,
+                                            taiunItemData
+                                            );
+
+                var rowItem = tbl.AddRow(item.title);
+                rowItem.foreColor = item.colorTenchusatu;
+                rowItem.backColor = System.Drawing.Color.White;
+
+                if (selectYear == year)
+                {
+                    rowItem.backColor = System.Drawing.Color.Aquamarine;
+                }
+
+
+                for (int iCol = (int)Const.ColUnseiLv.COL_KANSI; iCol < item.sItems.Length; iCol++)
+                {
+                    var cell = rowItem.AddCell(item.sItems[iCol]);
+                    if (iCol == 1)
+                    {
+                        if (item.bShugosin)
+                        {
+                            cell.backColor = Const.colorShugosin;
+                        }
+                        else if (item.bImigami)
+                        {
+                            cell.backColor = Const.colorImigami;
+                        }
+                    }                    
+                }
+                
+
+                GetuunNenunLvItemData itemData = new GetuunNenunLvItemData();
+                itemData.keyValue = year;           //年
+                itemData.kansi = item.targetKansi;    //干支
+                itemData.bShugosin = item.bShugosin;  //守護神
+                itemData.bImigami = item.bImigami;  //忌神
+                itemData.bKyokiToukan = item.bKyokiToukan;  //虚気
+                itemData.kyokiTargetAtrr = item.kyokiTargetAtrr;  //虚気となった属性
+                itemData.kyokiTargetBit = item.kyokiTargetBit;  //虚気となった干支のビット
+                itemData.bTenchusatu = item.bTenchusatu;
+                //if (item.bShugosin)
+                //{
+                //    itemData.lstItemColors.Add(new LvItemColor(1, Const.colorShugosin));
+                //}
+                //else if (item.bImigami)
+                //{
+                //    itemData.lstItemColors.Add(new LvItemColor(1, Const.colorImigami));
+                //}
+
+                lstNnenunItemData.Add(itemData);
+
+                nenkansiNo += 1;
+            }
+
+            drawTableMng.DrawTable(x, y, tbl, ref lastY);
+
+            return 0;
+        }
+
+        /// <summary>
+        /// 月運表
+        /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
+        /// <returns></returns>
+        int WriteGetuunHyou(float x, float y, int startNen, TaiunLvItemData taiunItemData, GetuunNenunLvItemData nenunItemData, ref float lastY)
+        {
+            writeCategoryNum++;
+            // TEST_Y(y);
+            pdfUtil.DrawString(x, y, "■月運表");
+            y += 20;
+
+            Person person = param.person;
+            TableMng tblMng = TableMng.GetTblManage();
+
+            var lv = FormMain.GetFormMain().GetActiveForm().GetGetuunListView();
+            DrawTableMng drawTableMng = new DrawTableMng(pdfUtil);
+            DrawTableMng.Table tbl = drawTableMng.table;
+
+            for (int i = 0; i < lv.Columns.Count; i++)
+            {
+                tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
+            }
+            int year = nenunItemData.keyValue;
+
+            //月運表示用の干支リストを取得
+            //2月～12月,1月分を表示
+            for (int i = 0; i < 12; i++)
+            {
+                int mMonth = Const.GetuunDispStartGetu + i;
+                if (mMonth > 12)
+                {
+                    mMonth = (mMonth - 12);
+                    year = nenunItemData.keyValue + 1;
+                }
+
+                //月干支番号取得(節入り日無視で単純月で取得）
+                int gekkansiNo = tblMng.setuiribiTbl.GetGekkansiNo(year, mMonth);
+
+                string title = string.Format("{0}月", mMonth);
+                var rowItem = tbl.AddRow(title);
+
+                Kansi getuunKansi = person.GetKansi(gekkansiNo);
+                var item = Common.GetGetuunItems(person, title, getuunKansi, taiunItemData, nenunItemData);
+
+                rowItem.foreColor = item.colorTenchusatu;
+                rowItem.backColor = System.Drawing.Color.White;
+
+                if (param.month == mMonth)
+                {
+                    rowItem.backColor = System.Drawing.Color.Aquamarine;
+                }
+
+                for (int iCol = (int)Const.ColUnseiLv.COL_KANSI; iCol < item.sItems.Length; iCol++)
+                {
+                    var cell = rowItem.AddCell(item.sItems[iCol]);
+                    if (iCol == 1)
+                    {
+                        if (item.bShugosin)
+                        {
+                            cell.backColor = Const.colorShugosin;
+                        }
+                        else if (item.bImigami)
+                        {
+                            cell.backColor = Const.colorImigami;
+                        }
+                    }
+                }
+
+                gekkansiNo += 1;
+            }
+
+            drawTableMng.DrawTable(x, y, tbl, ref lastY);
+
+            return 0;
+        }
+
+
+
         void OpenFile(string fname)
         {
             System.Diagnostics.Process p =
@@ -461,7 +787,183 @@ namespace DivinationApp
 
     }
 
+    //----------------------------------------------
+    // 表描画クラス
+    //----------------------------------------------
+    public class DrawTableMng
+    {
 
+        public class Table
+        {
+            public List<ColItem> colItems = new List<ColItem>();
+            public List<RowItem> rowItems = new List<RowItem>();
+
+            public ColItem AddColmun(string title, float width)
+            {
+                ColItem colItem = new ColItem(title, width);
+                colItems.Add(colItem);
+                return colItem;
+            }
+            public RowItem AddRow(string title = "")
+            {
+                RowItem rowItem = new RowItem(this);
+                rowItem.AddCell(title);
+
+                rowItems.Add(rowItem);
+                return rowItem;
+            }
+
+            public float GetColWidth(int iCol)
+            {
+                if (iCol >= colItems.Count) return 0;
+                return colItems[iCol].width;
+            }
+            public ColItem GetColItem(int iCol)
+            {
+                if (iCol >= colItems.Count) return null;
+                return colItems[iCol];
+            }
+        }
+        public class ColItem
+        {
+            public ColItem(string title, float width, int align = Element.ALIGN_LEFT)
+            {
+                this.title = title;
+                this.width = width;
+                this.align = align;
+
+            }
+            public float width;
+            public string title;
+            public int align;
+        }
+        public class RowItem
+        {
+            Table parent;
+            public System.Drawing.Color foreColor;
+            public System.Drawing.Color backColor;
+            public List<CellItem> lstCells = new List<CellItem>();
+
+            public RowItem(Table parentTbl)
+            {
+                parent = parentTbl;
+                foreColor = System.Drawing.Color.Black;
+                backColor = System.Drawing.Color.White;
+            }
+
+            public CellItem AddCell(string str)
+            {
+                CellItem item = new CellItem(str);
+                item.backColor = backColor;
+                lstCells.Add(item);
+                return item;
+            }
+        }
+        public class CellItem
+        {
+            public string str;
+           // public System.Drawing.Color foreColor; //文字食
+            public System.Drawing.Color backColor; //背景色
+
+            public CellItem(string str)
+            {
+                this.str = str;
+            }
+        }
+
+
+        PDFUtility pdfUtil;
+
+        public Table table = new Table();
+
+        public DrawTableMng( PDFUtility pdfUtil)
+        {
+            this.pdfUtil = pdfUtil;
+        }
+
+        public void DrawTable(float x, float y, Table table, ref float lastY)
+        {
+            pdfUtil.SaveState();
+            DrawTableHeader(x, y, table, ref lastY);
+
+            DrawTableRow(x, lastY, table, ref lastY);
+
+            pdfUtil.RestoreState();
+        }
+
+        void DrawTableHeader(float x, float y, Table table, ref float lastY)
+        {
+
+            int colX = (int)x;
+            int colY = (int)y;
+            float hederH = 15;
+
+            pdfUtil.SetFontSize(10);
+            //ヘッダー部
+            for (int iCol = 0; iCol < table.colItems.Count; iCol++)
+            {
+                var colItem = table.colItems[iCol];
+                System.Drawing.Rectangle rect = new System.Drawing.Rectangle();
+                rect.X = colX;
+                rect.Y = colY;
+                rect.Width = (int)colItem.width;
+                rect.Height = (int)hederH;
+
+
+                pdfUtil.FillRectangle(rect, System.Drawing.Color.Black, System.Drawing.Color.LightGray);
+                pdfUtil.DrawString(rect, colItem.align, System.Drawing.Color.Black, table.colItems[iCol].title);
+
+
+                colX += (int)colItem.width;
+            }
+
+            lastY = y + hederH;
+        }
+
+
+        void DrawTableRow(float x, float y, Table table, ref float lastY)
+        {
+
+            int colX = (int)x;
+            int colY = (int)y;
+            float rowH = 15;
+
+            pdfUtil.SetFontSize(10);
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle();
+            rect.Height = (int)rowH;
+
+
+            for (int iRow = 0; iRow < table.rowItems.Count; iRow++)
+            {
+                var rowItem = table.rowItems[iRow];
+                rect.Y = colY;
+                colX = (int)x;
+
+                System.Drawing.Color foreColor = rowItem.foreColor;
+
+                //グリッドセル
+                for (int iCol = 0; iCol < table.colItems.Count; iCol++)
+                {
+                    var colItem = table.GetColItem(iCol);
+                    if (colItem == null) break;
+                    var cellItem = rowItem.lstCells[iCol];
+                    rect.X = colX;
+                    rect.Width = (int)colItem.width;
+                    int align = colItem.align;
+
+                    pdfUtil.FillRectangle(rect, System.Drawing.Color.Black, cellItem.backColor);
+
+                    pdfUtil.DrawString(rect, align, foreColor, cellItem.str);
+
+
+                    colX += (int)colItem.width;
+                }
+                colY += (int)rowH;
+
+            }
+            lastY = colY;
+        }
+    }
 
     public  class PDFUtility
     {
@@ -473,6 +975,14 @@ namespace DivinationApp
         string fontName;
         Font font;
         Stack<float> stackFontSize = new Stack<float>();
+        Rectangle tatePageRect;
+        Rectangle yokoPageRect;
+
+        public enum A4Dirc
+        {
+            Vertical = 0 , //縦
+            Horizontal,     //横
+        }
 
         public PDFUtility()
         {
@@ -480,6 +990,9 @@ namespace DivinationApp
         public int OpenDocument( string filePath)
         {
             doc = new Document(PageSize.A4);
+
+            tatePageRect = doc.PageSize;
+            yokoPageRect = tatePageRect.Rotate();
 
             //Fontフォルダを指定
             FontFactory.RegisterDirectory(Environment.SystemDirectory.Replace("system32", "fonts"));
@@ -501,10 +1014,18 @@ namespace DivinationApp
             doc.Close();
         }
 
-        public void NewPage()
+        public void NewPage(A4Dirc dirc = A4Dirc.Vertical)
         {
+            if (dirc == A4Dirc.Vertical)
+            {   //縦
+                doc.SetPageSize(tatePageRect);
+            }else
+            {   //横
+                doc.SetPageSize(yokoPageRect);
+            }
             doc.NewPage();
-            cb.SetFontAndSize(font.BaseFont, fontSize);
+
+             cb.SetFontAndSize(font.BaseFont, fontSize);
         }
 
         public PdfContentByte GetContentByte()
@@ -543,7 +1064,7 @@ namespace DivinationApp
             int style = Font.NORMAL;
             if (bBold) style = Font.BOLD;
 
-            font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 15, style);
+            font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, fontSize, style);
 
             this.fontSize = fontSize;
             //フォントとフォントサイズの指定
@@ -554,25 +1075,11 @@ namespace DivinationApp
 
         public void SetFontSize(float fontSize, bool bBold = false)
         {
-           // baseFont = BaseFont.CreateFont(fontName, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-
- 
             int style = Font.NORMAL;
             if (bBold) style = Font.BOLD;
 
-
-            font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, 15, style);
+            font = FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, fontSize, style);
           
-
-
-            //Font fnt = new Font(baseFont, style);
-
-            //if( fnt.IsBold())
-            //{
-            //    style = style;
-            //}
-
-
             this.fontSize = fontSize;
             //フォントとフォントサイズの指定
             cb.SetFontAndSize(font.BaseFont, fontSize);
@@ -626,10 +1133,26 @@ namespace DivinationApp
         }
         public void DrawString(Rectangle rect, int align, BaseColor color, string fmt, params object[] item)
         {
+            if (fmt == null) return;
             string str = string.Format(fmt, item);
 
             System.Drawing.SizeF size = MeasureString(str);
-            int x = (int)(rect.Left + (rect.Width - size.Width) / 2);
+            int x = (int)(rect.Left + 1);
+            switch (align)
+            {
+                case iTextSharp.text.Element.ALIGN_LEFT:
+                    x = (int)(rect.Left + 1);
+                    break;
+                case iTextSharp.text.Element.ALIGN_CENTER:
+                    x = (int)(rect.Left + (rect.Width - size.Width) / 2);
+                    
+                    break;
+                case iTextSharp.text.Element.ALIGN_RIGHT:
+                    x = (int)(rect.Right - size.Width);
+                    break;
+            }
+
+
             int y = (int)(rect.Bottom + (rect.Height - size.Height) / 2 + size.Height); //y座標は文字の下の位置なので更に文字の高さを加算
 
             cb.SetColorFill(color);
@@ -647,7 +1170,8 @@ namespace DivinationApp
         {
 
             BaseColor lineColor_ = new BaseColor(color);
-            Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+           // Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+            Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
 
             DrawString(rect_, align, lineColor_, fmt, item);
 
@@ -720,7 +1244,7 @@ namespace DivinationApp
         public void DrawRectangle(System.Drawing.Rectangle rect, System.Drawing.Color lineColor)
         {
             BaseColor lineColor_ = new BaseColor(lineColor);
-            iTextSharp.text.Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+            iTextSharp.text.Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
             DrawRectangle(rect_, lineColor_);
         }
 
@@ -749,7 +1273,7 @@ namespace DivinationApp
         public void FillRectangle(System.Drawing.Rectangle rect, System.Drawing.Color lineColor)
         {
             BaseColor lineColor_ = new BaseColor(lineColor);
-            iTextSharp.text.Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+            iTextSharp.text.Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
             FillRectangle(rect_, lineColor_);
         }
         public void FillRectangle(System.Drawing.Rectangle rect, System.Drawing.Color lineColor, System.Drawing.Color fillColor)
@@ -757,7 +1281,7 @@ namespace DivinationApp
             BaseColor lineColor_ = new BaseColor(lineColor);
             BaseColor fillColor_ = new BaseColor(fillColor);
 
-            iTextSharp.text.Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+            iTextSharp.text.Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
             FillRectangle(rect_, lineColor_, fillColor_);
         }
 

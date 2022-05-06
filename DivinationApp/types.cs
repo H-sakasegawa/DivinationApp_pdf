@@ -677,6 +677,7 @@ namespace DivinationApp
         public bool bImigami=false;   //true...忌神
         public bool bKyokiToukan = false; //true..虚気
         public int kyokiTargetBit = 0;  //虚気と判定された干支を指すビット
+        public bool bTenchusatu = false;// true...天中殺
         public string kyokiTargetAtrr = null;  //虚気と判定された属性
     }
     //====================================================
@@ -698,6 +699,7 @@ namespace DivinationApp
         public bool bKyokiToukan = false; //true..虚気
         public int kyokiTargetBit = 0;  //虚気と判定された干支を指すビット
         public string kyokiTargetAtrr = null;  //虚気と判定された属性
+        public bool bTenchusatu = false;// true...天中殺
     }
 
 

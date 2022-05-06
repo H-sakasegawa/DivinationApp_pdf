@@ -52,8 +52,7 @@ namespace DivinationApp
             this.chkShugosin = new System.Windows.Forms.CheckBox();
             this.chkKonkihou = new System.Windows.Forms.CheckBox();
             this.chkKyoki = new System.Windows.Forms.CheckBox();
-            this.chkTaiun = new System.Windows.Forms.CheckBox();
-            this.chkNenun = new System.Windows.Forms.CheckBox();
+            this.chkTaiunNenun = new System.Windows.Forms.CheckBox();
             this.chkGetuun = new System.Windows.Forms.CheckBox();
             this.grpGogyouGotoku.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -308,30 +307,21 @@ namespace DivinationApp
             this.chkKyoki.Text = "虚気変化";
             this.chkKyoki.UseVisualStyleBackColor = true;
             // 
-            // chkTaiun
+            // chkTaiunNenun
             // 
-            this.chkTaiun.AutoSize = true;
-            this.chkTaiun.Location = new System.Drawing.Point(12, 55);
-            this.chkTaiun.Name = "chkTaiun";
-            this.chkTaiun.Size = new System.Drawing.Size(60, 16);
-            this.chkTaiun.TabIndex = 89;
-            this.chkTaiun.Text = "大運表";
-            this.chkTaiun.UseVisualStyleBackColor = true;
-            // 
-            // chkNenun
-            // 
-            this.chkNenun.AutoSize = true;
-            this.chkNenun.Location = new System.Drawing.Point(12, 77);
-            this.chkNenun.Name = "chkNenun";
-            this.chkNenun.Size = new System.Drawing.Size(60, 16);
-            this.chkNenun.TabIndex = 90;
-            this.chkNenun.Text = "年運表";
-            this.chkNenun.UseVisualStyleBackColor = true;
+            this.chkTaiunNenun.AutoSize = true;
+            this.chkTaiunNenun.Location = new System.Drawing.Point(12, 55);
+            this.chkTaiunNenun.Name = "chkTaiunNenun";
+            this.chkTaiunNenun.Size = new System.Drawing.Size(90, 16);
+            this.chkTaiunNenun.TabIndex = 89;
+            this.chkTaiunNenun.Text = "大運・年運表";
+            this.chkTaiunNenun.UseVisualStyleBackColor = true;
+            this.chkTaiunNenun.CheckedChanged += new System.EventHandler(this.chkTaiunNenun_CheckedChanged);
             // 
             // chkGetuun
             // 
             this.chkGetuun.AutoSize = true;
-            this.chkGetuun.Location = new System.Drawing.Point(12, 99);
+            this.chkGetuun.Location = new System.Drawing.Point(33, 77);
             this.chkGetuun.Name = "chkGetuun";
             this.chkGetuun.Size = new System.Drawing.Size(60, 16);
             this.chkGetuun.TabIndex = 91;
@@ -346,9 +336,8 @@ namespace DivinationApp
             this.Controls.Add(this.button1);
             this.Controls.Add(this.chkGetuun);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.chkNenun);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.chkTaiun);
+            this.Controls.Add(this.chkTaiunNenun);
             this.Controls.Add(this.txtMonth);
             this.Controls.Add(this.chkKyoki);
             this.Controls.Add(this.txtYear);
@@ -390,8 +379,7 @@ namespace DivinationApp
         private System.Windows.Forms.CheckBox chkShugosin;
         private System.Windows.Forms.CheckBox chkKonkihou;
         private System.Windows.Forms.CheckBox chkKyoki;
-        private System.Windows.Forms.CheckBox chkTaiun;
-        private System.Windows.Forms.CheckBox chkNenun;
+        private System.Windows.Forms.CheckBox chkTaiunNenun;
         private System.Windows.Forms.CheckBox chkGetuun;
         private System.Windows.Forms.CheckBox chkDispGetuun;
         private System.Windows.Forms.Button button1;

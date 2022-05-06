@@ -89,7 +89,8 @@ namespace DivinationApp
                 int idx = dataGridView1.Rows.Add();
                 if(dataGridView1.ColumnCount< info.Value.pictureInfos.Count +2)
                 {
-                    for (int i = 0; i < info.Value.pictureInfos.Count+2- dataGridView1.ColumnCount; i++)
+                    int nowColCnt = dataGridView1.ColumnCount;
+                    for (int i = 0; i < info.Value.pictureInfos.Count + 2 - nowColCnt; i++)
                     {
 
                         DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();

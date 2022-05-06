@@ -472,6 +472,18 @@ namespace DivinationApp
             return chkZougan.Checked;
         }
 
+        public ListView GetTaiunListView()
+        {
+            return lvTaiun;
+        }
+        public ListView GetNenunListView()
+        {
+            return lvNenun;
+        }
+        public ListView GetGetuunListView()
+        {
+            return lvGetuun;
+        }
 
         private void MainProc(Person person)
         {
@@ -986,6 +998,7 @@ namespace DivinationApp
             itemData.bKyokiToukan = item.bKyokiToukan;  //虚気
             itemData.kyokiTargetAtrr = item.kyokiTargetAtrr;  //虚気となった属性
             itemData.kyokiTargetBit = item.kyokiTargetBit;  //虚気となった干支のビット
+            itemData.bTenchusatu = item.bTenchusatu;
 
 
             if (item.bShugosin)
@@ -1146,15 +1159,15 @@ namespace DivinationApp
 
             Kansi nenunKansi = person.GetKansi(targetkansiNo);
 
-            var item = Common.GetNenunItems(person, title, nenunKansi, taiunLvItemData);
+            var item = Common.GetNenunItems(person, rowKeyValue,  title, nenunKansi,  taiunLvItemData);
             AddNenunGetuunItem(rowKeyValue, title, item, lv);
 
-            var lvItem = lv.Items[lv.Items.Count - 1];
-            //経歴情報
-            if (person.career != null)
-            {
-                lvItem.SubItems[(int)Const.ColUnseiLv.COL_CAREER].Text = person.career.GetLineString(rowKeyValue); //経歴
-            }
+            //var lvItem = lv.Items[lv.Items.Count - 1];
+            ////経歴情報
+            //if (person.career != null)
+            //{
+            //    lvItem.SubItems[(int)Const.ColUnseiLv.COL_CAREER].Text = person.career.GetLineString(rowKeyValue); //経歴
+            //}
 
         }
 
@@ -1196,6 +1209,7 @@ namespace DivinationApp
             itemData.bKyokiToukan = item.bKyokiToukan;  //虚気
             itemData.kyokiTargetAtrr = item.kyokiTargetAtrr;  //虚気となった属性
             itemData.kyokiTargetBit = item.kyokiTargetBit;  //虚気となった干支のビット
+            itemData.bTenchusatu = item.bTenchusatu;
 
             if (item.bShugosin)
             {
@@ -1289,33 +1303,48 @@ namespace DivinationApp
 
         public void DispDateView(DateTime today)
         {
-            int year = today.Year;
 
-            //大運リストビューで年に該当する行を選択
+            List<TaiunLvItemData> lstTaiunItemData = new List<TaiunLvItemData>();
+
             for (int i = 0; i < lvTaiun.Items.Count; i++)
             {
 
-                TaiunLvItemData itemData = (TaiunLvItemData)lvTaiun.Items[i].Tag;
-                if (itemData.startYear > today.Year)
-                {
-                    int index = i - 1;
-                    if (index < 0) index = 0;
-
-                    itemData = (TaiunLvItemData)lvTaiun.Items[index].Tag;
-                    if (itemData.startYear == year)
-                    {
-                        //１月の場合、前年を表示する必要がある
-                        if (today.Month < Const.GetuunDispStartGetu)
-                        {
-                            index--;
-                            if (index < 0) index = 0; //このチェックで引っかかることはない
-                        }
-                    }
-
-                    lvTaiun.Items[index].Selected = true; ;
-                    break;
-                }
+                lstTaiunItemData.Add( (TaiunLvItemData)lvTaiun.Items[i].Tag);
             }
+
+            int index = Common.GetTaiunItemIndex(lstTaiunItemData, today);
+            if (index >= 0)
+            {
+                lvTaiun.Items[index].Selected = true;
+            }
+
+            int year = today.Year;
+            
+            ////大運リストビューで年に該当する行を選択
+            //for (int i = 0; i < lvTaiun.Items.Count; i++)
+            //{
+
+            //    TaiunLvItemData itemData = (TaiunLvItemData)lvTaiun.Items[i].Tag;
+            //    if (itemData.startYear > today.Year)
+            //    {
+            //        int index = i - 1;
+            //        if (index < 0) index = 0;
+
+            //        itemData = (TaiunLvItemData)lvTaiun.Items[index].Tag;
+            //        if (itemData.startYear == year)
+            //        {
+            //            //１月の場合、前年を表示する必要がある
+            //            if (today.Month < Const.GetuunDispStartGetu)
+            //            {
+            //                index--;
+            //                if (index < 0) index = 0; //このチェックで引っかかることはない
+            //            }
+            //        }
+
+            //        lvTaiun.Items[index].Selected = true; ;
+            //        break;
+            //    }
+            //}
             //年運リストビューで年に該当する行を選択
             if (today.Month < Const.GetuunDispStartGetu)
             {
