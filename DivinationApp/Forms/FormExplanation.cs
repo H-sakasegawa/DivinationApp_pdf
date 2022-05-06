@@ -25,7 +25,7 @@ namespace DivinationApp
 
         string formTitle = "説明";
 
-        const string explanationFileDefName = "ExplanationFileDef.ini";
+        //const string explanationFileDefName = "ExplanationFileDef.ini";
 
         public FormExplanation()
         {
@@ -62,11 +62,11 @@ namespace DivinationApp
             {
                 reader.Clear();
 
-                string fileName = GetDataFileName(type);
+                string fileName = Common.GetExplanationDataFileName(type);
                 if(string.IsNullOrEmpty(fileName))
                 {
-                    string filePath = Path.Combine(FormMain.GetExePath(), explanationFileDefName);
-                    MessageBox.Show(string.Format("説明ファイル定義INIファイル[ {0 }]に\n{1}\nの定義がありません。", explanationFileDefName, type));
+                    string filePath = Path.Combine(FormMain.GetExePath(), Const.explanationFileDefName);
+                    MessageBox.Show(string.Format("説明ファイル定義INIファイル[ {0 }]に\n{1}\nの定義がありません。", Const.explanationFileDefName, type));
                     return;
                 }
                 string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName );
@@ -91,20 +91,21 @@ namespace DivinationApp
 
             }
 
-            if (!string.IsNullOrEmpty(dispTargetKey))
-            {
-                //キー文字から"(～)"などを除外
-                char[] splitKeys = new char[] { '(', ':', '：', '[' };
-                int index = dispTargetKey.IndexOfAny(splitKeys);
-                if (index >= 0)
-                {
-                    dispTargetKey = dispTargetKey.Substring(0, index).Trim();
-                }
-            }
-            else
-            {
-                dispTargetKey = null;
-            }
+            dispTargetKey = Common.TrimExplanationDataTargetKey(dispTargetKey);
+            //if (!string.IsNullOrEmpty(dispTargetKey))
+            //{
+            //    //キー文字から"(～)"などを除外
+            //    char[] splitKeys = new char[] { '(', ':', '：', '[' };
+            //    int index = dispTargetKey.IndexOfAny(splitKeys);
+            //    if (index >= 0)
+            //    {
+            //        dispTargetKey = dispTargetKey.Substring(0, index).Trim();
+            //    }
+            //}
+            //else
+            //{
+            //    dispTargetKey = null;
+            //}
             SetCurrentExplanation(dispTargetKey);
             //bool bEnable = true;
             //curData = reader.GetExplanation(dispTargetKey);
@@ -188,13 +189,13 @@ namespace DivinationApp
 
         }
 
-        private string GetDataFileName( string type)
-        {
-            string filePath = Path.Combine( FormMain.GetExePath() , explanationFileDefName);
-            IniFile iniFile = new IniFile(filePath);
+        //private string GetDataFileName( string type)
+        //{
+        //    string filePath = Path.Combine( FormMain.GetExePath() , explanationFileDefName);
+        //    IniFile iniFile = new IniFile(filePath);
 
-            return iniFile.GetString("Setting", type);
-        }
+        //    return iniFile.GetString("Setting", type);
+        //}
 
          private void ShowPage(int pageNo)
         {

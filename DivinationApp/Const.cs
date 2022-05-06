@@ -170,5 +170,9 @@ namespace DivinationApp
         public const string sTaiun = "大運";
         public const string sNenun = "年運";
         public const string sGetuun = "月運";
+
+
+        public const string explanationFileDefName = "ExplanationFileDef.ini";
+
     }
 }

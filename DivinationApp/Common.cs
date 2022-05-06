@@ -760,6 +760,36 @@ namespace DivinationApp
         }
 
 
+        public static string GetExplanationDataFileName(string type)
+        {
+            string filePath = System.IO.Path.Combine(FormMain.GetExePath(), Const.explanationFileDefName);
+            IniFile iniFile = new IniFile(filePath);
+
+            return iniFile.GetString("Setting", type);
+        }
+
+        public static string TrimExplanationDataTargetKey( string dispTargetKey)
+        {
+            if (!string.IsNullOrEmpty(dispTargetKey))
+            {
+                //キー文字から"(～)"などを除外
+                char[] splitKeys = new char[] { '(', ':', '：', '[' };
+                int index = dispTargetKey.IndexOfAny(splitKeys);
+                if (index >= 0)
+                {
+                    dispTargetKey = dispTargetKey.Substring(0, index).Trim();
+                }
+            }
+            else
+            {
+                dispTargetKey = null;
+            }
+
+            return dispTargetKey;
+
+        }
+
+
     }
 
 }

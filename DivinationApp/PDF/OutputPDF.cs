@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -15,7 +16,7 @@ namespace DivinationApp
     class PDFOutput
     {
         Parameter param;
-        Document doc;
+        //Document doc;
         int hedderAreaH = 20;
         int lastDrawY = 0;
         public PdfContentByte contentByte;
@@ -209,6 +210,9 @@ namespace DivinationApp
                     }
                 }
             }
+
+            if (writeCategoryNum != 0) pdfUtil.NewPage();
+            writeExplanation(areaLeft, 50, ref lastY);
 
             //-------------------------------------------
             pdfUtil.CloseDocument();
@@ -776,6 +780,73 @@ namespace DivinationApp
 
 
 
+        int writeExplanation(float x, float y, ref float lastY)
+        {
+            ExplanationReader reader = new ExplanationReader();
+            reader.Clear();
+
+            string type = "陽占特徴";
+            string dispTargetKey = "始星";
+
+            string fileName = Common.GetExplanationDataFileName(type);
+            string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
+
+            if (reader.ReadExcel(excelFilePath) != 0)
+            {
+                MessageBox.Show(string.Format("説明ファイルの読み込みに失敗しま\n\n{0}", excelFilePath));
+                return 0;
+            }
+
+            dispTargetKey = Common.TrimExplanationDataTargetKey(dispTargetKey);
+
+            ExplanationReader.ExplanationData curData = reader.GetExplanation(dispTargetKey);
+
+            System.Drawing.ImageConverter imgconv = new System.Drawing.ImageConverter();
+
+            float drawY = y;
+            float drawX = x;
+            float scale = 0.5f;
+
+
+            Rectangle rect = pdfUtil.GetPageSize();
+            float centerX = rect.Width / 2.0f;
+            float limitWidth = rect.Width/2.0f - 60;
+
+            for (int page = 0; page < curData.pictureInfos.Count; page++)
+            {
+                System.Drawing.Image image = (System.Drawing.Image)imgconv.ConvertFrom(curData.pictureInfos[page].pictureData.Data);
+
+                iTextSharp.text.Image pdfImage = iTextSharp.text.Image.GetInstance(image, BaseColor.WHITE);
+
+                scale = (limitWidth / pdfImage.Width);
+
+                float ofsY = (pdfImage.Height * scale) + 10;
+                if (drawY + ofsY >= rect.Height - 50) 
+                {
+                    if (drawX == x)
+                    {
+                        pdfUtil.DrawLine(centerX, 50, centerX, rect.Height - 50, 1, BaseColor.BLACK);
+                        drawX = centerX + 10;
+                        drawY = y;
+                    }
+                    else
+                    {
+                        drawX = x;
+                        drawY = y;
+                        pdfUtil.NewPage();
+                    }
+
+                }
+
+                pdfUtil.DrawPicture(drawX, drawY, scale, pdfImage);
+
+                drawY += ofsY ;
+
+            }
+
+            return 0;
+        }
+
         void OpenFile(string fname)
         {
             System.Diagnostics.Process p =
@@ -1021,6 +1092,11 @@ namespace DivinationApp
         {
             //ドキュメントを閉じる
             doc.Close();
+        }
+
+        public Rectangle GetPageSize()
+        {
+            return doc.PageSize;
         }
 
         public void NewPage(A4Dirc dirc = A4Dirc.Vertical)
@@ -1292,6 +1368,36 @@ namespace DivinationApp
 
             iTextSharp.text.Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
             FillRectangle(rect_, lineColor_, fillColor_);
+
+        }
+
+        public void DrawPicture(float x, float y, Image pdfImage)
+        {
+
+            DrawPicture(x, y,  1.0f, pdfImage);
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="scale">0.1～1.0</param>
+        /// <param name="pdfImage"></param>
+        public void DrawPicture(float x, float y, float scale, Image pdfImage)
+        {
+            float w = pdfImage.Width * scale;
+            float h = pdfImage.Height * scale;
+            DrawPicture(x, y, w, h, pdfImage);
+
+        }
+        public void DrawPicture(float x, float y, float w, float h, Image pdfImage)
+        {
+            pdfImage.SetAbsolutePosition(x, Y(y + h)); //画像の左下の座標
+            pdfImage.ScaleAbsoluteWidth(w);
+            pdfImage.ScaleAbsoluteHeight(h);
+
+            doc.Add(pdfImage);
         }
 
 
