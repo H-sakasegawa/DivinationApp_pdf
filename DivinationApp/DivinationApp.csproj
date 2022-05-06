@@ -70,118 +70,118 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Const.cs" />
-    <Compile Include="DataGridViewEx.cs">
+    <Compile Include="Tools\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DrawInsen.cs" />
-    <Compile Include="DrawIsouhouBase.cs" />
-    <Compile Include="DrawJuniSinKanHou.cs" />
-    <Compile Include="DrawKoutenUn.cs" />
-    <Compile Include="DrawShukumei.cs" />
-    <Compile Include="EiseiHou.cs" />
-    <Compile Include="ExcelReader.cs" />
-    <Compile Include="ExplanationReader.cs" />
-    <Compile Include="Finder.cs" />
-    <Compile Include="FinderCustom.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="DrawHelper\DrawInsen.cs" />
+    <Compile Include="DrawHelper\DrawIsouhouBase.cs" />
+    <Compile Include="DrawHelper\DrawJuniSinKanHou.cs" />
+    <Compile Include="DrawHelper\DrawKoutenUn.cs" />
+    <Compile Include="DrawHelper\DrawShukumei.cs" />
+    <Compile Include="InformationSupport\EiseiHou.cs" />
+    <Compile Include="Excel\ExcelReader.cs" />
+    <Compile Include="Excel\ExplanationReader.cs" />
+    <Compile Include="Tools\Finder.cs" />
+    <Compile Include="Tools\FinderCustom.cs" />
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAddTab.cs">
+    <Compile Include="Forms\FormAddTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddTab.Designer.cs">
+    <Compile Include="Forms\FormAddTab.Designer.cs">
       <DependentUpon>FormAddTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEditCareer.cs">
+    <Compile Include="Forms\FormEditCareer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEditCareer.Designer.cs">
+    <Compile Include="Forms\FormEditCareer.Designer.cs">
       <DependentUpon>FormEditCareer.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormExcelPictureTest.cs">
+    <Compile Include="Forms\FormExcelPictureTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormExcelPictureTest.Designer.cs">
+    <Compile Include="Forms\FormExcelPictureTest.Designer.cs">
       <DependentUpon>FormExcelPictureTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormExplanation.cs">
+    <Compile Include="Forms\FormExplanation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormExplanation.Designer.cs">
+    <Compile Include="Forms\FormExplanation.Designer.cs">
       <DependentUpon>FormExplanation.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormFinder.cs">
+    <Compile Include="Forms\FormFinder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFinder.Designer.cs">
+    <Compile Include="Forms\FormFinder.Designer.cs">
       <DependentUpon>FormFinder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormFinderCustom.cs">
+    <Compile Include="Forms\FormFinderCustom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFinderCustom.Designer.cs">
+    <Compile Include="Forms\FormFinderCustom.Designer.cs">
       <DependentUpon>FormFinderCustom.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormJuniSinKanHou.cs">
+    <Compile Include="Forms\FormJuniSinKanHou.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormJuniSinKanHou.Designer.cs">
+    <Compile Include="Forms\FormJuniSinKanHou.Designer.cs">
       <DependentUpon>FormJuniSinKanHou.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormKonkihou.cs">
+    <Compile Include="Forms\FormKonkihou.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormKonkihou.Designer.cs">
+    <Compile Include="Forms\FormKonkihou.Designer.cs">
       <DependentUpon>FormKonkihou.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
+    <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
+    <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOption.cs">
+    <Compile Include="Forms\FormOption.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOption.Designer.cs">
+    <Compile Include="Forms\FormOption.Designer.cs">
       <DependentUpon>FormOption.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPDF.cs">
+    <Compile Include="Forms\FormPDF.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPDF.Designer.cs">
+    <Compile Include="Forms\FormPDF.Designer.cs">
       <DependentUpon>FormPDF.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPersonInfo.cs">
+    <Compile Include="Forms\FormPersonInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPersonInfo.Designer.cs">
+    <Compile Include="Forms\FormPersonInfo.Designer.cs">
       <DependentUpon>FormPersonInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShugoSinHou.cs">
+    <Compile Include="Forms\FormShugoSinHou.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShugoSinHou.Designer.cs">
+    <Compile Include="Forms\FormShugoSinHou.Designer.cs">
       <DependentUpon>FormShugoSinHou.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormUnseiViewer.cs">
+    <Compile Include="Forms\FormUnseiViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormUnseiViewer.Designer.cs">
+    <Compile Include="Forms\FormUnseiViewer.Designer.cs">
       <DependentUpon>FormUnseiViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="FromKyokiSimulation.cs">
+    <Compile Include="Forms\FromKyokiSimulation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FromKyokiSimulation.Designer.cs">
+    <Compile Include="Forms\FromKyokiSimulation.Designer.cs">
       <DependentUpon>FromKyokiSimulation.cs</DependentUpon>
     </Compile>
-    <Compile Include="GraphicHelper.cs" />
-    <Compile Include="IniFile.cs" />
-    <Compile Include="InsenYousen.cs" />
+    <Compile Include="Tools\GraphicHelper.cs" />
+    <Compile Include="Tools\IniFile.cs" />
+    <Compile Include="InformationSupport\InsenYousen.cs" />
     <Compile Include="Insen\AngouSouren.cs" />
     <Compile Include="Insen\Chusatu.cs" />
     <Compile Include="Insen\DaiSangouKaikyokuDaiHankai.cs" />
@@ -195,71 +195,71 @@
     <Compile Include="Insen\RitinAndNetin.cs" />
     <Compile Include="Insen\ShunSui.cs" />
     <Compile Include="Insen\ZensiShuuin.cs" />
-    <Compile Include="JundakuHou.cs" />
-    <Compile Include="JuniSinKanHou.cs" />
-    <Compile Include="JunkanHou.cs" />
-    <Compile Include="Konkihou.cs" />
-    <Compile Include="KyokiSimulation.cs" />
-    <Compile Include="Kyokuhou.cs" />
-    <Compile Include="ListViewEx.cs" />
-    <Compile Include="MIkyouMichuMijaku.cs" />
-    <Compile Include="OutputPDF.cs" />
+    <Compile Include="InformationSupport\JundakuHou.cs" />
+    <Compile Include="InformationSupport\JuniSinKanHou.cs" />
+    <Compile Include="InformationSupport\JunkanHou.cs" />
+    <Compile Include="InformationSupport\Konkihou.cs" />
+    <Compile Include="InformationSupport\KyokiSimulation.cs" />
+    <Compile Include="InformationSupport\Kyokuhou.cs" />
+    <Compile Include="Tools\ListViewEx.cs" />
+    <Compile Include="InformationSupport\MIkyouMichuMijaku.cs" />
+    <Compile Include="PDF\OutputPDF.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetuiribiTable.cs" />
-    <Compile Include="ShugosinUtil.cs" />
-    <Compile Include="TabControlEx.cs">
+    <Compile Include="InformationSupport\ShugosinUtil.cs" />
+    <Compile Include="Tools\TabControlEx.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TableMng.cs" />
     <Compile Include="types.cs" />
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAddTab.resx">
+    <EmbeddedResource Include="Forms\FormAddTab.resx">
       <DependentUpon>FormAddTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEditCareer.resx">
+    <EmbeddedResource Include="Forms\FormEditCareer.resx">
       <DependentUpon>FormEditCareer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormExcelPictureTest.resx">
+    <EmbeddedResource Include="Forms\FormExcelPictureTest.resx">
       <DependentUpon>FormExcelPictureTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormExplanation.resx">
+    <EmbeddedResource Include="Forms\FormExplanation.resx">
       <DependentUpon>FormExplanation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormFinder.resx">
+    <EmbeddedResource Include="Forms\FormFinder.resx">
       <DependentUpon>FormFinder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormFinderCustom.resx">
+    <EmbeddedResource Include="Forms\FormFinderCustom.resx">
       <DependentUpon>FormFinderCustom.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormJuniSinKanHou.resx">
+    <EmbeddedResource Include="Forms\FormJuniSinKanHou.resx">
       <DependentUpon>FormJuniSinKanHou.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormKonkihou.resx">
+    <EmbeddedResource Include="Forms\FormKonkihou.resx">
       <DependentUpon>FormKonkihou.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
+    <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOption.resx">
+    <EmbeddedResource Include="Forms\FormOption.resx">
       <DependentUpon>FormOption.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPDF.resx">
+    <EmbeddedResource Include="Forms\FormPDF.resx">
       <DependentUpon>FormPDF.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPersonInfo.resx">
+    <EmbeddedResource Include="Forms\FormPersonInfo.resx">
       <DependentUpon>FormPersonInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShugoSinHou.resx">
+    <EmbeddedResource Include="Forms\FormShugoSinHou.resx">
       <DependentUpon>FormShugoSinHou.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormUnseiViewer.resx">
+    <EmbeddedResource Include="Forms\FormUnseiViewer.resx">
       <DependentUpon>FormUnseiViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FromKyokiSimulation.resx">
+    <EmbeddedResource Include="Forms\FromKyokiSimulation.resx">
       <DependentUpon>FromKyokiSimulation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -285,5 +285,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

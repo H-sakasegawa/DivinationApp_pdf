@@ -1319,32 +1319,7 @@ namespace DivinationApp
             }
 
             int year = today.Year;
-            
-            ////大運リストビューで年に該当する行を選択
-            //for (int i = 0; i < lvTaiun.Items.Count; i++)
-            //{
-
-            //    TaiunLvItemData itemData = (TaiunLvItemData)lvTaiun.Items[i].Tag;
-            //    if (itemData.startYear > today.Year)
-            //    {
-            //        int index = i - 1;
-            //        if (index < 0) index = 0;
-
-            //        itemData = (TaiunLvItemData)lvTaiun.Items[index].Tag;
-            //        if (itemData.startYear == year)
-            //        {
-            //            //１月の場合、前年を表示する必要がある
-            //            if (today.Month < Const.GetuunDispStartGetu)
-            //            {
-            //                index--;
-            //                if (index < 0) index = 0; //このチェックで引っかかることはない
-            //            }
-            //        }
-
-            //        lvTaiun.Items[index].Selected = true; ;
-            //        break;
-            //    }
-            //}
+ 
             //年運リストビューで年に該当する行を選択
             if (today.Month < Const.GetuunDispStartGetu)
             {

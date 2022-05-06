@@ -432,6 +432,7 @@ namespace DivinationApp
                                                      param.bGotoku,
                                                      param.bRefrectSigou
                                                      );
+            drawItem.SetStringBackColor(System.Drawing.Color.White);
             pdfUtil.SaveState();
             pdfUtil.SetFontAndSize(fontName, 12);
             drawItem.DrawPDF(pdfUtil, x, y);
@@ -475,6 +476,7 @@ namespace DivinationApp
                                                     param.bJuniSinkanHou
                
                                                     );
+            drawItem.SetStringBackColor(System.Drawing.Color.White);
             pdfUtil.SaveState();
   //          pdfUtil.SetFontAndSize(fontName, 12);
 
@@ -484,10 +486,6 @@ namespace DivinationApp
 
             return 0;
         }
-
-
-
-
         /// <summary>
         /// 大運表
         /// </summary>
@@ -697,7 +695,6 @@ namespace DivinationApp
 
             return 0;
         }
-
         /// <summary>
         /// 月運表
         /// </summary>
@@ -824,6 +821,9 @@ namespace DivinationApp
                 return colItems[iCol];
             }
         }
+        /// <summary>
+        /// カラムヘッダー情報
+        /// </summary>
         public class ColItem
         {
             public ColItem(string title, float width, int align = Element.ALIGN_LEFT)
@@ -837,6 +837,9 @@ namespace DivinationApp
             public string title;
             public int align;
         }
+        /// <summary>
+        /// 行データ
+        /// </summary>
         public class RowItem
         {
             Table parent;
@@ -854,15 +857,20 @@ namespace DivinationApp
             public CellItem AddCell(string str)
             {
                 CellItem item = new CellItem(str);
+                //デフォルトの色は、RowItemと同じ色にしておく。
+                item.foreColor = foreColor;
                 item.backColor = backColor;
                 lstCells.Add(item);
                 return item;
             }
         }
+        /// <summary>
+        /// グリッドセルデータ
+        /// </summary>
         public class CellItem
         {
             public string str;
-           // public System.Drawing.Color foreColor; //文字食
+            public System.Drawing.Color foreColor; //文字食
             public System.Drawing.Color backColor; //背景色
 
             public CellItem(string str)
@@ -939,7 +947,6 @@ namespace DivinationApp
                 rect.Y = colY;
                 colX = (int)x;
 
-                System.Drawing.Color foreColor = rowItem.foreColor;
 
                 //グリッドセル
                 for (int iCol = 0; iCol < table.colItems.Count; iCol++)
@@ -950,6 +957,8 @@ namespace DivinationApp
                     rect.X = colX;
                     rect.Width = (int)colItem.width;
                     int align = colItem.align;
+
+                    System.Drawing.Color foreColor = cellItem.foreColor;
 
                     pdfUtil.FillRectangle(rect, System.Drawing.Color.Black, cellItem.backColor);
 

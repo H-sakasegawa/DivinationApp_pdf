@@ -32,6 +32,8 @@ namespace DivinationApp
         public StringFormat stringFormat = null;
         public StringFormat smallStringFormat = null;
 
+        protected Brush stringBkBrush = null;
+
         protected DrawMode drawMode = DrawMode.DRAW;
 
         TableMng tblMng = TableMng.GetTblManage();
@@ -218,6 +220,8 @@ namespace DivinationApp
             redPen = new Pen(Color.Red, 1); 
             redPenBold = new Pen(Color.Red, 2);
 
+            stringBkBrush = new SolidBrush(Color.FromArgb(255, 240, 240, 240));
+
             var fontName = "メイリオ";
             fnt =  new Font(fontName, fntSize, FontStyle.Regular);
             fntBold = new Font(fontName, fntSize, FontStyle.Regular | FontStyle.Bold);
@@ -244,6 +248,11 @@ namespace DivinationApp
             rangeWidth = 45;
 
 
+        }
+
+        public void SetStringBackColor( Color color)
+        {
+            stringBkBrush = new SolidBrush( color );
         }
         /// <summary>
         /// フォント高さ取得
@@ -825,7 +834,7 @@ namespace DivinationApp
                 fillRect.Width = (int)w.Width;
             }
             if (brush == null) brush = Brushes.Black;
-            g.FillRectangle(Brushes.WhiteSmoke, fillRect);
+            g.FillRectangle(stringBkBrush, fillRect);
             g.DrawString(s, fntSmall, brush, rect, smallStringFormat);
         }
         /// <summary>
@@ -876,7 +885,7 @@ namespace DivinationApp
             {
 
                 Rectangle rect = new Rectangle(x, y, (int)Math.Ceiling(maxWidth), fntSmall.Height);
-                g.FillRectangle(Brushes.WhiteSmoke, rect);
+                g.FillRectangle(stringBkBrush, rect);
 
                 if (s.bEnable)
                 {
@@ -928,7 +937,7 @@ namespace DivinationApp
             {
                 
                 Rectangle rect = new Rectangle(x, y, (int)Math.Ceiling(maxWidth), fntSmall.Height);
-                g.FillRectangle(Brushes.WhiteSmoke, rect);
+                g.FillRectangle(stringBkBrush, rect);
 
                 g.DrawString(aryStr[i], fntSmall, brush, rect, smallStringFormat);
 
