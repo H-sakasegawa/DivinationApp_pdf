@@ -514,7 +514,6 @@ namespace DivinationApp
             this.Name = "FormShugoSinHou";
             this.Text = "守護神法";
             this.TopMost = true;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormKonkihou_FormClosed);
             this.Load += new System.EventHandler(this.FormShugoSinHou_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

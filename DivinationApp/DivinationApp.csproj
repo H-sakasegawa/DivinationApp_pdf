@@ -70,6 +70,12 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Const.cs" />
+    <Compile Include="Forms\ModelessBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModelessBase.Designer.cs">
+      <DependentUpon>ModelessBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tools\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FromKyokiSimulation.resx">
       <DependentUpon>FromKyokiSimulation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModelessBase.resx">
+      <DependentUpon>ModelessBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

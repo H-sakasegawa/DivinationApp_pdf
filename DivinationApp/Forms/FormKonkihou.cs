@@ -14,14 +14,13 @@ namespace DivinationApp
     /// <summary>
     /// 根気法　表示画面
     /// </summary>
-    public partial class FormKonkihou : Form
+    public partial class FormKonkihou : ModelessBase
     {
         public delegate void CloseHandler();
         Person person;
         TableMng tblMng = TableMng.GetTblManage();
         //陰占 描画オブジェクト
         DrawInsen drawInsen = null;
-        public event Common.CloseHandler OnClose;
 
         public FormKonkihou()
         {
@@ -90,9 +89,5 @@ namespace DivinationApp
 
         }
 
-        private void FormKonkihou_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            OnClose?.Invoke(this);
-        }
     }
 }

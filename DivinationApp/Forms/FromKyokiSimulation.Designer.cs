@@ -100,7 +100,6 @@ namespace DivinationApp
             this.Name = "FromKyokiSimulation";
             this.Text = "虚気 変化パターン";
             this.TopMost = true;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FromKyokiSimulation_FormClosed);
             this.Load += new System.EventHandler(this.FromKyokiSimulation_Load);
             this.ResumeLayout(false);
 

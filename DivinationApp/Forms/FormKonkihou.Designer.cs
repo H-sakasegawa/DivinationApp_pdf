@@ -165,7 +165,6 @@ namespace DivinationApp
             this.Name = "FormKonkihou";
             this.Text = "根気法";
             this.TopMost = true;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormKonkihou_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

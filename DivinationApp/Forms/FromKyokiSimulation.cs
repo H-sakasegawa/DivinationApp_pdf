@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace DivinationApp
 {
 
-    public partial class FromKyokiSimulation : Form
+    public partial class FromKyokiSimulation : ModelessBase
     {
 
 
@@ -24,7 +24,6 @@ namespace DivinationApp
         /// </summary>
         private const bool bReflectGetuunToYearList = false;
 
-        public event Common.CloseHandler OnClose;
 
         public FromKyokiSimulation( Form1 parent)
         {
@@ -278,9 +277,5 @@ namespace DivinationApp
             frmParent.UpdateNeunTaiunDisp(year);
         }
 
-        private void FromKyokiSimulation_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            OnClose?.Invoke(this);
-        }
     }
 }

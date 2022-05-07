@@ -24,11 +24,11 @@ namespace DivinationApp
 
         const string keyLastDataFile = "LastDataFile";
 
-        List<Form> lstModlessForms = new List<Form>();
+        List<ModelessBase> lstModlessForms = new List<ModelessBase>();
         FormFinder frmFinder = null;
         FormFinderCustom frmFinderCustom = null;
-
         FormExplanation frmExplanation = null;
+        FormPDF frmPDF = null;
 
         static FormMain frmMain = null;
 
@@ -110,6 +110,16 @@ namespace DivinationApp
             }
 
         }
+
+        private void OnModelessFormClose(ModelessBase frm)
+        {
+            lstModlessForms.Remove(frm);
+            if (frm == frmFinderCustom) frmFinderCustom = null;
+            if (frm == frmExplanation) frmExplanation = null;
+            if (frm == frmPDF) frmPDF = null;
+        }
+
+
         private void mnuAddTab_Click(object sender, EventArgs e)
         {
             FormAddTab frmAddTab = new FormAddTab(personList);
@@ -172,6 +182,12 @@ namespace DivinationApp
             return frm.GetCurrentPerson();
 
         }
+        public Group GetActiveFormGroup()
+        {
+            var frm = GetActiveForm();
+            return frm.GetCurrentGroup();
+
+        }
         private void mnuSerch_Click(object sender, EventArgs e)
         {
             if(frmFinder!=null)
@@ -188,12 +204,12 @@ namespace DivinationApp
             Group group = frm.GetCurrentGroup();
 
             frmFinder = new FormFinder(this, group, person);
-            frmFinder.OnClose += OnFrmFinder_Close;
+            frmFinder.OnClose += OnModelessFormClose;
             frmFinder.Show();
             lstModlessForms.Add(frmFinder);
         }
 
-        private void OnFrmFinder_Close(Form frm)
+        private void OnFrmFinder_Close(ModelessBase frm)
         {
             lstModlessForms.Remove(frm);
             if(frm == frmFinder) frmFinder = null;
@@ -274,16 +290,11 @@ namespace DivinationApp
             }
 
             frmFinderCustom = new FormFinderCustom(this);
-            frmFinderCustom.OnClose += OnFrmFindCustom_Close;
+            frmFinderCustom.OnClose += OnModelessFormClose;
             frmFinderCustom.Show();
             lstModlessForms.Add(frmFinderCustom);
         }
 
-        private void OnFrmFindCustom_Close(Form frm)
-        {
-            lstModlessForms.Remove(frm);
-            if (frm == frmFinderCustom) frmFinderCustom = null;
-        }
 
         /// <summary>
         /// 名簿を開く
@@ -370,14 +381,9 @@ namespace DivinationApp
             }
 
             frmExplanation = new FormExplanation();
-            frmExplanation.OnClose += OnExplanation_Close;
+            frmExplanation.OnClose += OnModelessFormClose;
             frmExplanation.Show( type,  key);
             lstModlessForms.Add(frmExplanation);
-        }
-        private void OnExplanation_Close(Form frm)
-        {
-            lstModlessForms.Remove(frm);
-            if (frm == frmExplanation) frmExplanation = null;
         }
 
         /// <summary>
@@ -397,8 +403,18 @@ namespace DivinationApp
         /// <param name="e"></param>
         private void mnuPDF_Click(object sender, EventArgs e)
         {
-            FormPDF frm = new FormPDF( );
-            frm.Show();
+            if (frmPDF != null)
+            {
+                frmPDF.Show();
+                frmPDF.Activate();
+                return;
+            }
+
+            frmPDF = new FormPDF(personList);
+            frmPDF.OnClose += OnModelessFormClose;
+            frmPDF.Show();
+            lstModlessForms.Add(frmPDF);
+
 
         }
 

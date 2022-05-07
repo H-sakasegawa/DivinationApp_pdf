@@ -342,7 +342,6 @@ namespace DivinationApp
             this.MinimumSize = new System.Drawing.Size(438, 200);
             this.Name = "FormFinder";
             this.Text = "検索";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormFinder_FormClosing);
             this.Load += new System.EventHandler(this.FormSerch_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

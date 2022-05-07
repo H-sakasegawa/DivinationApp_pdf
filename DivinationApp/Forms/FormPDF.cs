@@ -7,19 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DivinationApp
 {
-    public partial class FormPDF : Form
+    public partial class FormPDF : ModelessBase
     {
-        public FormPDF()
+        Persons personList;
+
+        public FormPDF(Persons persons)
         {
             InitializeComponent();
 
+            personList = persons;
+
         }
+
 
         private void FormPDF_Load(object sender, EventArgs e)
         {
+            this.TopMost = true;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = new Size(this.Size.Width, 2048);
+
+            var frmMain = FormMain.GetFormMain();
+            Person person = frmMain.GetActiveFormPerson();
+            Group group = frmMain.GetActiveFormGroup();
+
+
             SetNowYearMonth();
 
             chkShukumeiAndKoutenun.Checked = true;
@@ -45,16 +60,90 @@ namespace DivinationApp
             chkZougan.Checked = false;
             chkJuniSinkanHou.Checked = false;
 
+            //グループコンボボックス設定
+            Common.SetGroupCombobox(personList, cmbGroup, group.groupName);
+
+            //初回のみ現在のメンバーのチェックマークをONする
+            foreach(ListViewItem item in lstPerson.Items)
+            {
+                if(item.Text == person.name)
+                {
+                    item.Checked = true;
+                }
+            }
+
+
 
         }
 
+        bool bStop = false;
         private void button2_Click(object sender, EventArgs e)
         {
-            var frmMaqin = FormMain.GetFormMain();
-            Person person = frmMaqin.GetActiveFormPerson();
+            if (button2.Text == "PDF出力")
+            {
+                string folderPath = Path.Combine(FormMain.GetExePath(), "PDF");
+                Directory.CreateDirectory(folderPath);
+                button2.Text = "停止";
+                bStop = false;
+                lstPerson.Enabled = false;
+                cmbGroup.Enabled = false;
 
+                //人名一覧でチェックの付いている人をすべてPDF化
+                List<Person> lstPdfPersons = new List<Person>();
+                foreach (ListViewItem lvItem in lstPerson.Items)
+                {
+                    if (!lvItem.Checked) continue;
+                    lstPdfPersons.Add((Person)lvItem.Tag);
+                }
+
+                Task.Run(() =>
+                {
+                    //人名一覧でチェックの付いている人をすべてPDF化
+                    foreach (var person in lstPdfPersons)
+                    {
+                        if (bStop) break;
+
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            foreach (ListViewItem lvItem in lstPerson.Items)
+                            {
+                                Person p = (Person)lvItem.Tag;
+                                if ( p.name == person.name && p.group == person.group)
+                                {
+                                    lvItem.Selected = true;
+                                    lvItem.EnsureVisible();
+                                }
+                            }
+
+                        }));
+
+
+                        OutputPDF(person, folderPath);
+                    }
+                    Invoke((MethodInvoker)(() =>
+                    {
+                        button2.Text = "PDF出力";
+                        lstPerson.Enabled = true;
+                        cmbGroup.Enabled = true;
+
+                    }));
+
+                });
+
+            }
+            else
+            {
+                bStop = true;
+            }
+        }
+
+        private void OutputPDF( Person person, string outputFolderPath )
+        {
             PDFOutput.Parameter param = new PDFOutput.Parameter();
-            param.person = person;
+
+            //Person情報を一部書き換えるので、ここでクローンを作成してparamに設定
+            param.person = person.Clone(); 
+
             param.bShukumeiAndKoutenun = chkShukumeiAndKoutenun.Checked;
             param.bKyoki = chkKyoki.Checked;
             param.bTaiunHyouAndNenunHyou = chkTaiunNenun.Checked;
@@ -79,17 +168,18 @@ namespace DivinationApp
             param.bZougan = chkZougan.Checked;
             param.bJuniSinkanHou = chkJuniSinkanHou.Checked;
 
+            param.bInsenYousenExplanation = chkInsenYousenExplanation.Checked;
+
             //宿命、後天運図への反映項目、
-            person.bRefrectSigou = chkRefrectSigou.Checked;
-            person.bRefrectHankai = chkRefrectHankai.Checked;
-            person.bRefrectKangou = chkRefrectKangou.Checked;
-            person.bRefrectHousani = chkRefrectHousani.Checked;
-            person.bRefrectSangouKaikyoku = chkRefrectSangouKaikyoku.Checked;
-
-
+            param.person.bRefrectSigou = chkRefrectSigou.Checked;
+            param.person.bRefrectHankai = chkRefrectHankai.Checked;
+            param.person.bRefrectKangou = chkRefrectKangou.Checked;
+            param.person.bRefrectHousani = chkRefrectHousani.Checked;
+            param.person.bRefrectSangouKaikyoku = chkRefrectSangouKaikyoku.Checked;
 
             PDFOutput pdf = new PDFOutput(param);
-            pdf.WritePDF(@"c:\temp\01_Hello.pdf");
+            pdf.WritePDF( Path.Combine(outputFolderPath, string.Format("{0}.pdf", person.name)) );
+
 
         }
 
@@ -107,6 +197,56 @@ namespace DivinationApp
         private void chkTaiunNenun_CheckedChanged(object sender, EventArgs e)
         {
             chkGetuun.Enabled = chkTaiunNenun.Checked;
+        }
+
+
+        private void cmbGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            List<Person> persons = null;
+            if (cmbGroup.SelectedIndex == 0)
+            {
+                //全て
+                persons = personList.GetPersonList();
+            }
+            else
+            {
+                var item = (Group)cmbGroup.SelectedItem;
+                persons = item.members;
+
+            }
+            lstPerson.Items.Clear();
+            foreach (var item in persons)
+            {
+                var lvItem = lstPerson.Items.Add(item.name);
+                lvItem.Tag = item;
+
+            }
+        }
+
+        private void chkGogyou_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkGotoku.Checked == false) return;
+            chkGotoku.CheckedChanged -= chkGotoku_CheckedChanged;
+            chkGotoku.Checked = false;
+            chkGotoku.CheckedChanged += chkGotoku_CheckedChanged;
+        }
+
+        private void chkGotoku_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkGotoku.Checked == false) return;
+            chkGogyou.CheckedChanged -= chkGogyou_CheckedChanged;
+            chkGogyou.Checked = false;
+            chkGogyou.CheckedChanged += chkGogyou_CheckedChanged;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (ListViewItem lvItem in lstPerson.Items)
+            {
+                lvItem.Checked = checkBox1.Checked;
+            }
+
         }
     }
 }

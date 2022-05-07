@@ -12,9 +12,9 @@ using System.IO;
 
 namespace DivinationApp
 {
-    public partial class FormExplanation : Form
+    public partial class FormExplanation : ModelessBase
     {
-        public event Common.CloseHandler OnClose = null;
+        //public event Common.CloseHandler OnClose = null;
         ExplanationReader reader = new ExplanationReader();
         ExplanationReader.ExplanationData curData = null;
         string curType = "";
@@ -46,10 +46,10 @@ namespace DivinationApp
                 += new System.Windows.Forms.MouseEventHandler(this.picExplanation_MouseWheel);
         }
 
-        private void FormExplanation_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (OnClose != null) OnClose(this);
-        }
+        //private void FormExplanation_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    if (OnClose != null) OnClose(this);
+        //}
 
         /// <summary>
         /// 
@@ -199,6 +199,8 @@ namespace DivinationApp
 
          private void ShowPage(int pageNo)
         {
+            if (curData == null) return;
+
             picExplanation.Image = null;
             if (pageNo > curData.pictureInfos.Count) return;
             if (curData.pictureInfos[pageNo - 1] == null) return;

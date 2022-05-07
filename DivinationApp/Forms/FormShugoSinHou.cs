@@ -14,14 +14,13 @@ namespace DivinationApp
     /// <summary>
     /// 守護神法　表示画面
     /// </summary>
-    public partial class FormShugoSinHou : Form
+    public partial class FormShugoSinHou : ModelessBase
     {
         public delegate void CloseHandler();
         public delegate void UpdateShugoSin();
         Person person;
         TableMng tblMng = TableMng.GetTblManage();
 
-        public event Common.CloseHandler OnClose = null;
         public event UpdateShugoSin OnUpdateShugosin=null;
 
         CheckBox[] chkShugosin;
@@ -132,18 +131,6 @@ namespace DivinationApp
 
         }
 
-
-        private void FormKonkihou_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (bEditCustom)
-            {
-                //メンバー登録ファイル更新
-                Persons.GetPersons().WritePersonList();
-                bEditCustom = false;
-            }
-
-            OnClose?.Invoke(this);
-        }
 
         private void chkShugosin_CheckedChanged(object sender, EventArgs e)
         {

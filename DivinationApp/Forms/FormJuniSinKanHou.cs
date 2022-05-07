@@ -13,10 +13,9 @@ namespace DivinationApp
     /// <summary>
     /// 十二親干法 表示画面
     /// </summary>
-    public partial class FormJuniSinKanHou : Form
+    public partial class FormJuniSinKanHou : ModelessBase
     {
         public delegate void CloseHandler();
-        public event Common.CloseHandler OnClose = null;
 
 
         JuniSinKanHou juniSinKanHou = null;
@@ -42,11 +41,5 @@ namespace DivinationApp
 
         }
 
-        private void FormJuniSinKanHou_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            drawJuniSinKanhoun.Dispose();
-
-            OnClose?.Invoke(this);
-        }
     }
 }

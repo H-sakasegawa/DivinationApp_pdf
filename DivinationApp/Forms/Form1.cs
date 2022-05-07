@@ -57,7 +57,8 @@ namespace DivinationApp
 
 
         List<Form> lstModlessForms = new List<Form>();
-        void OnModelessFormClose(Form frm)
+
+        void OnModelessFormClose(ModelessBase frm)
         {
             frm.Dispose();
             lstModlessForms.Remove(frm);
@@ -1238,7 +1239,11 @@ namespace DivinationApp
         private void DispShukumei(Person person, PictureBox pictureBox)
         {
 
-            drawItem = new DrawShukumei(person, pictureBox, chkGogyou.Checked, chkGotoku.Checked, chkRefrectSigou.Checked);
+            drawItem = new DrawShukumei(    person, 
+                                            pictureBox, 
+                                            chkGogyou.Checked, 
+                                            chkGotoku.Checked
+                                            );
             drawItem.Draw();
 
         }

@@ -1,7 +1,7 @@
 ﻿
 namespace DivinationApp
 {
-    partial class FormExplanation
+    partial class FormExplanation 
     {
         /// <summary>
         /// Required designer variable.
@@ -176,7 +176,7 @@ namespace DivinationApp
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormExplanation";
             this.Text = "説明";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormExplanation_FormClosing);
+           // this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormExplanation_FormClosing);
             this.Load += new System.EventHandler(this.FormExplanation_Load);
             this.Resize += new System.EventHandler(this.FormExplanation_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picExplanation)).EndInit();

@@ -48,14 +48,16 @@ namespace DivinationApp
             public bool bGogyou;
             public bool bGotoku;
             public bool bRefrectSigou;
-            public bool bRefrectHankai;
-            public bool bRefrectKangou;
-            public bool bRefrectHousani;
-            public bool bRefrectSangouKaikyoku;
+            //public bool bRefrectHankai;
+            //public bool bRefrectKangou;
+            //public bool bRefrectHousani;
+            //public bool bRefrectSangouKaikyoku;
 
             public bool bSangouKaikyoku;
             public bool bZougan;
             public bool bJuniSinkanHou;
+
+            public bool bInsenYousenExplanation;
 
         }
 
@@ -211,9 +213,12 @@ namespace DivinationApp
                 }
             }
 
-            if (writeCategoryNum != 0) pdfUtil.NewPage();
-            writeExplanation(areaLeft, 50, ref lastY);
+            if (param.bInsenYousenExplanation)
+            {
+                writeExplanationInsen(areaLeft, 50, ref lastY);
 
+                writeExplanationYousen(areaLeft, 50, ref lastY);
+            }
             //-------------------------------------------
             pdfUtil.CloseDocument();
 
@@ -433,8 +438,7 @@ namespace DivinationApp
 
             DrawShukumei drawItem = new DrawShukumei(person, null,
                                                      param.bGogyou,
-                                                     param.bGotoku,
-                                                     param.bRefrectSigou
+                                                     param.bGotoku
                                                      );
             drawItem.SetStringBackColor(System.Drawing.Color.White);
             pdfUtil.SaveState();
@@ -506,15 +510,19 @@ namespace DivinationApp
 
             Person person = param.person;
 
-            var lv = FormMain.GetFormMain().GetActiveForm().GetTaiunListView();
-            DrawTableMng drawTableMng = new DrawTableMng( pdfUtil);
+            DrawTableMng drawTableMng = new DrawTableMng(pdfUtil);
             DrawTableMng.Table tbl = drawTableMng.table;
 
-            for (int i=0; i< lv.Columns.Count; i++)
+            FormMain.GetFormMain().Invoke((MethodInvoker)(() =>
             {
-                tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
-            }
+                var lv = FormMain.GetFormMain().GetActiveForm().GetTaiunListView();
 
+                for (int i = 0; i < lv.Columns.Count; i++)
+                {
+                    tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
+                }
+            }));
+ 
             //大運表示用の干支リストを取得
             var lstTaiunKansi = person.GetTaiunKansiList();
 
@@ -610,14 +618,20 @@ namespace DivinationApp
 
             int baseYear = person.birthday.year + taiunItemData.startNen;
 
-            var lv = FormMain.GetFormMain().GetActiveForm().GetNenunListView();
             DrawTableMng drawTableMng = new DrawTableMng(pdfUtil);
             DrawTableMng.Table tbl = drawTableMng.table;
 
-            for (int i = 0; i < lv.Columns.Count; i++)
+            FormMain.GetFormMain().Invoke((MethodInvoker)(() =>
             {
-                tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
-            }
+                var lv = FormMain.GetFormMain().GetActiveForm().GetNenunListView();
+
+                for (int i = 0; i < lv.Columns.Count; i++)
+                {
+                    tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
+                }
+            }));
+
+
 
             int selectYear = param.year;
             //年運リストビューで年に該当する行を選択
@@ -779,27 +793,73 @@ namespace DivinationApp
         }
 
 
-
-        int writeExplanation(float x, float y, ref float lastY)
+        int writeExplanationInsen(float x, float y, ref float lastY)
         {
+            string type = "陰占特徴";
             ExplanationReader reader = new ExplanationReader();
-            reader.Clear();
-
-            string type = "陽占特徴";
-            string dispTargetKey = "始星";
-
             string fileName = Common.GetExplanationDataFileName(type);
             string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
 
             if (reader.ReadExcel(excelFilePath) != 0)
             {
-                MessageBox.Show(string.Format("説明ファイルの読み込みに失敗しま\n\n{0}", excelFilePath));
+                pdfUtil.DrawString(x, y, "説明データがありません");
                 return 0;
             }
 
-            dispTargetKey = Common.TrimExplanationDataTargetKey(dispTargetKey);
+            List<InsenDetail> lstDetail = new List<InsenDetail>();
 
-            ExplanationReader.ExplanationData curData = reader.GetExplanation(dispTargetKey);
+            Insen insen = new Insen(param.person);
+            insen.GetInsenDetailInfo(param.person, ref lstDetail);
+            foreach (var item in lstDetail)
+            {
+                pdfUtil.NewPage();
+
+                pdfUtil.DrawString(x, y, string.Format("■{0}:{1}","陰占", item.sText));
+                writeExplanation(x, y + fntH + 5, reader, item.sText, ref lastY);
+
+            }
+            return 0;
+        }
+        int writeExplanationYousen(float x, float y, ref float lastY)
+        {
+            string type = "陽占特徴";
+            ExplanationReader reader = new ExplanationReader();
+            string fileName = Common.GetExplanationDataFileName(type);
+            string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
+
+            if (reader.ReadExcel(excelFilePath) != 0)
+            {
+                pdfUtil.DrawString(x, y, "説明データがありません");
+                return 0;
+            }
+
+            List<YousenDetail> lstDetail = new List<YousenDetail>();
+
+            Yousen yousen = new Yousen(param.person);
+            yousen.GetYousennDetailInfo( lstDetail);
+            foreach (var item in lstDetail)
+            {
+                 pdfUtil.NewPage();
+
+                pdfUtil.DrawString(x, y, string.Format("■{0}:{1}", "陽占", item.sText));
+                writeExplanation(x, y + fntH + 5, reader, item.sText, ref lastY);
+
+            }
+            return 0;
+
+        }
+
+        int writeExplanation(float x, float y, ExplanationReader reader, string targetKey, ref float lastY)
+        {
+
+            targetKey = Common.TrimExplanationDataTargetKey(targetKey);
+
+            ExplanationReader.ExplanationData curData = reader.GetExplanation(targetKey);
+            if(curData==null)
+            {
+                pdfUtil.DrawString(x, y, "説明データがありません");
+                return 0;
+            }
 
             System.Drawing.ImageConverter imgconv = new System.Drawing.ImageConverter();
 
@@ -814,6 +874,8 @@ namespace DivinationApp
 
             for (int page = 0; page < curData.pictureInfos.Count; page++)
             {
+                if (curData.pictureInfos[page] == null) continue;
+
                 System.Drawing.Image image = (System.Drawing.Image)imgconv.ConvertFrom(curData.pictureInfos[page].pictureData.Data);
 
                 iTextSharp.text.Image pdfImage = iTextSharp.text.Image.GetInstance(image, BaseColor.WHITE);

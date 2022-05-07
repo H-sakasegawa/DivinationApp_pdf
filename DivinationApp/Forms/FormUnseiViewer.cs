@@ -12,7 +12,7 @@ using System.Configuration;
 namespace DivinationApp
 {
 
-    public partial class FormUnseiViewer : Form
+    public partial class FormUnseiViewer : ModelessBase
     {
         //年運表行データTag情報
         class RowItems
@@ -53,7 +53,6 @@ namespace DivinationApp
 
         bool bInitializeLoad = true;
         public event DelegateOnChangeCurYear OnChangeCurYear =null;
-        public event Common.CloseHandler OnClose;
 
         TableMng tblMng = TableMng.GetTblManage();
 
@@ -793,10 +792,6 @@ namespace DivinationApp
                 OnChangeCurYear?.Invoke(rowItem.year);
                 bRowSelectEvent = false;
             }
-        }
-        private void FormUnseiViewer_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            OnClose?.Invoke(this);
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)

@@ -14,7 +14,7 @@ namespace DivinationApp
     public class Common
     {
 
-        public delegate void CloseHandler(Form frm);
+        public delegate void CloseHandler(ModelessBase frm);
 
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto, CallingConvention = System.Runtime.InteropServices.CallingConvention.StdCall)]
         private static extern short GetKeyState(int nVirtKey);

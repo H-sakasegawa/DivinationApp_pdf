@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DivinationApp
 {
-    public partial class FormFinderCustom : Form
+    public partial class FormFinderCustom : ModelessBase
     {
         class FindResultItem : LvItemDataBase
         {
@@ -21,8 +21,6 @@ namespace DivinationApp
             public FinderCustom.ResultItem findItem;
         }
 
-
-        public event Common.CloseHandler OnClose = null;
 
         private const string title = "検索";
         private const string sep = "---";
@@ -407,11 +405,6 @@ namespace DivinationApp
         {
             //chkTenchusatu.Enabled = (radNattin.Checked || radRittin.Checked);
             //chkIncludeGetuun.Enabled = (radNattin.Checked || radRittin.Checked);
-        }
-
-        private void FormFinder_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (OnClose != null) OnClose(this);
         }
 
         private void button2_Click(object sender, EventArgs e)

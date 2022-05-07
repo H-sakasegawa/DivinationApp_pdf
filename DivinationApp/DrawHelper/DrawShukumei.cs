@@ -37,13 +37,11 @@ namespace DivinationApp
         /// <param name="pictureBox">描画先のピクチャーボックス</param>
         /// <param name="_bDispGogyou">true...五行反映</param>
         /// <param name="_bDispGotoku">true... 五徳反映</param>
-        /// <param name="_bDispRefrectGouhou">true...五行/五徳反映時の合法反映表示</param>
         public DrawShukumei(
                             Person person, 
                             PictureBox pictureBox,
                             bool _bDispGogyou,
-                            bool _bDispGotoku,
-                            bool _bDispRefrectGouhou
+                            bool _bDispGotoku
             ) : base(person, pictureBox)
         {
 

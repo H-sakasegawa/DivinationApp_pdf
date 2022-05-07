@@ -252,7 +252,6 @@ namespace DivinationApp
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormUnseiViewer";
             this.Text = "年運比較表";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormUnseiViewer_FormClosed);
             this.Load += new System.EventHandler(this.FormUnseiViewer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdViewNenUn)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);

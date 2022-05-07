@@ -60,7 +60,6 @@ namespace DivinationApp
             this.Name = "FormJuniSinKanHou";
             this.Text = "十二親干法";
             this.TopMost = true;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormJuniSinKanHou_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

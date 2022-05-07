@@ -537,7 +537,7 @@ namespace DivinationApp
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(363, 379);
+            this.tabPage2.Size = new System.Drawing.Size(310, 379);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "詳細条件";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -700,7 +700,7 @@ namespace DivinationApp
             this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage4.Size = new System.Drawing.Size(214, 258);
+            this.tabPage4.Size = new System.Drawing.Size(267, 281);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "生年月日";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -718,7 +718,7 @@ namespace DivinationApp
             this.lvFindResultBIRTHDAY.MultiSelect = false;
             this.lvFindResultBIRTHDAY.Name = "lvFindResultBIRTHDAY";
             this.lvFindResultBIRTHDAY.OwnerDraw = true;
-            this.lvFindResultBIRTHDAY.Size = new System.Drawing.Size(208, 254);
+            this.lvFindResultBIRTHDAY.Size = new System.Drawing.Size(261, 277);
             this.lvFindResultBIRTHDAY.TabIndex = 2;
             this.lvFindResultBIRTHDAY.UseCompatibleStateImageBehavior = false;
             this.lvFindResultBIRTHDAY.View = System.Windows.Forms.View.Details;
@@ -736,7 +736,6 @@ namespace DivinationApp
             this.MinimumSize = new System.Drawing.Size(438, 200);
             this.Name = "FormFinderCustom";
             this.Text = "パターン条件検索";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormFinder_FormClosing);
             this.Load += new System.EventHandler(this.FormSerch_Load);
             this.panel2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

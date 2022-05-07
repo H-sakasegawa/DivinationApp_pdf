@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DivinationApp
 {
-    public partial class FormFinder : Form
+    public partial class FormFinder : ModelessBase
     {
         class FindResultItem : LvItemDataBase
         {
@@ -21,7 +21,6 @@ namespace DivinationApp
             public Finder.FindItem findItem;
         }
 
-        public event Common.CloseHandler OnClose = null;
 
         private const string title = "検索";
 
@@ -441,9 +440,5 @@ namespace DivinationApp
             DispCtrl();
         }
 
-        private void FormFinder_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (OnClose != null) OnClose(this);
-        }
     }
 }
