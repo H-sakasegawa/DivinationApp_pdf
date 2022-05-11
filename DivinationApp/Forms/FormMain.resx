@@ -216,6 +216,15 @@
         K+ncYIZZ9lCvUtIVLhMajX/kqWzWVzdNtAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="toolOutputPDF.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACSSURBVDhPlY3RDYAgDEQZwk1YgK0Jq/DLIJXaItdqjH1J
+        hR53Z2Jyzsc8KDAP6A/sq7W+lqjlG/aNMV5L1PINBHfB/HJ1bCa7AHErBjy2wBtxxxP0eMFCd1uwwBDe
+        1wm6LXCPN6g5zy7Ah7+DBaUUio4pUC4xAmckKqhM1Ht//LG1ZnaGMxIVLjECZyQqLCE4KZ3aJlZiJ8Df
+        RwAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>86</value>
   </metadata>

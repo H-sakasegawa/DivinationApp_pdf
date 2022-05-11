@@ -21,9 +21,11 @@ namespace DivinationApp
         int lastDrawY = 0;
         public PdfContentByte contentByte;
 
+        float areaTop = 50;
+        float areaBottom = 50;
         float areaLeft = 50;
 
-        string fontName= "Meiryo UI";
+        string fontName = "Meiryo UI";
         int fntH = 15;
 
         int writeCategoryNum = 0;
@@ -143,7 +145,7 @@ namespace DivinationApp
 
             //陰占
             float lastY = 0;
-            WriteInsen(30, 70, ref lastY);
+            WriteInsen(30, pdfUtil.lastDrawY+5, ref lastY);
 
             //陽占
             WriteYousen(areaLeft, lastY + 30, ref lastY);
@@ -155,29 +157,33 @@ namespace DivinationApp
             {
                 if (writeCategoryNum!=0) pdfUtil.NewPage();
                 //宿命
-                WriteShukumei(areaLeft, 50, ref lastY);
+                WriteShukumei(areaLeft, areaTop, ref lastY);
                 //後天運
-                WriteKoutenUn(260, 50, ref lastY);
-            }
-            if (param.bShugosinHou)//守護神法
-            {
-                //                if (writeCategoryNum != 0) pdfUtil.NewPage();
+                WriteKoutenUn(260, areaTop, ref lastY);
             }
             if (param.bKonkiHou)//根気法
             {
-                //                if (writeCategoryNum != 0) pdfUtil.NewPage();
+                //宿命・後天運と同じページに出力
+                // if (writeCategoryNum != 0) pdfUtil.NewPage();
+                WriteKonkiHou(areaLeft, lastY + 10, ref lastY);
+            }
+            if (param.bShugosinHou)//守護神法
+            {
+                if (writeCategoryNum != 0) pdfUtil.NewPage();
+                WriteShugosinHou(areaLeft, areaTop, ref lastY);
             }
 
             if (param.bKyoki)   //虚気変化
             {
-//                if (writeCategoryNum != 0) pdfUtil.NewPage();
+                if (writeCategoryNum != 0) pdfUtil.NewPage();
+                WriteKyokiSimulation(areaLeft, areaTop, ref lastY);
             }
 
             if (param.bTaiunHyouAndNenunHyou)//大運表 & 年運表
             {
                 if (writeCategoryNum != 0) pdfUtil.NewPage(PDFUtility.A4Dirc.Horizontal); //A4横
                 List<TaiunLvItemData> lstTaiunItemData = new List<TaiunLvItemData>();
-                WriteTaiunHyoun(areaLeft, 50, ref lastY, ref lstTaiunItemData);
+                WriteTaiunHyoun(areaLeft, areaTop, ref lastY, ref lstTaiunItemData);
 
                 DateTime dt = new DateTime(param.year, param.month, 1); //GetTaiunItemIndex()では日を使用していなのでとりあえず1日を設定しておく
                 int index = Common.GetTaiunItemIndex(lstTaiunItemData, dt);
@@ -207,7 +213,7 @@ namespace DivinationApp
                         GetuunNenunLvItemData nenunItemData = lstNenunItemData.Find(x => x.keyValue == year);
                         if (nenunItemData != null)
                         {
-                            WriteGetuunHyou(areaLeft, 50, param.year, taiunItem, nenunItemData, ref lastY);
+                            WriteGetuunHyou(areaLeft, areaTop, param.year, taiunItem, nenunItemData, ref lastY);
                         }
                     }
                 }
@@ -215,9 +221,9 @@ namespace DivinationApp
 
             if (param.bInsenYousenExplanation)
             {
-                writeExplanationInsen(areaLeft, 50, ref lastY);
+                writeExplanationInsen(areaLeft, areaTop, ref lastY);
 
-                writeExplanationYousen(areaLeft, 50, ref lastY);
+                writeExplanationYousen(areaLeft, areaTop, ref lastY);
             }
             //-------------------------------------------
             pdfUtil.CloseDocument();
@@ -262,9 +268,10 @@ namespace DivinationApp
 
             //描画するテキスト
             int row = 1;
-            pdfUtil.DrawString( 50, row * fntH,  "氏名　　：{0}", person.name); row++;
-            pdfUtil.DrawString( 50, row * fntH,  "性別　　：{0}", (person.gender == Gender.MAN ? "男性" : "女性")); row++;
-            pdfUtil.DrawString( 50, row * fntH,  "生年月日：{0}", person.birthday.birthday); row++;
+            pdfUtil.DrawString(areaLeft, row * fntH, "氏名　　：{0}", person.name); row++;
+            pdfUtil.DrawString(areaLeft, row * fntH, "性別　　：{0}", (person.gender == Gender.MAN ? "男性" : "女性")); row++;
+            pdfUtil.DrawString(areaLeft, row * fntH, "生年月日：{0}", person.birthday.birthday); row++;
+            pdfUtil.DrawString(areaLeft, row * fntH + 10, "対象年月：{0}年{1}月", param.year, param.month); row++;
 
             //     pdfUtil.DrawLine( new System.Drawing.Point(50, lastDrawY + 5), new System.Drawing.Point(300, lastDrawY + 5), 1, BaseColor.BLUE);
 
@@ -491,6 +498,8 @@ namespace DivinationApp
             drawItem.DrawPDF(pdfUtil, x, y);
 
             pdfUtil.RestoreState();
+
+            lastY = drawItem.CalcDrawAreaSizePDF( pdfUtil ).Height;
 
             return 0;
         }
@@ -729,15 +738,20 @@ namespace DivinationApp
 
             Person person = param.person;
             TableMng tblMng = TableMng.GetTblManage();
-
-            var lv = FormMain.GetFormMain().GetActiveForm().GetGetuunListView();
             DrawTableMng drawTableMng = new DrawTableMng(pdfUtil);
             DrawTableMng.Table tbl = drawTableMng.table;
 
-            for (int i = 0; i < lv.Columns.Count; i++)
+            FormMain.GetFormMain().Invoke((MethodInvoker)(() =>
             {
-                tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
-            }
+                var lv = FormMain.GetFormMain().GetActiveForm().GetGetuunListView();
+
+                for (int i = 0; i < lv.Columns.Count; i++)
+                {
+                    tbl.AddColmun(lv.Columns[i].Text, lv.Columns[i].Width);
+                }
+            }));
+
+
             int year = nenunItemData.keyValue;
 
             //月運表示用の干支リストを取得
@@ -791,8 +805,384 @@ namespace DivinationApp
 
             return 0;
         }
+        /// <summary>
+        /// .守護神法
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="lastY"></param>
+        /// <returns></returns>
+        int WriteShugosinHou(float x, float y, ref float lastY)
+        {
+            writeCategoryNum++;
+            // TEST_Y(y);
+            pdfUtil.DrawString(x, y, "■守護神法");
+            y += 20;
 
 
+            Person person = param.person;
+            TableMng tblMng = TableMng.GetTblManage();
+
+            BaseColor color = new BaseColor(System.Drawing.Color.PaleVioletRed.ToArgb());
+
+            string str="";
+            //調候の守護神
+            float drawX = x;
+            float drawY = y;
+            float ofsY = 30;
+            pdfUtil.DrawString(x, drawY, color, "調候の守護神");
+
+            foreach (var s in person.choukouShugosin)
+            {
+                str += s;
+            }
+            drawY = pdfUtil.lastDrawY;
+            pdfUtil.DrawString(drawX, drawY,  str);
+
+
+
+            //調候の忌神
+            drawY = pdfUtil.lastDrawY + ofsY;
+            pdfUtil.DrawString(drawX, drawY, color, "調候の忌神");
+            drawY = pdfUtil.lastDrawY;
+            pdfUtil.DrawString(drawX, drawY, person.choukouImigamiAttr);
+            //説明
+            drawY = pdfUtil.lastDrawY;
+            pdfUtil.DrawString(drawX, drawY, person.shugosinExplanation);
+
+
+            drawX = 160;
+            string sNone = "(なし)";
+            //第１守護神情報取得
+            //調和の守護神属性, imigamiAttr
+            if (string.IsNullOrEmpty(person.imigamiAttr))
+            {
+                drawY = y;
+                pdfUtil.DrawString(drawX, drawY, color, "調和の守護神");
+                drawY = pdfUtil.lastDrawY;
+                pdfUtil.DrawString(drawX, drawY, sNone);
+
+                drawY = pdfUtil.lastDrawY + ofsY;
+                pdfUtil.DrawString(drawX, drawY, color, "忌神");
+                drawY = pdfUtil.lastDrawY;
+                pdfUtil.DrawString(drawX, drawY, sNone);
+            }
+            else
+            {
+                drawY = y;
+                pdfUtil.DrawString(drawX, drawY, color, "調和の守護神");
+                drawY = pdfUtil.lastDrawY;
+                pdfUtil.DrawString(drawX, drawY, person.shugosinAttr + "性");
+
+                drawY = pdfUtil.lastDrawY + ofsY;
+                pdfUtil.DrawString(drawX, drawY, color, "忌神");
+                drawY = pdfUtil.lastDrawY;
+                pdfUtil.DrawString(drawX, drawY, person.imigamiAttr + "性");
+
+            }
+
+            //手動設定情報
+            string[] aryJudai1 = new string[] { "甲", "丙", "戊", "庚", "壬" };
+            string[] aryJudai2 = new string[] { "乙", "丁", "己", "辛", "癸" };
+
+            pdfUtil.SaveState();
+
+            drawY = y;
+            drawX = 300;
+            pdfUtil.SetFontSize(10);
+            pdfUtil.DrawString(drawX, drawY, "[守護神]");
+
+            drawY = pdfUtil.lastDrawY + 5;
+            DrawCustomShugosinImigami(drawX, drawY, aryJudai1, person.customShugosin);
+            drawY += 20;
+            DrawCustomShugosinImigami(drawX, drawY, aryJudai2, person.customShugosin);
+
+
+            drawX = 300;
+            drawY = pdfUtil.lastDrawY + 10;
+            pdfUtil.SetFontSize(10);
+            pdfUtil.DrawString(drawX, drawY, "[忌神]");
+
+            drawY = pdfUtil.lastDrawY + 5;
+            DrawCustomShugosinImigami(drawX, drawY, aryJudai1, person.customImigami);
+            drawY += 20;
+            DrawCustomShugosinImigami(drawX, drawY, aryJudai2, person.customImigami);
+
+
+            string gogyo = tblMng.jyukanTbl.GetGogyo(person.nikkansi.kan);
+
+            string expressionType = string.Format("守護神{0}{1}", person.nikkansi.kan, gogyo);
+            //string expressionKey = string.Format("{0}{1}", person.nikkansi.kan, gogyo);
+
+            ExplanationReader reader = new ExplanationReader(); 
+            string fileName = Common.GetExplanationDataFileName(expressionType);
+            string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
+            pdfUtil.RestoreState();
+
+            if (reader.ReadExcel(excelFilePath) != 0)
+            {
+                pdfUtil.DrawString(x, drawY + 20, "説明データがありません");
+                return 0;
+            }
+            drawY = pdfUtil.lastDrawY + 10;
+            foreach (var key in reader.GetExplanationKeys())
+            {
+                writeExplanation(x, drawY, reader, key, ref lastY);
+
+                drawY = lastY + 5;
+            }
+
+            lastY = pdfUtil.lastDrawY;
+
+            return 0;
+        }
+
+        void DrawCustomShugosinImigami(float drawX, float drawY, string[] items, CustomShugosinImigami customShugosin)
+        {
+            pdfUtil.SetFontSize(10);
+            foreach (string item in items)
+            {
+                System.Drawing.Point pnt = new System.Drawing.Point((int)drawX, (int)drawY);
+                System.Drawing.Size size = new System.Drawing.Size(10, 10);
+                System.Drawing.Rectangle rect = new System.Drawing.Rectangle(pnt, size);
+
+                if (customShugosin.IsExist(item))
+                {
+                    pdfUtil.FillRectangle(rect, System.Drawing.Color.Black, System.Drawing.Color.DarkBlue);
+                }
+                else
+                {
+                    pdfUtil.DrawRectangle(rect, System.Drawing.Color.Black);
+                }
+                drawX += size.Width + 2;
+                pdfUtil.DrawString(drawX, drawY, item);
+                drawX += 20;
+
+            }
+
+
+        }
+
+        /// <summary>
+        /// 根気法
+        /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
+        /// <returns></returns>
+        int WriteKonkiHou(float x, float y, ref float lastY)
+        {
+            writeCategoryNum++;
+            // TEST_Y(y);
+            pdfUtil.DrawString(x, y, "■根気法");
+            y += 20;
+
+            float drawX = x;
+            float drawY = y;
+
+            Person person = param.person;
+            TableMng tblMng = TableMng.GetTblManage();
+
+
+            Konkihou konkihou = new Konkihou(person);
+
+            //各干支の根情報取得
+            var kansiRoot = konkihou.GetKansiRoot();
+
+            drawY += 10;
+            pdfUtil.SetFontSize(15);
+            drawInsen = new DrawInsen(
+                                            person,
+                                            null,
+                                            false,
+                                            false
+                                     );
+            drawInsen.DrawPDF(pdfUtil, drawX, drawY);
+
+            DrawAllow(drawInsen, drawInsen.rectNikansiKan, kansiRoot[0]);
+            DrawAllow(drawInsen, drawInsen.rectGekkansiKan, kansiRoot[1]);
+            DrawAllow(drawInsen, drawInsen.rectNenkansiKan, kansiRoot[2]);
+
+
+
+            drawY = drawInsen.rectNikansiKan.Top - 10;
+            pdfUtil.SetFontSize(12);
+            pdfUtil.DrawString(drawInsen.rectNikansiKan.Left + drawInsen.rectNikansiKan.Width / 2, drawY, konkihou.GetSumScore(person.nikkansi.kan).ToString());
+            pdfUtil.DrawString(drawInsen.rectGekkansiKan.Left + drawInsen.rectGekkansiKan.Width / 2, drawY, konkihou.GetSumScore(person.gekkansi.kan).ToString());
+            pdfUtil.DrawString(drawInsen.rectNenkansiKan.Left + drawInsen.rectNenkansiKan.Width / 2, drawY, konkihou.GetSumScore(person.nenkansi.kan).ToString());
+
+            pdfUtil.SetFontSize(15);
+            drawX = 250;
+            DrawRootInfo(drawX, drawY+20, person, person.nikkansi, kansiRoot[0]);
+            DrawRootInfo(drawX, pdfUtil.lastDrawY+5, person, person.gekkansi, kansiRoot[1]);
+            DrawRootInfo(drawX, pdfUtil.lastDrawY+5, person, person.nenkansi, kansiRoot[2]);
+
+            lastY = pdfUtil.lastDrawY;
+
+            return 0;
+        }
+
+        private void DrawRootInfo(float x, float y, Person person ,Kansi kansi, Konkihou.FindItem item)
+        {
+            TableMng tblMng = TableMng.GetTblManage();
+            var attr1 = tblMng.jyukanTbl[person.nikkansi.kan].gogyou;
+            var attr2 = tblMng.jyukanTbl[kansi.kan].gogyou;
+            string str = "なし";
+            if (item != null)
+            {
+
+                str = string.Format("{0}({1}) - {2} [ {3} ] {4}点",
+                                            kansi.kan,
+                                            tblMng.gotokuTbl.GetGotoku(attr1, attr2),
+                                            item.si,
+                                            item.junidaiJusei.name,
+                                            item.junidaiJusei.tensuu);
+            }
+            else
+            {
+                str = string.Format("{0}({1}) - なし",
+                                            kansi.kan,
+                                            tblMng.gotokuTbl.GetGotoku(attr1, attr2)
+                                            );
+            }
+
+            pdfUtil.DrawString(x, y, str);
+
+        }
+
+        private void DrawAllow(DrawInsen drawInsen, System.Drawing.Rectangle rectStart, Konkihou.FindItem item)
+        {
+            if (item == null) return;
+
+            System.Drawing.Rectangle rectEnd = default;
+            if (item.kansiBit == Const.bitFlgNiti) rectEnd = drawInsen.rectNikansiSi;
+            if (item.kansiBit == Const.bitFlgGetu) rectEnd = drawInsen.rectGekkansiSi;
+            if (item.kansiBit == Const.bitFlgNen) rectEnd = drawInsen.rectNenkansiSi;
+            if (rectEnd != default)
+                drawInsen.DrawArrowLine(drawInsen.graph, rectStart, rectEnd);
+
+        }
+
+
+        /// <summary>
+        /// .虚気変化パターン
+        /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
+        /// <returns></returns>
+        int WriteKyokiSimulation(float x, float y, ref float lastY)
+        {
+            writeCategoryNum++;
+            // TEST_Y(y);
+            pdfUtil.DrawString(x, y, "■虚気変化パターン");
+            y += 20;
+
+            float drawX = x;
+            float drawY = y;
+
+            Person person = param.person.Clone();
+            TableMng tblMng = TableMng.GetTblManage();
+
+            Kansi taiunKansi = person.GetTaiunKansi(param.year);
+            Kansi nenunKansi = person.GetNenkansi(param.year, true);
+            Kansi getuunKansi = person.GetGekkansi(param.year, param.month);
+
+            KyokiSimulation sim = new KyokiSimulation();
+            sim.Simulation(person, getuunKansi, nenunKansi, taiunKansi, param.bDispGetuun);
+
+            int[] kansiBit = new int[] {
+                Const.bitFlgGetuun, Const.bitFlgNenun, Const.bitFlgTaiun,
+                Const.bitFlgNiti, Const.bitFlgGetu, Const.bitFlgNen
+            };
+
+            int cnt = 0;
+            int drawAreaH = 0;
+            Rectangle rect = pdfUtil.GetPageSize();
+
+            foreach (var pattern in sim.lstKansPattern)
+            {
+                string sTitle;
+                string sTitleSub = "";
+                if (cnt == 0)
+                {
+                    sTitle = string.Format("基本", cnt++);
+                }
+                else
+                {
+                    sTitle = string.Format("{0}回目", cnt++);
+                }
+                if (pattern.bCirculation) sTitleSub = "(循環)";
+
+                pdfUtil.DrawString(drawX, drawY + 20, sTitle);
+                pdfUtil.DrawString(drawX, pdfUtil.lastDrawY, sTitleSub);
+
+                person.nikkansi = pattern.aryKansi[(int)Const.enumKansiItemID.NIKKANSI].kansi;
+                person.gekkansi = pattern.aryKansi[(int)Const.enumKansiItemID.GEKKANSI].kansi;
+                person.nenkansi = pattern.aryKansi[(int)Const.enumKansiItemID.NENKANSI].kansi;
+                //----------------------------------------------------------
+                //干支情報の干で変化している箇所のビットを設定
+                //----------------------------------------------------------
+                //干の変化位置 管理ビット情報
+                int ChangeKansiBit = 0;
+
+                for (int i = 0; i < pattern.aryKansi.Length; i++)
+                {
+                    if (pattern.aryKansi[i].bChange)
+                    {
+                        //aryKansiの並びは、kansiBitの定義の並びになっている
+                        //変化のあった箇所のビットをON
+                        ChangeKansiBit |= kansiBit[i];
+                    }
+                }
+
+                //----------------------------------------------------------
+                //後天運 表示
+                //----------------------------------------------------------
+                DrawKoutenUn drawItem = new DrawKoutenUn(person,
+                                                        null,
+                                                        pattern.aryKansi[(int)Const.enumKansiItemID.TAIUN].kansi,
+                                                        pattern.aryKansi[(int)Const.enumKansiItemID.NENUN].kansi,
+                                                        pattern.aryKansi[(int)Const.enumKansiItemID.GETUUN].kansi,
+                                                        param.bDispGetuun,
+                                                        param.bSangouKaikyoku,
+                                                        param.bGogyou,
+                                                        param.bGotoku, 
+                                                        true
+                                                        );
+
+                //虚気変化パターン表示用の描画関数呼び出し
+                drawItem.SetStringBackColor(System.Drawing.Color.White);
+                pdfUtil.SaveState();
+
+                drawItem.DrawKyokiPatternPDF(pdfUtil, drawX+60, drawY, ChangeKansiBit);
+                pdfUtil.RestoreState();
+
+                if(drawAreaH == 0)
+                {
+                    drawAreaH = drawItem.rectNenkansiKan.Height * 2;
+                }
+
+                drawY = drawItem.rectNenkansiSi.Bottom + 5;
+
+                if ( drawY + drawAreaH >= rect.Height - areaBottom)
+                {
+                    pdfUtil.NewPage();
+                    drawY = areaTop;
+                }
+
+            }
+
+            return 0;
+
+        }
+        /// <summary>
+        /// 陰占特徴説明
+        /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
+        /// <returns></returns>
         int writeExplanationInsen(float x, float y, ref float lastY)
         {
             string type = "陰占特徴";
@@ -814,12 +1204,19 @@ namespace DivinationApp
             {
                 pdfUtil.NewPage();
 
-                pdfUtil.DrawString(x, y, string.Format("■{0}:{1}","陰占", item.sText));
+                pdfUtil.DrawString(x, y, string.Format("■{0}:{1}", "陰占", item.sText));
                 writeExplanation(x, y + fntH + 5, reader, item.sText, ref lastY);
 
             }
             return 0;
         }
+        /// <summary>
+        /// 陽占特徴説明
+        /// </summary>
+        /// <param name="x">描画開始左上座標X</param>
+        /// <param name="y">描画開始左上座標Y[</param>
+        /// <param name="lastY">最大描画Y座標受け取り変数</param>
+        /// <returns></returns>
         int writeExplanationYousen(float x, float y, ref float lastY)
         {
             string type = "陽占特徴";
@@ -848,16 +1245,25 @@ namespace DivinationApp
             return 0;
 
         }
-
+        /// <summary>
+        /// 説明資料出力処理
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="reader"></param>
+        /// <param name="targetKey"></param>
+        /// <param name="lastY"></param>
+        /// <returns></returns>
         int writeExplanation(float x, float y, ExplanationReader reader, string targetKey, ref float lastY)
         {
 
             targetKey = Common.TrimExplanationDataTargetKey(targetKey);
 
             ExplanationReader.ExplanationData curData = reader.GetExplanation(targetKey);
-            if(curData==null)
+            if(curData==null || curData.pictureInfos.Count==0 || curData.pictureInfos[0]==null)
             {
-                pdfUtil.DrawString(x, y, "説明データがありません");
+                pdfUtil.DrawString(x, y, targetKey);
+                pdfUtil.DrawString(x, pdfUtil.lastDrawY+5, "   ※説明データがありません");
                 return 0;
             }
 
@@ -872,6 +1278,21 @@ namespace DivinationApp
             float centerX = rect.Width / 2.0f;
             float limitWidth = rect.Width/2.0f - 60;
 
+            lastY = y;
+
+            System.Drawing.Image imageWk = (System.Drawing.Image)imgconv.ConvertFrom(curData.pictureInfos[0].pictureData.Data);
+            if (drawY + imageWk.Height >= pdfUtil.GetPageSize().Height - areaBottom)
+            {
+                drawX = x;
+                drawY = areaTop;
+                lastY = drawY;
+                pdfUtil.NewPage();
+            }
+
+
+            pdfUtil.DrawString(x, drawY, targetKey);
+            drawY = pdfUtil.lastDrawY;
+
             for (int page = 0; page < curData.pictureInfos.Count; page++)
             {
                 if (curData.pictureInfos[page] == null) continue;
@@ -883,18 +1304,18 @@ namespace DivinationApp
                 scale = (limitWidth / pdfImage.Width);
 
                 float ofsY = (pdfImage.Height * scale) + 10;
-                if (drawY + ofsY >= rect.Height - 50) 
+                if (drawY + ofsY >= rect.Height - areaBottom) 
                 {
-                    if (drawX == x)
+                    if (drawX == x && y + ofsY < rect.Height - areaBottom)
                     {
-                        pdfUtil.DrawLine(centerX, 50, centerX, rect.Height - 50, 1, BaseColor.BLACK);
+                        pdfUtil.DrawLine(centerX, y, centerX, rect.Height - areaBottom, 1, BaseColor.BLACK);
                         drawX = centerX + 10;
                         drawY = y;
                     }
                     else
                     {
                         drawX = x;
-                        drawY = y;
+                        drawY = areaTop;
                         pdfUtil.NewPage();
                     }
 
@@ -903,6 +1324,10 @@ namespace DivinationApp
                 pdfUtil.DrawPicture(drawX, drawY, scale, pdfImage);
 
                 drawY += ofsY ;
+
+                if (lastY < drawY) lastY = drawY;
+
+
 
             }
 
@@ -1365,6 +1790,60 @@ namespace DivinationApp
             cb.LineTo(x2, Y(y2));
             cb.Stroke();
             cb.RestoreState();
+        }
+
+        public void DrawArrow(System.Drawing.Point pnt1, System.Drawing.Point pnt2, int w, int h, BaseColor lineColor, double[] dotPattern = null)
+        {
+            DrawArrow(pnt1.X, pnt1.Y, pnt2.X, pnt2.Y, w,h, lineColor, dotPattern);
+        }
+
+        public void DrawArrow(float x1, float y1, float x2, float y2, int w, int h, BaseColor lineColor, double[] dotPattern=null)
+        {
+            System.Drawing.Point A = new System.Drawing.Point((int)x1, (int)y1);
+            System.Drawing.Point B = new System.Drawing.Point((int)x2, (int)y2);
+            System.Drawing.Point L = new System.Drawing.Point();
+            System.Drawing.Point R = new System.Drawing.Point();
+            CalcArrowPos(A, B, w, h, ref L, ref R);
+
+            cb.SaveState();
+            if (dotPattern != null)
+            {
+                cb.SetLineDash(dotPattern, 0);
+            }
+
+            cb.SetColorStroke(lineColor);
+            //cb.SetLineWidth(width);
+            cb.MoveTo(x1, Y(y1));
+            cb.LineTo(x2, Y(y2));
+            cb.Stroke();
+            cb.MoveTo(L.X, Y(L.Y));
+            cb.LineTo(B.X, Y(B.Y));
+            cb.LineTo(R.X, Y(R.Y));
+            //cb.ClosePath();          // 閉曲線にする
+            cb.ClosePathFillStroke();               // 塗り
+
+            cb.RestoreState();
+        }
+
+
+        private void CalcArrowPos(
+                              System.Drawing.Point A,
+                              System.Drawing.Point B, 
+                              int w, 
+                              int h, 
+                              ref System.Drawing.Point L, 
+                              ref System.Drawing.Point R
+            )
+        { //A,B,L,Rは[0]:x [1]:y
+            var Vx = B.X - A.X;
+            var Vy = B.Y - A.Y;
+            var v = Math.Sqrt(Vx * Vx + Vy * Vy);
+            var Ux = Vx / v;
+            var Uy = Vy / v;
+            L.X = (int)(B.X - Uy * w - Ux * h);
+            L.Y = (int)(B.Y + Ux * w - Uy * h);
+            R.X = (int)(B.X + Uy * w - Ux * h);
+            R.Y = (int)(B.Y - Ux * w - Uy * h);
         }
 
         public void DrawRectangle(Rectangle rect, BaseColor lineColor)

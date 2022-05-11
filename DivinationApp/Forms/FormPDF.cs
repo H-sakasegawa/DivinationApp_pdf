@@ -14,6 +14,9 @@ namespace DivinationApp
     public partial class FormPDF : ModelessBase
     {
         Persons personList;
+        bool bStop = false;
+
+        delegate void delegateUpdateDisplay(Person person, int cnt, int cntMax);
 
         public FormPDF(Persons persons)
         {
@@ -72,11 +75,11 @@ namespace DivinationApp
                 }
             }
 
+            grpGogyouGotoku.Enabled = chkGogyou.Checked || chkGotoku.Checked;
 
 
         }
 
-        bool bStop = false;
         private void button2_Click(object sender, EventArgs e)
         {
             if (button2.Text == "PDF出力")
@@ -98,17 +101,19 @@ namespace DivinationApp
 
                 Task.Run(() =>
                 {
+                    int cnt = 0;
                     //人名一覧でチェックの付いている人をすべてPDF化
                     foreach (var person in lstPdfPersons)
                     {
                         if (bStop) break;
+
 
                         Invoke((MethodInvoker)(() =>
                         {
                             foreach (ListViewItem lvItem in lstPerson.Items)
                             {
                                 Person p = (Person)lvItem.Tag;
-                                if ( p.name == person.name && p.group == person.group)
+                                if (p.name == person.name && p.group == person.group)
                                 {
                                     lvItem.Selected = true;
                                     lvItem.EnsureVisible();
@@ -116,6 +121,7 @@ namespace DivinationApp
                             }
 
                         }));
+
 
 
                         OutputPDF(person, folderPath);
@@ -136,6 +142,7 @@ namespace DivinationApp
                 bStop = true;
             }
         }
+
 
         private void OutputPDF( Person person, string outputFolderPath )
         {
@@ -226,18 +233,20 @@ namespace DivinationApp
 
         private void chkGogyou_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkGotoku.Checked == false) return;
-            chkGotoku.CheckedChanged -= chkGotoku_CheckedChanged;
-            chkGotoku.Checked = false;
-            chkGotoku.CheckedChanged += chkGotoku_CheckedChanged;
+            if (chkGogyou.Checked)
+            {
+                chkGotoku.Checked = false;
+            }
+            grpGogyouGotoku.Enabled = chkGogyou.Checked || chkGotoku.Checked;
         }
 
         private void chkGotoku_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkGotoku.Checked == false) return;
-            chkGogyou.CheckedChanged -= chkGogyou_CheckedChanged;
-            chkGogyou.Checked = false;
-            chkGogyou.CheckedChanged += chkGogyou_CheckedChanged;
+            if (chkGotoku.Checked)
+            {
+                chkGogyou.Checked = false;
+            }
+            grpGogyouGotoku.Enabled = chkGogyou.Checked || chkGotoku.Checked;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

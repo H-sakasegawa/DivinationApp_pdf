@@ -327,7 +327,13 @@ namespace DivinationApp
             //pen.StartCap = LineCap.Round;
             //pen.EndCap = LineCap.ArrowAnchor;
 
-            g.DrawLine(pen, start, end);
+            if (g.GetType() == typeof(PDFGraphics))
+            {
+                g.DrawArrow(pen, start, end);
+            }else
+            {
+                g.DrawLine(pen, start, end);
+            }
 
         }
 

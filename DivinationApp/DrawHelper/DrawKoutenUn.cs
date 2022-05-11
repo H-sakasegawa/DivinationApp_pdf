@@ -168,7 +168,7 @@ namespace DivinationApp
         {
             CalcCoord(idxMtx + 1);
         }
-        public void CalcCoord(int topLineCnt)
+        protected override void CalcCoord(int topLineCnt)
         {
             int ofsX = GetLineOffsetX();
             int ofsY = (topLineCnt) * GetLineOffsetY() + 10;
@@ -398,7 +398,7 @@ namespace DivinationApp
             Kansi nenkansiWk = null;
 
 
-            if(attrJuniSinkanHou!=null)
+            if (attrJuniSinkanHou!=null)
             {
                 //十二親干法の表示文字に切り替える
                 if (getuunKansi != null) getuunKansiWk = attrJuniSinkanHou.GeJuniSinkanHouString(getuunKansi);

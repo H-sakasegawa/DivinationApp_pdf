@@ -287,6 +287,11 @@ namespace DivinationApp
             return offsetY;
         }
 
+        protected virtual void CalcCoord(int itopLineCnt)
+        {
+            return;
+        }
+
         protected abstract void DrawItem(GraphicsBase g);
         protected virtual void DrawKansi(GraphicsBase g, JuniSinkankanHouAttr attrJuniSinkanHou = null) { }
 
@@ -384,8 +389,13 @@ namespace DivinationApp
 
             DrawItem(g);
          }
+        public Size CalcDrawAreaSizePDF(PDFUtility pdfUtil)
+        {
+            return CalcDrawAreaSize(new PDFGraphics(pdfUtil));
+        }
 
-        public Size CalcDrawAreaSize()
+
+        public Size CalcDrawAreaSize(GraphicsBase g=null)
         {
             matrix.Clear();
             matrixBottom.Clear();
@@ -396,18 +406,20 @@ namespace DivinationApp
             idxMtxButtom = 0;
             maxDrawStringAreaY = 0;
 
-            //派生先クラスの描画I/F呼び出し
-            Bitmap canvas = new Bitmap(pictureBaseWidth, pictureBaseHeight);
-            // Graphicsオブジェクトの作成
-            //g = Graphics.FromImage(canvas);
-            //g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            g = new FormGraphics(Graphics.FromImage(canvas));
-
-            DrawItem(g);
-            if (pictureBox != null)
+            if (g == null)
             {
-                pictureBox.Image = canvas;
+                //派生先クラスの描画I/F呼び出し
+                Bitmap canvas = new Bitmap(pictureBaseWidth, pictureBaseHeight);
+                // Graphicsオブジェクトの作成
+                //g = Graphics.FromImage(canvas);
+                //g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                g = new FormGraphics(Graphics.FromImage(canvas));
             }
+            DrawItem(g);
+            //if (pictureBox != null)
+            //{
+            //    pictureBox.Image = canvas;
+            //}
 
 
             return new Size(
@@ -416,10 +428,9 @@ namespace DivinationApp
                 );
         }
 
-
         int redColorItemBit = 0;
 
-        public void DrawKyokiPattern( int _redColorItemBit)
+        public void DrawKyokiPattern(int _redColorItemBit)
         {
             redColorItemBit = _redColorItemBit;
 
@@ -430,6 +441,9 @@ namespace DivinationApp
             ////干支文字と枠のみ描画
             //g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
             g = new FormGraphics(Graphics.FromImage(canvas));
+
+            CalcCoord(0);
+
             DrawKansi(g);
 
             if (pictureBox != null)
@@ -437,6 +451,18 @@ namespace DivinationApp
                 pictureBox.Image = canvas;
             }
 
+        }
+        public void DrawKyokiPatternPDF(PDFUtility pdfUtil, float areaLeft, float areaTop, int _redColorItemBit)
+        {
+            redColorItemBit = _redColorItemBit;
+
+             drawAreaOffset.X = areaLeft;
+            drawAreaOffset.Y = areaTop;
+
+            g = new PDFGraphics(pdfUtil);
+
+            CalcCoord(0);
+            DrawKansi(g);
         }
         /// <summary>
         /// 解放処理

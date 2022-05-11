@@ -418,5 +418,25 @@ namespace DivinationApp
 
         }
 
+        /// <summary>
+        /// PDF出力
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolOutputPDF_Click(object sender, EventArgs e)
+        {
+            if (frmPDF != null)
+            {
+                frmPDF.Show();
+                frmPDF.Activate();
+                return;
+            }
+
+            frmPDF = new FormPDF(personList);
+            frmPDF.OnClose += OnModelessFormClose;
+            frmPDF.Show();
+            lstModlessForms.Add(frmPDF);
+
+        }
     }
 }

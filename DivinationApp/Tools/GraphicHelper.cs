@@ -15,6 +15,7 @@ namespace DivinationApp
         public abstract void FillRectangle(Brush brush, Rectangle rect);
         public abstract void FillRectangle(Brush brush, int x, int y, int width, int height);
         public abstract void DrawLine(Pen pen, Point pt1, Point pt2);
+        public abstract void DrawArrow(Pen pen, Point pt1, Point pt2);
         public abstract SizeF MeasureString(string text, Font font);
     }
     public class FormGraphics : GraphicsBase
@@ -53,6 +54,10 @@ namespace DivinationApp
         }
 
         public override void DrawLine(Pen pen, Point pt1, Point pt2)
+        {
+            g.DrawLine(pen, pt1, pt2);
+        }
+        public override void DrawArrow(Pen pen, Point pt1, Point pt2)
         {
             g.DrawLine(pen, pt1, pt2);
         }
@@ -121,8 +126,16 @@ namespace DivinationApp
         public override void DrawLine(Pen pen, Point pt1, Point pt2)
         {
             iTextSharp.text.BaseColor lineColor_ = new iTextSharp.text.BaseColor(pen.Color);
-            pdfUtil.DrawLine( pt1, pt2, pen.Width, lineColor_);
+            pdfUtil.DrawLine(pt1, pt2, pen.Width, lineColor_);
         }
+
+        public override void DrawArrow(Pen pen, Point pt1, Point pt2)
+        {
+            iTextSharp.text.BaseColor lineColor_ = new iTextSharp.text.BaseColor(pen.Color);
+            var aac = (System.Drawing.Drawing2D.AdjustableArrowCap)pen.CustomEndCap;
+            pdfUtil.DrawArrow(pt1, pt2, (int)aac.Width, (int)aac.Height, lineColor_);
+        }
+
         public override SizeF MeasureString(string text, Font font)
         {
 #if false

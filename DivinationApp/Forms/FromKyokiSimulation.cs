@@ -178,7 +178,6 @@ namespace DivinationApp
                                         _bDispGotoku,
                                         true
                                         );
-                drawItem2.CalcCoord(0);
                 //虚気変化パターン表示用の描画関数呼び出し
                 drawItem2.DrawKyokiPattern(ChangeKansiBit);
             }

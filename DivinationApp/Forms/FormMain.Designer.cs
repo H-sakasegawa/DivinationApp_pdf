@@ -42,13 +42,14 @@ namespace DivinationApp
             this.mnuOption = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExcelPicture = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPDF = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolAdd = new System.Windows.Forms.ToolStripButton();
             this.toolFind = new System.Windows.Forms.ToolStripButton();
             this.toolFindCustom = new System.Windows.Forms.ToolStripButton();
-            this.mnuPDF = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolOutputPDF = new System.Windows.Forms.ToolStripButton();
             this.tabControl1 = new DivinationApp.TabControlEx();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -99,26 +100,26 @@ namespace DivinationApp
             // mnuAddTab
             // 
             this.mnuAddTab.Name = "mnuAddTab";
-            this.mnuAddTab.Size = new System.Drawing.Size(180, 22);
+            this.mnuAddTab.Size = new System.Drawing.Size(158, 22);
             this.mnuAddTab.Text = "タブ追加";
             this.mnuAddTab.Click += new System.EventHandler(this.mnuAddTab_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
             // 
             // mnuSerch
             // 
             this.mnuSerch.Name = "mnuSerch";
-            this.mnuSerch.Size = new System.Drawing.Size(180, 22);
+            this.mnuSerch.Size = new System.Drawing.Size(158, 22);
             this.mnuSerch.Text = "大運・年運検索";
             this.mnuSerch.Click += new System.EventHandler(this.mnuSerch_Click);
             // 
             // パターン条件検索ToolStripMenuItem
             // 
             this.パターン条件検索ToolStripMenuItem.Name = "パターン条件検索ToolStripMenuItem";
-            this.パターン条件検索ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.パターン条件検索ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.パターン条件検索ToolStripMenuItem.Text = "パターン条件検索";
             this.パターン条件検索ToolStripMenuItem.Click += new System.EventHandler(this.mnuPatternCondFind_Click);
             // 
@@ -153,6 +154,13 @@ namespace DivinationApp
             this.mnuExcelPicture.Text = "Excel画像読み込み";
             this.mnuExcelPicture.Click += new System.EventHandler(this.mnuExcelPicture_Click);
             // 
+            // mnuPDF
+            // 
+            this.mnuPDF.Name = "mnuPDF";
+            this.mnuPDF.Size = new System.Drawing.Size(171, 22);
+            this.mnuPDF.Text = "PDF出力";
+            this.mnuPDF.Click += new System.EventHandler(this.mnuPDF_Click);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -160,7 +168,8 @@ namespace DivinationApp
             this.toolStripSeparator2,
             this.toolAdd,
             this.toolFind,
-            this.toolFindCustom});
+            this.toolFindCustom,
+            this.toolOutputPDF});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1312, 25);
@@ -214,12 +223,15 @@ namespace DivinationApp
             this.toolFindCustom.ToolTipText = "パターン条件検索";
             this.toolFindCustom.Click += new System.EventHandler(this.toolFindCustom_Click);
             // 
-            // mnuPDF
+            // toolOutputPDF
             // 
-            this.mnuPDF.Name = "mnuPDF";
-            this.mnuPDF.Size = new System.Drawing.Size(171, 22);
-            this.mnuPDF.Text = "PDF出力";
-            this.mnuPDF.Click += new System.EventHandler(this.mnuPDF_Click);
+            this.toolOutputPDF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolOutputPDF.Image = ((System.Drawing.Image)(resources.GetObject("toolOutputPDF.Image")));
+            this.toolOutputPDF.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolOutputPDF.Name = "toolOutputPDF";
+            this.toolOutputPDF.Size = new System.Drawing.Size(23, 22);
+            this.toolOutputPDF.Text = "PDF出力";
+            this.toolOutputPDF.Click += new System.EventHandler(this.toolOutputPDF_Click);
             // 
             // tabControl1
             // 
@@ -248,11 +260,11 @@ namespace DivinationApp
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1304, 706);
+            this.tabPage2.Size = new System.Drawing.Size(1304, 704);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -306,5 +318,6 @@ namespace DivinationApp
         private System.Windows.Forms.ToolStripMenuItem mnuSetting;
         private System.Windows.Forms.ToolStripMenuItem mnuOption;
         private System.Windows.Forms.ToolStripMenuItem mnuPDF;
+        private System.Windows.Forms.ToolStripButton toolOutputPDF;
     }
 }
