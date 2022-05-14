@@ -63,6 +63,8 @@ namespace DivinationApp
 
             public bool bInsenYousenExplanation;
 
+            public string pdfFileName;
+
         }
 
         public PDFOutput(Parameter param)
@@ -110,10 +112,11 @@ namespace DivinationApp
             //PDFドキュメントを閉じる
             // pdfDoc.Close();
 
-
-            string imgFilePath = Path.Combine(FormMain.GetExePath(), "PDFBack2.png");
-            pdfUtil.SetBackgroundImage(imgFilePath);
-
+            if (!string.IsNullOrEmpty(param.pdfFileName))
+            {
+                string imgFilePath = Path.Combine(FormMain.GetExePath(), param.pdfFileName);
+                pdfUtil.SetBackgroundImage(imgFilePath);
+            }
             pdfUtil.OpenDocument(pdfFilePath);
 
             ////ドキュメントを作成
@@ -230,7 +233,6 @@ namespace DivinationApp
             //-------------------------------------------
             pdfUtil.CloseDocument();
 
-            OpenFile(pdfFilePath);
             return 0;
         }
 
@@ -1337,11 +1339,6 @@ namespace DivinationApp
             return 0;
         }
 
-        void OpenFile(string fname)
-        {
-            System.Diagnostics.Process p =
-                         System.Diagnostics.Process.Start(fname);
-        }
 
     }
 

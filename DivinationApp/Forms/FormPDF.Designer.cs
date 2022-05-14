@@ -59,6 +59,7 @@ namespace DivinationApp
             this.chkZougan = new System.Windows.Forms.CheckBox();
             this.chkShukumeiAndKoutenun = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkViewPDF = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.grpGogyouGotoku.SuspendLayout();
             this.SuspendLayout();
@@ -203,7 +204,7 @@ namespace DivinationApp
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(300, 252);
+            this.button2.Location = new System.Drawing.Point(162, 252);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(147, 35);
             this.button2.TabIndex = 85;
@@ -389,11 +390,24 @@ namespace DivinationApp
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // chkViewPDF
+            // 
+            this.chkViewPDF.AutoSize = true;
+            this.chkViewPDF.Checked = true;
+            this.chkViewPDF.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkViewPDF.Location = new System.Drawing.Point(315, 262);
+            this.chkViewPDF.Name = "chkViewPDF";
+            this.chkViewPDF.Size = new System.Drawing.Size(121, 16);
+            this.chkViewPDF.TabIndex = 96;
+            this.chkViewPDF.Text = "作成したPDFを表示";
+            this.chkViewPDF.UseVisualStyleBackColor = true;
+            // 
             // FormPDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 297);
+            this.Controls.Add(this.chkViewPDF);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.lstPerson);
             this.Controls.Add(this.cmbGroup);
@@ -457,5 +471,6 @@ namespace DivinationApp
         private System.Windows.Forms.ListView lstPerson;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkViewPDF;
     }
 }

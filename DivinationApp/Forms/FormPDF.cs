@@ -184,10 +184,23 @@ namespace DivinationApp
             param.person.bRefrectHousani = chkRefrectHousani.Checked;
             param.person.bRefrectSangouKaikyoku = chkRefrectSangouKaikyoku.Checked;
 
+            //背景画像指定
+            param.pdfFileName = "PDFBack.png";
+
             PDFOutput pdf = new PDFOutput(param);
-            pdf.WritePDF( Path.Combine(outputFolderPath, string.Format("{0}.pdf", person.name)) );
+            string pdfFilePath = Path.Combine(outputFolderPath, string.Format("{0}.pdf", person.name));
+            pdf.WritePDF(pdfFilePath);
 
+            if(chkViewPDF.Checked)
+            {
+                OpenFile(pdfFilePath);
+            }
 
+        }
+        void OpenFile(string fname)
+        {
+            System.Diagnostics.Process p =
+                         System.Diagnostics.Process.Start(fname);
         }
 
         private void button1_Click(object sender, EventArgs e)
