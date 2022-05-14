@@ -34,6 +34,8 @@ namespace DivinationApp
 
         PDFUtility pdfUtil;
 
+ 
+
         public class Parameter
         {
             public Person person;
@@ -109,8 +111,8 @@ namespace DivinationApp
             // pdfDoc.Close();
 
 
-
-
+            string imgFilePath = Path.Combine(FormMain.GetExePath(), "PDFBack2.png");
+            pdfUtil.SetBackgroundImage(imgFilePath);
 
             pdfUtil.OpenDocument(pdfFilePath);
 
@@ -248,6 +250,7 @@ namespace DivinationApp
             if (color == null) color = BaseColor.BLACK;
             pdfUtil.DrawLine(areaLeft, y, areaLeft + 500, y, 1, color, dotPattern);
         }
+
 
         /// <summary>
         /// メンバ情報
@@ -1545,6 +1548,9 @@ namespace DivinationApp
         Rectangle tatePageRect;
         Rectangle yokoPageRect;
 
+        string backgroundImageFilePath;
+        Image imgDocBackground = null;
+
         public enum A4Dirc
         {
             Vertical = 0 , //縦
@@ -1569,6 +1575,7 @@ namespace DivinationApp
 
             //ドキュメントを開く
             doc.Open();
+            DrawBackgroundImage();
 
             cb = pdfWriter.DirectContent;
 
@@ -1579,6 +1586,11 @@ namespace DivinationApp
         {
             //ドキュメントを閉じる
             doc.Close();
+        }
+        
+        public void SetBackgroundImage(string imageFilePath)
+        {
+            backgroundImageFilePath = imageFilePath;
         }
 
         public Rectangle GetPageSize()
@@ -1597,7 +1609,10 @@ namespace DivinationApp
             }
             doc.NewPage();
 
-             cb.SetFontAndSize(font.BaseFont, fontSize);
+            cb.SetFontAndSize(font.BaseFont, fontSize);
+
+            DrawBackgroundImage();
+
         }
 
         public PdfContentByte GetContentByte()
@@ -1673,6 +1688,23 @@ namespace DivinationApp
 
             return sz;
         }
+
+        void DrawBackgroundImage()
+        {
+            if (string.IsNullOrEmpty(backgroundImageFilePath)) return;
+
+            if(imgDocBackground==null)
+            {
+                System.Drawing.Image image = System.Drawing.Image.FromFile(backgroundImageFilePath);
+                imgDocBackground = Image.GetInstance(image, BaseColor.WHITE);
+            }
+
+            var rect = GetPageSize();
+            DrawPicture(0, 0, rect.Width, rect.Height, imgDocBackground);
+        }
+
+
+
 
         public void DrawString(float x, float y, string fmt, params object[] item)
         {
