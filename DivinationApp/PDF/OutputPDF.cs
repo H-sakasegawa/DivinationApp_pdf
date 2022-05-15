@@ -63,7 +63,7 @@ namespace DivinationApp
 
             public bool bInsenYousenExplanation;
 
-            public string pdfFileName;
+            public string pdfBackgroundImageFileName;
 
         }
 
@@ -75,75 +75,13 @@ namespace DivinationApp
         }
         public int WritePDF(string pdfFilePath)
         {
-
-            // A4サイズで作成
-            // Document pdfDoc = new Document(PageSize.A4);
-            // 保存ファイルを指定
-            //FileStream fileStream = new FileStream(@"C:\Temp\test.pdf", FileMode.Create);
-            //PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, fileStream);
-            //// PDFオープン
-            //pdfDoc.Open();
-            //PdfContentByte pdfContentByte = pdfWriter.DirectContent;
-            ////フォントの設定
-            //Font font =
-            //    FontFactory.GetFont("ＭＳ ゴシック",
-            //    BaseFont.IDENTITY_H,    //横書き
-            //    BaseFont.NOT_EMBEDDED,  //フォントをPDFファイルに組み込まない（重要）
-            //    11f,                    //フォントサイズ
-            //    iTextSharp.text.Font.NORMAL,           //フォントスタイル
-            //    BaseColor.BLACK);       //フォントカラー
-
-
-            //ColumnText columnText = new ColumnText(pdfContentByte);
-            ////SetSimpleColumnで出力
-            //columnText.SetSimpleColumn(
-            //    new Phrase("私は日本語しゃべれます", font)
-            //    , 100   // 始点X座標
-            //    , 600   // 始点Y座標
-            //    , 250   // 終点X座標
-            //    , 620   // 終点Y座標
-            //    , 11f
-            //    , Element.ALIGN_LEFT // 左寄せ
-            //    );
-
-            ////テキスト描画
-            //columnText.Go();
-
-            //PDFドキュメントを閉じる
-            // pdfDoc.Close();
-
-            if (!string.IsNullOrEmpty(param.pdfFileName))
+            //背景画像が指定されていたら背景を設定
+            if (!string.IsNullOrEmpty(param.pdfBackgroundImageFileName))
             {
-                string imgFilePath = Path.Combine(FormMain.GetExePath(), param.pdfFileName);
+                string imgFilePath = Path.Combine(FormMain.GetExePath(), param.pdfBackgroundImageFileName);
                 pdfUtil.SetBackgroundImage(imgFilePath);
             }
             pdfUtil.OpenDocument(pdfFilePath);
-
-            ////ドキュメントを作成
-            //doc = new Document(PageSize.A4, 0, 0, 0, 0);
-
-            //FileStream fileStream = new FileStream(pdfFilePath, FileMode.Create);
-            //PdfWriter pdfWriter = PdfWriter.GetInstance(doc, fileStream);
-
-
-
-            ////Font fnt = FontFactory.GetFont("MS P明朝", 10f, BaseColor.BLACK);
-            ////ドキュメントを開く
-            //doc.Open();
-
-            ////Font fnt1 = new Font(BaseFont.CreateFont
-            ////    (@"c:\windows\fonts\msgothic.ttc,0", BaseFont.IDENTITY_H, true), 40);
-
-            //////氏名：
-            ////doc.Add(new Paragraph("こんにちは", fnt1));
-
-            //contentByte = pdfWriter.DirectContent;
-
-
-            ////https://helpx.adobe.com/jp/x-productkb/global/cq08041028.html
-            //fontFolder = Environment.SystemDirectory.Replace("system32", "fonts");
-            ////            fontName = fontFolder + "\\msgothic.ttc,0";
-            //fontName = fontFolder + "\\meiryo.ttc,0";
 
             //人情報
             WritePersonBaseInfo();

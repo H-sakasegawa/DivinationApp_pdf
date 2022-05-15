@@ -185,7 +185,7 @@ namespace DivinationApp
             param.person.bRefrectSangouKaikyoku = chkRefrectSangouKaikyoku.Checked;
 
             //背景画像指定
-            param.pdfFileName = "PDFBack.png";
+            param.pdfBackgroundImageFileName = "PDFBack.png";
 
             PDFOutput pdf = new PDFOutput(param);
             string pdfFilePath = Path.Combine(outputFolderPath, string.Format("{0}.pdf", person.name));
