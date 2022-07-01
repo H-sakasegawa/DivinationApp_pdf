@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Configuration;
 
 namespace DivinationApp
 {
@@ -29,6 +30,12 @@ namespace DivinationApp
 
         private void FormPDF_Load(object sender, EventArgs e)
         {
+
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            //選択された背景画像ファイルパス
+            txtBackImageFIle.Text = config.AppSettings.Settings["PdfBackImage"].Value;
+
             this.TopMost = true;
             this.MinimumSize = this.Size;
             this.MaximumSize = new Size(this.Size.Width, 2048);
@@ -91,6 +98,16 @@ namespace DivinationApp
                 lstPerson.Enabled = false;
                 cmbGroup.Enabled = false;
 
+                //背景画像のファイル有無チェック
+                if (!string.IsNullOrEmpty(txtBackImageFIle.Text))
+                {
+                    if(! File.Exists(txtBackImageFIle.Text))
+                    {
+                        MessageBox.Show(string.Format("指定された背景画像がありません。\n{0}", txtBackImageFIle.Text));
+                        return;
+                    }
+                }
+
                 //人名一覧でチェックの付いている人をすべてPDF化
                 List<Person> lstPdfPersons = new List<Person>();
                 foreach (ListViewItem lvItem in lstPerson.Items)
@@ -124,7 +141,7 @@ namespace DivinationApp
 
 
 
-                        OutputPDF(person, folderPath);
+                        OutputPDF(person, folderPath, txtBackImageFIle.Text);
                     }
                     Invoke((MethodInvoker)(() =>
                     {
@@ -144,7 +161,7 @@ namespace DivinationApp
         }
 
 
-        private void OutputPDF( Person person, string outputFolderPath )
+        private void OutputPDF( Person person, string outputFolderPath, string imageFile )
         {
             PDFOutput.Parameter param = new PDFOutput.Parameter();
 
@@ -185,7 +202,13 @@ namespace DivinationApp
             param.person.bRefrectSangouKaikyoku = chkRefrectSangouKaikyoku.Checked;
 
             //背景画像指定
-            param.pdfBackgroundImageFileName = "PDFBack.png";
+            if (!string.IsNullOrEmpty(imageFile))
+            {
+            //    param.pdfBackgroundImageFileName = Path.Combine(Path.Combine(FormMain.GetExePath(), "PDFBack.png");
+            //}else
+            //{
+                param.pdfBackgroundImageFileName = imageFile;
+            }
 
             PDFOutput pdf = new PDFOutput(param);
             string pdfFilePath = Path.Combine(outputFolderPath, string.Format("{0}.pdf", person.name));
@@ -269,6 +292,22 @@ namespace DivinationApp
                 lvItem.Checked = checkBox1.Checked;
             }
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "画像ファイル| *.png;*.bmp;*.jpg |すべてのファイル|*.*";
+
+            if ( dlg.ShowDialog() == DialogResult.OK)
+            {
+                txtBackImageFIle.Text = dlg.FileName;
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+                //選択された背景画像ファイルパスを記録
+                config.AppSettings.Settings["PdfBackImage"].Value = txtBackImageFIle.Text;
+                config.Save();
+            }
         }
     }
 }

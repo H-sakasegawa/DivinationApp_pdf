@@ -60,8 +60,12 @@ namespace DivinationApp
             this.chkShukumeiAndKoutenun = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chkViewPDF = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtBackImageFIle = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.grpGogyouGotoku.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstPerson
@@ -77,7 +81,7 @@ namespace DivinationApp
             this.lstPerson.Location = new System.Drawing.Point(9, 52);
             this.lstPerson.MultiSelect = false;
             this.lstPerson.Name = "lstPerson";
-            this.lstPerson.Size = new System.Drawing.Size(147, 235);
+            this.lstPerson.Size = new System.Drawing.Size(147, 273);
             this.lstPerson.TabIndex = 3;
             this.lstPerson.UseCompatibleStateImageBehavior = false;
             this.lstPerson.View = System.Windows.Forms.View.Details;
@@ -204,7 +208,7 @@ namespace DivinationApp
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(162, 252);
+            this.button2.Location = new System.Drawing.Point(162, 290);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(147, 35);
             this.button2.TabIndex = 85;
@@ -395,18 +399,47 @@ namespace DivinationApp
             this.chkViewPDF.AutoSize = true;
             this.chkViewPDF.Checked = true;
             this.chkViewPDF.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkViewPDF.Location = new System.Drawing.Point(315, 262);
+            this.chkViewPDF.Location = new System.Drawing.Point(315, 300);
             this.chkViewPDF.Name = "chkViewPDF";
             this.chkViewPDF.Size = new System.Drawing.Size(121, 16);
             this.chkViewPDF.TabIndex = 96;
             this.chkViewPDF.Text = "作成したPDFを表示";
             this.chkViewPDF.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.txtBackImageFIle);
+            this.groupBox2.Location = new System.Drawing.Point(168, 247);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(279, 44);
+            this.groupBox2.TabIndex = 98;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "背景画像";
+            // 
+            // txtBackImageFIle
+            // 
+            this.txtBackImageFIle.Location = new System.Drawing.Point(9, 18);
+            this.txtBackImageFIle.Name = "txtBackImageFIle";
+            this.txtBackImageFIle.Size = new System.Drawing.Size(228, 19);
+            this.txtBackImageFIle.TabIndex = 0;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(237, 18);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(39, 18);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "参照";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // FormPDF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 297);
+            this.ClientSize = new System.Drawing.Size(463, 335);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.chkViewPDF);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.lstPerson);
@@ -434,6 +467,8 @@ namespace DivinationApp
             this.groupBox1.PerformLayout();
             this.grpGogyouGotoku.ResumeLayout(false);
             this.grpGogyouGotoku.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -472,5 +507,8 @@ namespace DivinationApp
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox chkViewPDF;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox txtBackImageFIle;
     }
 }

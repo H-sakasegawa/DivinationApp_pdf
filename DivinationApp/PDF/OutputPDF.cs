@@ -78,8 +78,8 @@ namespace DivinationApp
             //背景画像が指定されていたら背景を設定
             if (!string.IsNullOrEmpty(param.pdfBackgroundImageFileName))
             {
-                string imgFilePath = Path.Combine(FormMain.GetExePath(), param.pdfBackgroundImageFileName);
-                pdfUtil.SetBackgroundImage(imgFilePath);
+              //  string imgFilePath = Path.Combine(FormMain.GetExePath(), param.pdfBackgroundImageFileName);
+                pdfUtil.SetBackgroundImage(param.pdfBackgroundImageFileName);
             }
             pdfUtil.OpenDocument(pdfFilePath);
 
