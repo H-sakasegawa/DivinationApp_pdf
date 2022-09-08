@@ -22,6 +22,8 @@ namespace DivinationApp
         Person updatePerson;
         string initGroupName=null;
 
+        public Person newPerson = null;
+
         public FormPersonInfo(Persons _personList, string _initGroupName, Mode _mode)
         {
             InitializeComponent();
@@ -142,6 +144,8 @@ namespace DivinationApp
                                         txtName.Text, birthday, gender, cmbGroup.Text
                                         );
                 personList.Add(person);
+
+                newPerson = person;
             }
             //グループディクショナリ
             personList.Add(person.group, person);

@@ -380,7 +380,7 @@ namespace DivinationApp
             FormPersonInfo frm = new FormPersonInfo(personList, grpName, FormPersonInfo.Mode.MODE_NEW);
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                SelectGroupAndPersonCombobox(curPerson);
+                SelectGroupAndPersonCombobox(frm.newPerson);
             }
         }
         /// <summary>
