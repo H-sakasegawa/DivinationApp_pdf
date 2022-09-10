@@ -12,7 +12,7 @@ namespace DivinationApp
     class KakeiShuuin
     {
 
-        public static string GetKakeiShuuin(Person person)
+        public static List<string> GetKakeiShuuin(Person person)
         {
        
             TableMng tblMng = TableMng.GetTblManage();
@@ -35,30 +35,37 @@ namespace DivinationApp
             if (attGetuKan != attGetuSi) return null;//専気ではない
 
             string sResult = null;
+            List<string> lstResult = new List<string>();
 
             //家系集印? (月干→日干）
-            if( tblMng.gogyouAttrRelationshipTbl.IsCreate(attGetuKan, attNitiKan))
+            if ( tblMng.gogyouAttrRelationshipTbl.IsCreate(attGetuKan, attNitiKan))
             {
-                sResult = "家系集印";
-
-                if (attNitiSi == attGetuSi) sResult = "包曲" + sResult;
+                sResult = "家系集印(自)";
+                if (attNitiSi == attGetuSi) sResult = string.Format("包曲{0} ..{1}",sResult, nitiKan);
+                lstResult.Add(sResult);
             }
-            else
+            if (tblMng.gogyouAttrRelationshipTbl.IsCreate(attGetuSi, attNitiSi))
             {
-                if (tblMng.gogyouAttrRelationshipTbl.IsCreate(attGetuSi, attNitiSi))
-                {
-                    sResult = "家系集印(配偶者)";
-                    if (attNitiKan == attGetuKan) sResult = "包曲" + sResult;
+                sResult = "家系集印(配偶者)";
+                if (attNitiKan == attGetuKan) sResult = string.Format("包曲{0} ..{1}", sResult, nitiSi);
+                lstResult.Add(sResult);
 
-                }
-                else if (tblMng.gogyouAttrRelationshipTbl.IsCreate(attGetuKan, attNenKan))
-                {
-                    sResult = "家系集印(父)";
-                    if (attNenSi == attGetuSi) sResult = "包曲" + sResult;
-                }
+            }
+            if (tblMng.gogyouAttrRelationshipTbl.IsCreate(attGetuKan, attNenKan))
+            {
+                sResult = "家系集印(父)";
+                if (attNenSi == attGetuSi) sResult = string.Format("包曲{0} ..{1}", sResult, nenKan);
+                lstResult.Add(sResult);
+            }
+            if (tblMng.gogyouAttrRelationshipTbl.IsCreate(attGetuKan, attNenSi))
+            {
+                sResult = "家系集印(母)";
+                if (attNenKan == attGetuKan) sResult = string.Format("包曲{0} ..{1}", sResult, nenSi);
+                lstResult.Add(sResult);
             }
 
-            return sResult;
+
+            return lstResult;
         }
     }
 

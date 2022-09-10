@@ -1077,14 +1077,44 @@ namespace DivinationApp
                 return IsDestory(fromAttr, toAttr);
             }
             /// <summary>
-            /// 引数で渡された属性を生み出すものを返す
+            /// 引数で渡された属性から生み出されるもの（相生）を返す
             /// </summary>
             /// <param name="to">生み出される属性</param>
             /// <returns></returns>
-            public string GetCreatFrom( string to)
+            public string GetCreatTo(string to)
             {
                 var relation = GetRelation(to);
+                return relation.createToName;
+            }
+            /// <summary>
+            /// 引数で渡された属性を生み出すもの（相生）を返す
+            /// </summary>
+            /// <param name="to">生み出される属性</param>
+            /// <returns></returns>
+            public string GetCreatFrom(string from)
+            {
+                var relation = GetRelation(from);
                 return relation.createFromName;
+            }
+            /// <summary>
+            /// 引数で渡された属性から剋されるもの（相剋）を返す
+            /// </summary>
+            /// <param name="to">生み出される属性</param>
+            /// <returns></returns>
+            public string GetDestroyTo(string to)
+            {
+                var relation = GetRelation(to);
+                return relation.destoryToName;
+            }
+            /// <summary>
+            /// 引数で渡された属性を剋するもの（相剋）を返す
+            /// </summary>
+            /// <param name="to">生み出される属性</param>
+            /// <returns></returns>
+            public string GetDestroyFrom(string from)
+            {
+                var relation = GetRelation(from);
+                return relation.destoryFromName;
             }
             /// <summary>
             /// 属性AからBまでの相生関連距離

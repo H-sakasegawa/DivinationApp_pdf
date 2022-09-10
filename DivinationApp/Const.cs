@@ -131,6 +131,8 @@ namespace DivinationApp
             INSEN_DETAIL_DAISANGOU_DAIHANKAI,//大三合会局、大半会
             INSEN_DETAIL_KANSI_SOUREN,//干支双連
             INSEN_DETAIL_KANSI_SOUHA,//干支双破
+            INSEN_DETAIL_KANZENKAKU,//完全格
+            INSEN_DETAIL_KANZENKAKU_SUB,//完全格 補助説明
 
         }
 

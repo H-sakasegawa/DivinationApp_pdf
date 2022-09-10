@@ -1249,81 +1249,84 @@ namespace DivinationApp
         /// <param name="kansiItemNum"></param>
         private void RefrectGouhou(Color[] colorNikkansi, Color[] colorGekkansi, Color[] colorNenkansi, int kansiItemNum)
         {
-            var tblMng = TableMng.GetTblManage();
 
-            int idxSi = 1;
+            AttrAndColorRefrectHelper.RefrectGouhou(person, colorNikkansi, colorGekkansi, colorNenkansi, kansiItemNum, kansiAttrTbl);
 
-            //合法反映前の属性について"土"の数をカウント
-            int cnt = GetAttrDoCount();
-            bool bManyAttrDo = (kansiItemNum / 2 < cnt) ? true : false;
+            //var tblMng = TableMng.GetTblManage();
 
-            //支合と半会はダブらない
-            //================================================
-            //支合
-            //================================================
-            if (person.bRefrectSigou)// 支合 反映指定あり
-            {
-                //日支 - 月支
-                var gogyou = tblMng.sigouTbl.GetSigouAttr(person.nikkansi.si, person.gekkansi.si, bManyAttrDo);
-                if (gogyou != null)
-                {
-                    if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
-                    kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
-                }
-                //日支 - 年支
-                gogyou = tblMng.sigouTbl.GetSigouAttr(person.nikkansi.si, person.nenkansi.si, bManyAttrDo);
-                if (gogyou != null)
-                {
-                    if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
-                }
-                //月支 - 年支
-                gogyou = tblMng.sigouTbl.GetSigouAttr(person.gekkansi.si, person.nenkansi.si, bManyAttrDo);
-                if (gogyou != null)
-                {
-                    if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
-                }
-            }
-            //================================================
-            //半会
-            //================================================
-            if (person.bRefrectHankai)// 半会 反映指定あり
-            {
-                //日支 - 月支
-                var gogyou = tblMng.hankaiTbl.GetGogyou(person.nikkansi.si, person.gekkansi.si);
-                if (gogyou != null)
-                {
-                    if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
-                    kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
-                }
-                //日支 - 年支
-                gogyou = tblMng.hankaiTbl.GetGogyou(person.nikkansi.si, person.nenkansi.si);
-                if (gogyou != null)
-                {
-                    if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
-                }
-                //月支 - 年支
-                gogyou = tblMng.hankaiTbl.GetGogyou(person.gekkansi.si, person.nenkansi.si);
-                if (gogyou != null)
-                {
-                    if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
-                    kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
-                    kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
-                }
-            }
+            //int idxSi = 1;
+
+            ////合法反映前の属性について"土"の数をカウント
+            //int cnt = GetAttrDoCount();
+            //bool bManyAttrDo = (kansiItemNum / 2 < cnt) ? true : false;
+
+            ////支合と半会はダブらない
+            ////================================================
+            ////支合
+            ////================================================
+            //if (person.bRefrectSigou)// 支合 反映指定あり
+            //{
+            //    //日支 - 月支
+            //    var gogyou = tblMng.sigouTbl.GetSigouAttr(person.nikkansi.si, person.gekkansi.si, bManyAttrDo);
+            //    if (gogyou != null)
+            //    {
+            //        if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
+            //    }
+            //    //日支 - 年支
+            //    gogyou = tblMng.sigouTbl.GetSigouAttr(person.nikkansi.si, person.nenkansi.si, bManyAttrDo);
+            //    if (gogyou != null)
+            //    {
+            //        if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
+            //    }
+            //    //月支 - 年支
+            //    gogyou = tblMng.sigouTbl.GetSigouAttr(person.gekkansi.si, person.nenkansi.si, bManyAttrDo);
+            //    if (gogyou != null)
+            //    {
+            //        if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
+            //    }
+            //}
+            ////================================================
+            ////半会
+            ////================================================
+            //if (person.bRefrectHankai)// 半会 反映指定あり
+            //{
+            //    //日支 - 月支
+            //    var gogyou = tblMng.hankaiTbl.GetGogyou(person.nikkansi.si, person.gekkansi.si);
+            //    if (gogyou != null)
+            //    {
+            //        if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
+            //    }
+            //    //日支 - 年支
+            //    gogyou = tblMng.hankaiTbl.GetGogyou(person.nikkansi.si, person.nenkansi.si);
+            //    if (gogyou != null)
+            //    {
+            //        if (colorNikkansi != null) colorNikkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi = gogyou;
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
+            //    }
+            //    //月支 - 年支
+            //    gogyou = tblMng.hankaiTbl.GetGogyou(person.gekkansi.si, person.nenkansi.si);
+            //    if (gogyou != null)
+            //    {
+            //        if (colorGekkansi != null) colorGekkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        if (colorNenkansi != null) colorNenkansi[idxSi] = tblMng.gogyouAttrColorTbl[gogyou];
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi = gogyou;
+            //        kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi = gogyou;
+            //    }
+            //}
         }
 
         /// <summary>
@@ -1767,39 +1770,41 @@ namespace DivinationApp
         /// <param name="colorNenkansi"></param>
         public void RefrectKangou(Color[] colorNikkansi, Color[] colorGekkansi, Color[] colorNenkansi)
         {
-            var tblMng = TableMng.GetTblManage();
 
-            int idxKan = 0;//<==[干][支]の[干]を見るので、idx=0
-            //================================================
-            //干合
-            //================================================
-            //日（干） - 月（干）
-            var gogyou = tblMng.kangouTbl.GetKangouAttr(person.nikkansi.kan, person.gekkansi.kan);
-            if (gogyou != null)
-            {
-                if (colorNikkansi != null) colorNikkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
-                if (colorGekkansi != null) colorGekkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
-                kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrKan = gogyou;
-                kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrKan = gogyou;
-            }
-            //日（干） - 年（干）
-            gogyou = tblMng.kangouTbl.GetKangouAttr(person.nikkansi.kan, person.nenkansi.kan);
-            if (gogyou != null)
-            {
-                if (colorNikkansi != null) colorNikkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
-                if (colorNenkansi != null) colorNenkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
-                kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrKan = gogyou;
-                kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrKan = gogyou;
-            }
-            //月（干） - 年（干）
-            gogyou = tblMng.kangouTbl.GetKangouAttr(person.gekkansi.kan, person.nenkansi.kan);
-            if (gogyou != null)
-            {
-                if (colorGekkansi != null) colorGekkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
-                if (colorNenkansi != null) colorNenkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
-                kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrKan = gogyou;
-                kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrKan = gogyou;
-            }
+            AttrAndColorRefrectHelper.RefrectKangou(person, colorNikkansi, colorGekkansi, colorNenkansi, kansiAttrTbl);
+            //var tblMng = TableMng.GetTblManage();
+
+            //int idxKan = 0;//<==[干][支]の[干]を見るので、idx=0
+            ////================================================
+            ////干合
+            ////================================================
+            ////日（干） - 月（干）
+            //var gogyou = tblMng.kangouTbl.GetKangouAttr(person.nikkansi.kan, person.gekkansi.kan);
+            //if (gogyou != null)
+            //{
+            //    if (colorNikkansi != null) colorNikkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
+            //    if (colorGekkansi != null) colorGekkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
+            //    kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrKan = gogyou;
+            //    kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrKan = gogyou;
+            //}
+            ////日（干） - 年（干）
+            //gogyou = tblMng.kangouTbl.GetKangouAttr(person.nikkansi.kan, person.nenkansi.kan);
+            //if (gogyou != null)
+            //{
+            //    if (colorNikkansi != null) colorNikkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
+            //    if (colorNenkansi != null) colorNenkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
+            //    kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrKan = gogyou;
+            //    kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrKan = gogyou;
+            //}
+            ////月（干） - 年（干）
+            //gogyou = tblMng.kangouTbl.GetKangouAttr(person.gekkansi.kan, person.nenkansi.kan);
+            //if (gogyou != null)
+            //{
+            //    if (colorGekkansi != null) colorGekkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
+            //    if (colorNenkansi != null) colorNenkansi[idxKan] = tblMng.gogyouAttrColorTbl[gogyou];
+            //    kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrKan = gogyou;
+            //    kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrKan = gogyou;
+            //}
         }
 
 

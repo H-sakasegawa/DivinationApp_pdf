@@ -70,28 +70,9 @@ namespace DivinationApp
             this.radMan = new System.Windows.Forms.RadioButton();
             this.radWoman = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lvTaiun = new DivinationApp.ListViewEx();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbPerson = new System.Windows.Forms.ComboBox();
-            this.lvNenun = new DivinationApp.ListViewEx();
-            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblGogyoJunkan = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -119,15 +100,6 @@ namespace DivinationApp
             this.cmbGroup = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lvGetuun = new DivinationApp.ListViewEx();
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label17 = new System.Windows.Forms.Label();
             this.chkDispGetuun = new System.Windows.Forms.CheckBox();
             this.chkSangouKaikyoku = new System.Windows.Forms.CheckBox();
@@ -173,6 +145,35 @@ namespace DivinationApp
             this.panel1 = new System.Windows.Forms.Panel();
             this.listYousenDetail = new System.Windows.Forms.ListBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lvGetuun = new DivinationApp.ListViewEx();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvNenun = new DivinationApp.ListViewEx();
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvTaiun = new DivinationApp.ListViewEx();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -190,6 +191,10 @@ namespace DivinationApp
             this.tabPage3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -610,76 +615,11 @@ namespace DivinationApp
             this.groupBox2.TabIndex = 39;
             this.groupBox2.TabStop = false;
             // 
-            // lvTaiun
-            // 
-            this.lvTaiun.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11,
-            this.columnHeader23});
-            this.lvTaiun.FullRowSelect = true;
-            this.lvTaiun.GridLines = true;
-            this.lvTaiun.HideSelection = false;
-            this.lvTaiun.Location = new System.Drawing.Point(596, 26);
-            this.lvTaiun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lvTaiun.MultiSelect = false;
-            this.lvTaiun.Name = "lvTaiun";
-            this.lvTaiun.OwnerDraw = true;
-            this.lvTaiun.Size = new System.Drawing.Size(557, 240);
-            this.lvTaiun.TabIndex = 40;
-            this.lvTaiun.UseCompatibleStateImageBehavior = false;
-            this.lvTaiun.View = System.Windows.Forms.View.Details;
-            this.lvTaiun.SelectedIndexChanged += new System.EventHandler(this.lvTaiun_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "旬";
-            this.columnHeader1.Width = 64;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "干支";
-            this.columnHeader2.Width = 40;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "十大主星";
-            this.columnHeader3.Width = 40;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "十二大従星";
-            this.columnHeader4.Width = 40;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "日";
-            this.columnHeader9.Width = 90;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "月";
-            this.columnHeader10.Width = 90;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "年";
-            this.columnHeader11.Width = 90;
-            // 
-            // columnHeader23
-            // 
-            this.columnHeader23.Text = "詳細";
-            this.columnHeader23.Width = 120;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
-            this.label11.Location = new System.Drawing.Point(596, 269);
+            this.label11.Location = new System.Drawing.Point(4, 269);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(54, 20);
             this.label11.TabIndex = 13;
@@ -689,7 +629,7 @@ namespace DivinationApp
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
-            this.label12.Location = new System.Drawing.Point(596, 2);
+            this.label12.Location = new System.Drawing.Point(4, 6);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(54, 20);
             this.label12.TabIndex = 13;
@@ -706,87 +646,12 @@ namespace DivinationApp
             this.cmbPerson.TabIndex = 42;
             this.cmbPerson.SelectedIndexChanged += new System.EventHandler(this.cmbPerson_SelectedIndexChanged);
             // 
-            // lvNenun
-            // 
-            this.lvNenun.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvNenun.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader15,
-            this.columnHeader16,
-            this.columnHeader17,
-            this.columnHeader18,
-            this.columnHeader19,
-            this.columnHeader20,
-            this.columnHeader21,
-            this.columnHeader24,
-            this.columnHeader22});
-            this.lvNenun.FullRowSelect = true;
-            this.lvNenun.GridLines = true;
-            this.lvNenun.HideSelection = false;
-            this.lvNenun.Location = new System.Drawing.Point(596, 290);
-            this.lvNenun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lvNenun.MultiSelect = false;
-            this.lvNenun.Name = "lvNenun";
-            this.lvNenun.OwnerDraw = true;
-            this.lvNenun.Size = new System.Drawing.Size(710, 240);
-            this.lvNenun.TabIndex = 43;
-            this.lvNenun.UseCompatibleStateImageBehavior = false;
-            this.lvNenun.View = System.Windows.Forms.View.Details;
-            this.lvNenun.SelectedIndexChanged += new System.EventHandler(this.lvNenun_SelectedIndexChanged);
-            this.lvNenun.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvNenun_KeyDown);
-            this.lvNenun.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvNenun_MouseDoubleClick);
-            // 
-            // columnHeader15
-            // 
-            this.columnHeader15.Text = "歳";
-            this.columnHeader15.Width = 64;
-            // 
-            // columnHeader16
-            // 
-            this.columnHeader16.Text = "干支";
-            this.columnHeader16.Width = 40;
-            // 
-            // columnHeader17
-            // 
-            this.columnHeader17.Text = "十大主星";
-            this.columnHeader17.Width = 40;
-            // 
-            // columnHeader18
-            // 
-            this.columnHeader18.Text = "十二大従星";
-            this.columnHeader18.Width = 40;
-            // 
-            // columnHeader19
-            // 
-            this.columnHeader19.Text = "日";
-            this.columnHeader19.Width = 90;
-            // 
-            // columnHeader20
-            // 
-            this.columnHeader20.Text = "月";
-            this.columnHeader20.Width = 90;
-            // 
-            // columnHeader21
-            // 
-            this.columnHeader21.Text = "年";
-            this.columnHeader21.Width = 90;
-            // 
-            // columnHeader24
-            // 
-            this.columnHeader24.Text = "詳細";
-            this.columnHeader24.Width = 120;
-            // 
-            // columnHeader22
-            // 
-            this.columnHeader22.Text = "経歴";
-            this.columnHeader22.Width = 200;
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.lblGogyoJunkan);
             this.panel2.Controls.Add(this.tableLayoutPanel8);
-            this.panel2.Location = new System.Drawing.Point(128, 371);
+            this.panel2.Location = new System.Drawing.Point(6, 371);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(302, 137);
@@ -942,7 +807,7 @@ namespace DivinationApp
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.ContextMenuStrip = this.contextMenuDetail;
-            this.pictureBox1.Location = new System.Drawing.Point(129, 532);
+            this.pictureBox1.Location = new System.Drawing.Point(6, 532);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(147, 238);
@@ -967,7 +832,7 @@ namespace DivinationApp
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
-            this.label13.Location = new System.Drawing.Point(127, 509);
+            this.label13.Location = new System.Drawing.Point(4, 509);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 20);
             this.label13.TabIndex = 47;
@@ -979,10 +844,10 @@ namespace DivinationApp
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.ContextMenuStrip = this.contextMenuDetail;
-            this.pictureBox2.Location = new System.Drawing.Point(282, 532);
+            this.pictureBox2.Location = new System.Drawing.Point(158, 532);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(308, 280);
+            this.pictureBox2.Size = new System.Drawing.Size(308, 294);
             this.pictureBox2.TabIndex = 48;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.SizeChanged += new System.EventHandler(this.pictureBox2_SizeChanged);
@@ -991,7 +856,7 @@ namespace DivinationApp
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
-            this.label14.Location = new System.Drawing.Point(296, 509);
+            this.label14.Location = new System.Drawing.Point(173, 509);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(69, 20);
             this.label14.TabIndex = 47;
@@ -1001,7 +866,7 @@ namespace DivinationApp
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(128, 2);
+            this.tabControl1.Location = new System.Drawing.Point(4, 7);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1129,88 +994,20 @@ namespace DivinationApp
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.txtBaseGekkansiNo);
             this.tabPage2.Controls.Add(this.txtBaseDay);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(399, 135);
+            this.tabPage2.Size = new System.Drawing.Size(399, 133);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "算出基準値";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // lvGetuun
-            // 
-            this.lvGetuun.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvGetuun.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader12,
-            this.columnHeader13,
-            this.columnHeader14,
-            this.columnHeader25});
-            this.lvGetuun.FullRowSelect = true;
-            this.lvGetuun.GridLines = true;
-            this.lvGetuun.HideSelection = false;
-            this.lvGetuun.Location = new System.Drawing.Point(596, 555);
-            this.lvGetuun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lvGetuun.MultiSelect = false;
-            this.lvGetuun.Name = "lvGetuun";
-            this.lvGetuun.OwnerDraw = true;
-            this.lvGetuun.Size = new System.Drawing.Size(710, 256);
-            this.lvGetuun.TabIndex = 51;
-            this.lvGetuun.UseCompatibleStateImageBehavior = false;
-            this.lvGetuun.View = System.Windows.Forms.View.Details;
-            this.lvGetuun.SelectedIndexChanged += new System.EventHandler(this.lvGetuUn_SelectedIndexChanged);
-            this.lvGetuun.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvGetuun_KeyDown);
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "月";
-            this.columnHeader5.Width = 64;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "干支";
-            this.columnHeader6.Width = 40;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "十大主星";
-            this.columnHeader7.Width = 40;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "十二大従星";
-            this.columnHeader8.Width = 40;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "日";
-            this.columnHeader12.Width = 90;
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "月";
-            this.columnHeader13.Width = 90;
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "年";
-            this.columnHeader14.Width = 90;
-            // 
-            // columnHeader25
-            // 
-            this.columnHeader25.Text = "詳細";
-            this.columnHeader25.Width = 120;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
-            this.label17.Location = new System.Drawing.Point(596, 532);
+            this.label17.Location = new System.Drawing.Point(4, 536);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(54, 20);
             this.label17.TabIndex = 50;
@@ -1221,7 +1018,7 @@ namespace DivinationApp
             this.chkDispGetuun.AutoSize = true;
             this.chkDispGetuun.Checked = true;
             this.chkDispGetuun.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDispGetuun.Location = new System.Drawing.Point(428, 512);
+            this.chkDispGetuun.Location = new System.Drawing.Point(305, 512);
             this.chkDispGetuun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkDispGetuun.Name = "chkDispGetuun";
             this.chkDispGetuun.Size = new System.Drawing.Size(50, 19);
@@ -1245,7 +1042,7 @@ namespace DivinationApp
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(827, -1);
+            this.button2.Location = new System.Drawing.Point(218, 2);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 24);
@@ -1259,7 +1056,7 @@ namespace DivinationApp
             this.chkDispNenun.AutoSize = true;
             this.chkDispNenun.Checked = true;
             this.chkDispNenun.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDispNenun.Location = new System.Drawing.Point(484, 512);
+            this.chkDispNenun.Location = new System.Drawing.Point(361, 512);
             this.chkDispNenun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkDispNenun.Name = "chkDispNenun";
             this.chkDispNenun.Size = new System.Drawing.Size(50, 19);
@@ -1273,7 +1070,7 @@ namespace DivinationApp
             this.chkDispTaiun.AutoSize = true;
             this.chkDispTaiun.Checked = true;
             this.chkDispTaiun.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkDispTaiun.Location = new System.Drawing.Point(540, 512);
+            this.chkDispTaiun.Location = new System.Drawing.Point(417, 512);
             this.chkDispTaiun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkDispTaiun.Name = "chkDispTaiun";
             this.chkDispTaiun.Size = new System.Drawing.Size(50, 19);
@@ -1309,7 +1106,7 @@ namespace DivinationApp
             // lblGgyou1
             // 
             this.lblGgyou1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGgyou1.Location = new System.Drawing.Point(152, 772);
+            this.lblGgyou1.Location = new System.Drawing.Point(29, 772);
             this.lblGgyou1.Name = "lblGgyou1";
             this.lblGgyou1.Size = new System.Drawing.Size(25, 17);
             this.lblGgyou1.TabIndex = 58;
@@ -1319,7 +1116,7 @@ namespace DivinationApp
             // lblGotoku1
             // 
             this.lblGotoku1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGotoku1.Location = new System.Drawing.Point(152, 792);
+            this.lblGotoku1.Location = new System.Drawing.Point(29, 792);
             this.lblGotoku1.Name = "lblGotoku1";
             this.lblGotoku1.Size = new System.Drawing.Size(25, 17);
             this.lblGotoku1.TabIndex = 58;
@@ -1329,7 +1126,7 @@ namespace DivinationApp
             // lblGotoku2
             // 
             this.lblGotoku2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGotoku2.Location = new System.Drawing.Point(177, 792);
+            this.lblGotoku2.Location = new System.Drawing.Point(54, 792);
             this.lblGotoku2.Name = "lblGotoku2";
             this.lblGotoku2.Size = new System.Drawing.Size(25, 17);
             this.lblGotoku2.TabIndex = 59;
@@ -1339,7 +1136,7 @@ namespace DivinationApp
             // lblGgyou2
             // 
             this.lblGgyou2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGgyou2.Location = new System.Drawing.Point(177, 772);
+            this.lblGgyou2.Location = new System.Drawing.Point(54, 772);
             this.lblGgyou2.Name = "lblGgyou2";
             this.lblGgyou2.Size = new System.Drawing.Size(25, 17);
             this.lblGgyou2.TabIndex = 60;
@@ -1349,7 +1146,7 @@ namespace DivinationApp
             // lblGgyou3
             // 
             this.lblGgyou3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGgyou3.Location = new System.Drawing.Point(202, 772);
+            this.lblGgyou3.Location = new System.Drawing.Point(79, 772);
             this.lblGgyou3.Name = "lblGgyou3";
             this.lblGgyou3.Size = new System.Drawing.Size(25, 17);
             this.lblGgyou3.TabIndex = 60;
@@ -1359,7 +1156,7 @@ namespace DivinationApp
             // lblGotoku3
             // 
             this.lblGotoku3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGotoku3.Location = new System.Drawing.Point(202, 792);
+            this.lblGotoku3.Location = new System.Drawing.Point(79, 792);
             this.lblGotoku3.Name = "lblGotoku3";
             this.lblGotoku3.Size = new System.Drawing.Size(25, 17);
             this.lblGotoku3.TabIndex = 59;
@@ -1369,7 +1166,7 @@ namespace DivinationApp
             // lblGgyou4
             // 
             this.lblGgyou4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGgyou4.Location = new System.Drawing.Point(227, 772);
+            this.lblGgyou4.Location = new System.Drawing.Point(104, 772);
             this.lblGgyou4.Name = "lblGgyou4";
             this.lblGgyou4.Size = new System.Drawing.Size(25, 17);
             this.lblGgyou4.TabIndex = 60;
@@ -1379,7 +1176,7 @@ namespace DivinationApp
             // lblGotoku4
             // 
             this.lblGotoku4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGotoku4.Location = new System.Drawing.Point(227, 792);
+            this.lblGotoku4.Location = new System.Drawing.Point(104, 792);
             this.lblGotoku4.Name = "lblGotoku4";
             this.lblGotoku4.Size = new System.Drawing.Size(25, 17);
             this.lblGotoku4.TabIndex = 59;
@@ -1389,7 +1186,7 @@ namespace DivinationApp
             // lblGgyou5
             // 
             this.lblGgyou5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGgyou5.Location = new System.Drawing.Point(252, 772);
+            this.lblGgyou5.Location = new System.Drawing.Point(129, 772);
             this.lblGgyou5.Name = "lblGgyou5";
             this.lblGgyou5.Size = new System.Drawing.Size(25, 17);
             this.lblGgyou5.TabIndex = 60;
@@ -1399,7 +1196,7 @@ namespace DivinationApp
             // lblGotoku5
             // 
             this.lblGotoku5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblGotoku5.Location = new System.Drawing.Point(252, 792);
+            this.lblGotoku5.Location = new System.Drawing.Point(129, 792);
             this.lblGotoku5.Name = "lblGotoku5";
             this.lblGotoku5.Size = new System.Drawing.Size(25, 17);
             this.lblGotoku5.TabIndex = 59;
@@ -1409,7 +1206,7 @@ namespace DivinationApp
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(121, 772);
+            this.label22.Location = new System.Drawing.Point(-2, 772);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(31, 15);
             this.label22.TabIndex = 61;
@@ -1418,7 +1215,7 @@ namespace DivinationApp
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(121, 792);
+            this.label23.Location = new System.Drawing.Point(-2, 792);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(31, 15);
             this.label23.TabIndex = 61;
@@ -1513,7 +1310,7 @@ namespace DivinationApp
             // pictureBox3
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Location = new System.Drawing.Point(129, 168);
+            this.pictureBox3.Location = new System.Drawing.Point(5, 173);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(301, 197);
@@ -1557,19 +1354,19 @@ namespace DivinationApp
             // 
             this.txtCarrerMemo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCarrerMemo.Location = new System.Drawing.Point(1163, 204);
+            this.txtCarrerMemo.Location = new System.Drawing.Point(554, 205);
             this.txtCarrerMemo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCarrerMemo.Multiline = true;
             this.txtCarrerMemo.Name = "txtCarrerMemo";
             this.txtCarrerMemo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCarrerMemo.Size = new System.Drawing.Size(146, 83);
+            this.txtCarrerMemo.Size = new System.Drawing.Size(169, 83);
             this.txtCarrerMemo.TabIndex = 71;
             this.txtCarrerMemo.Leave += new System.EventHandler(this.txtCarrerMemo_Leave);
             // 
             // btnTabClose
             // 
             this.btnTabClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTabClose.Location = new System.Drawing.Point(1281, 0);
+            this.btnTabClose.Location = new System.Drawing.Point(692, 0);
             this.btnTabClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTabClose.Name = "btnTabClose";
             this.btnTabClose.Size = new System.Drawing.Size(31, 22);
@@ -1620,7 +1417,7 @@ namespace DivinationApp
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage3.Size = new System.Drawing.Size(148, 147);
+            this.tabPage3.Size = new System.Drawing.Size(166, 147);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "経歴一覧";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1638,7 +1435,7 @@ namespace DivinationApp
             this.lvCareer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvCareer.MultiSelect = false;
             this.lvCareer.Name = "lvCareer";
-            this.lvCareer.Size = new System.Drawing.Size(142, 143);
+            this.lvCareer.Size = new System.Drawing.Size(160, 143);
             this.lvCareer.TabIndex = 55;
             this.lvCareer.UseCompatibleStateImageBehavior = false;
             this.lvCareer.View = System.Windows.Forms.View.Details;
@@ -1659,23 +1456,25 @@ namespace DivinationApp
             this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Location = new System.Drawing.Point(1158, 28);
+            this.tabControl2.Location = new System.Drawing.Point(549, 29);
             this.tabControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(156, 175);
+            this.tabControl2.Size = new System.Drawing.Size(174, 175);
             this.tabControl2.TabIndex = 77;
             // 
             // lstInsenDetail
             // 
+            this.lstInsenDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstInsenDetail.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lstInsenDetail.FormattingEnabled = true;
             this.lstInsenDetail.IntegralHeight = false;
             this.lstInsenDetail.ItemHeight = 15;
-            this.lstInsenDetail.Location = new System.Drawing.Point(430, 168);
+            this.lstInsenDetail.Location = new System.Drawing.Point(306, 173);
             this.lstInsenDetail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstInsenDetail.Name = "lstInsenDetail";
-            this.lstInsenDetail.Size = new System.Drawing.Size(161, 196);
+            this.lstInsenDetail.Size = new System.Drawing.Size(163, 196);
             this.lstInsenDetail.TabIndex = 78;
             this.lstInsenDetail.DoubleClick += new System.EventHandler(this.lstInsenDetail_DoubleClick);
             // 
@@ -1697,18 +1496,20 @@ namespace DivinationApp
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(121, 819);
+            this.panel1.Size = new System.Drawing.Size(121, 847);
             this.panel1.TabIndex = 79;
             // 
             // listYousenDetail
             // 
+            this.listYousenDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listYousenDetail.FormattingEnabled = true;
             this.listYousenDetail.IntegralHeight = false;
             this.listYousenDetail.ItemHeight = 15;
-            this.listYousenDetail.Location = new System.Drawing.Point(430, 371);
+            this.listYousenDetail.Location = new System.Drawing.Point(308, 371);
             this.listYousenDetail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listYousenDetail.Name = "listYousenDetail";
-            this.listYousenDetail.Size = new System.Drawing.Size(159, 136);
+            this.listYousenDetail.Size = new System.Drawing.Size(161, 136);
             this.listYousenDetail.TabIndex = 80;
             this.listYousenDetail.DoubleClick += new System.EventHandler(this.listYousenDetail_DoubleClick);
             // 
@@ -1718,46 +1519,273 @@ namespace DivinationApp
             this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem1.Text = "説明表示";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Location = new System.Drawing.Point(122, 10);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.pictureBox2);
+            this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.listYousenDetail);
+            this.splitContainer1.Panel1.Controls.Add(this.lstInsenDetail);
+            this.splitContainer1.Panel1.Controls.Add(this.label13);
+            this.splitContainer1.Panel1.Controls.Add(this.label14);
+            this.splitContainer1.Panel1.Controls.Add(this.chkDispGetuun);
+            this.splitContainer1.Panel1.Controls.Add(this.pictureBox3);
+            this.splitContainer1.Panel1.Controls.Add(this.chkDispNenun);
+            this.splitContainer1.Panel1.Controls.Add(this.chkDispTaiun);
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGgyou1);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGotoku1);
+            this.splitContainer1.Panel1.Controls.Add(this.label23);
+            this.splitContainer1.Panel1.Controls.Add(this.panel2);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGgyou2);
+            this.splitContainer1.Panel1.Controls.Add(this.label22);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGgyou3);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGotoku5);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGgyou4);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGotoku4);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGgyou5);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGotoku3);
+            this.splitContainer1.Panel1.Controls.Add(this.lblGotoku2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.label17);
+            this.splitContainer1.Panel2.Controls.Add(this.lvGetuun);
+            this.splitContainer1.Panel2.Controls.Add(this.label11);
+            this.splitContainer1.Panel2.Controls.Add(this.btnTabClose);
+            this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
+            this.splitContainer1.Panel2.Controls.Add(this.lvNenun);
+            this.splitContainer1.Panel2.Controls.Add(this.button2);
+            this.splitContainer1.Panel2.Controls.Add(this.txtCarrerMemo);
+            this.splitContainer1.Panel2.Controls.Add(this.lvTaiun);
+            this.splitContainer1.Panel2.Controls.Add(this.label12);
+            this.splitContainer1.Size = new System.Drawing.Size(1201, 833);
+            this.splitContainer1.SplitterDistance = 471;
+            this.splitContainer1.TabIndex = 81;
+            // 
+            // lvGetuun
+            // 
+            this.lvGetuun.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvGetuun.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader12,
+            this.columnHeader13,
+            this.columnHeader14,
+            this.columnHeader25});
+            this.lvGetuun.FullRowSelect = true;
+            this.lvGetuun.GridLines = true;
+            this.lvGetuun.HideSelection = false;
+            this.lvGetuun.Location = new System.Drawing.Point(8, 558);
+            this.lvGetuun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lvGetuun.MultiSelect = false;
+            this.lvGetuun.Name = "lvGetuun";
+            this.lvGetuun.OwnerDraw = true;
+            this.lvGetuun.Size = new System.Drawing.Size(711, 250);
+            this.lvGetuun.TabIndex = 51;
+            this.lvGetuun.UseCompatibleStateImageBehavior = false;
+            this.lvGetuun.View = System.Windows.Forms.View.Details;
+            this.lvGetuun.SelectedIndexChanged += new System.EventHandler(this.lvGetuUn_SelectedIndexChanged);
+            this.lvGetuun.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvGetuun_KeyDown);
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "月";
+            this.columnHeader5.Width = 64;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "干支";
+            this.columnHeader6.Width = 40;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "十大主星";
+            this.columnHeader7.Width = 40;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "十二大従星";
+            this.columnHeader8.Width = 40;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "日";
+            this.columnHeader12.Width = 90;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "月";
+            this.columnHeader13.Width = 90;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "年";
+            this.columnHeader14.Width = 90;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "詳細";
+            this.columnHeader25.Width = 120;
+            // 
+            // lvNenun
+            // 
+            this.lvNenun.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvNenun.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader24,
+            this.columnHeader22});
+            this.lvNenun.FullRowSelect = true;
+            this.lvNenun.GridLines = true;
+            this.lvNenun.HideSelection = false;
+            this.lvNenun.Location = new System.Drawing.Point(8, 291);
+            this.lvNenun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lvNenun.MultiSelect = false;
+            this.lvNenun.Name = "lvNenun";
+            this.lvNenun.OwnerDraw = true;
+            this.lvNenun.Size = new System.Drawing.Size(715, 240);
+            this.lvNenun.TabIndex = 43;
+            this.lvNenun.UseCompatibleStateImageBehavior = false;
+            this.lvNenun.View = System.Windows.Forms.View.Details;
+            this.lvNenun.SelectedIndexChanged += new System.EventHandler(this.lvNenun_SelectedIndexChanged);
+            this.lvNenun.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvNenun_KeyDown);
+            this.lvNenun.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvNenun_MouseDoubleClick);
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "歳";
+            this.columnHeader15.Width = 64;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "干支";
+            this.columnHeader16.Width = 40;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "十大主星";
+            this.columnHeader17.Width = 40;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "十二大従星";
+            this.columnHeader18.Width = 40;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "日";
+            this.columnHeader19.Width = 90;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "月";
+            this.columnHeader20.Width = 90;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "年";
+            this.columnHeader21.Width = 90;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "詳細";
+            this.columnHeader24.Width = 120;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "経歴";
+            this.columnHeader22.Width = 200;
+            // 
+            // lvTaiun
+            // 
+            this.lvTaiun.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader9,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader23});
+            this.lvTaiun.FullRowSelect = true;
+            this.lvTaiun.GridLines = true;
+            this.lvTaiun.HideSelection = false;
+            this.lvTaiun.Location = new System.Drawing.Point(10, 27);
+            this.lvTaiun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lvTaiun.MultiSelect = false;
+            this.lvTaiun.Name = "lvTaiun";
+            this.lvTaiun.OwnerDraw = true;
+            this.lvTaiun.Size = new System.Drawing.Size(534, 240);
+            this.lvTaiun.TabIndex = 40;
+            this.lvTaiun.UseCompatibleStateImageBehavior = false;
+            this.lvTaiun.View = System.Windows.Forms.View.Details;
+            this.lvTaiun.SelectedIndexChanged += new System.EventHandler(this.lvTaiun_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "旬";
+            this.columnHeader1.Width = 64;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "干支";
+            this.columnHeader2.Width = 40;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "十大主星";
+            this.columnHeader3.Width = 40;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "十二大従星";
+            this.columnHeader4.Width = 40;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "日";
+            this.columnHeader9.Width = 90;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "月";
+            this.columnHeader10.Width = 90;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "年";
+            this.columnHeader11.Width = 90;
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "詳細";
+            this.columnHeader23.Width = 120;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1318, 819);
-            this.Controls.Add(this.listYousenDetail);
+            this.ClientSize = new System.Drawing.Size(1327, 847);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lstInsenDetail);
-            this.Controls.Add(this.tabControl2);
-            this.Controls.Add(this.btnTabClose);
-            this.Controls.Add(this.txtCarrerMemo);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.label23);
-            this.Controls.Add(this.label22);
-            this.Controls.Add(this.lblGotoku5);
-            this.Controls.Add(this.lblGotoku4);
-            this.Controls.Add(this.lblGotoku3);
-            this.Controls.Add(this.lblGotoku2);
-            this.Controls.Add(this.lblGgyou5);
-            this.Controls.Add(this.lblGgyou4);
-            this.Controls.Add(this.lblGgyou3);
-            this.Controls.Add(this.lblGgyou2);
-            this.Controls.Add(this.lblGotoku1);
-            this.Controls.Add(this.lblGgyou1);
-            this.Controls.Add(this.chkDispTaiun);
-            this.Controls.Add(this.chkDispNenun);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.chkDispGetuun);
-            this.Controls.Add(this.lvGetuun);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.lvNenun);
-            this.Controls.Add(this.lvTaiun);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
             this.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
@@ -1792,8 +1820,13 @@ namespace DivinationApp
             this.tabControl2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1942,6 +1975,7 @@ namespace DivinationApp
         private System.Windows.Forms.ToolStripMenuItem mnuExplanation;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

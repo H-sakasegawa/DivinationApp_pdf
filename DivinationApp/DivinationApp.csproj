@@ -76,6 +76,8 @@
     <Compile Include="Forms\ModelessBase.Designer.cs">
       <DependentUpon>ModelessBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Insen\KanzenKaku.cs" />
+    <Compile Include="OtherFunction\AttrAndColorRefrectHelper.cs" />
     <Compile Include="Tools\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>

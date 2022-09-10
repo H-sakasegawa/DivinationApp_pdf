@@ -225,6 +225,7 @@ namespace DivinationApp
         {
             string sExpressionType = "陰占特徴";
             string str = "";
+            List<string> lstStr;
 
             lstDetail.Clear();
 
@@ -352,10 +353,11 @@ namespace DivinationApp
                 lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_TENGOU_CHIGOU));
             }
             //家系集印
-            str = KakeiShuuin.GetKakeiShuuin(person);
-            if (!string.IsNullOrEmpty(str))
+            lstStr = KakeiShuuin.GetKakeiShuuin(person);
+            if (lstStr != null)
             {
-                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KAKEI_SHUUIN));
+                foreach( var item in lstStr )
+                    lstDetail.Add(new InsenDetail(item, item, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KAKEI_SHUUIN));
             }
             //全支集印
             str = ZensiShuuin.GetZensiShuuin(person);
@@ -396,6 +398,20 @@ namespace DivinationApp
             {
                 lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANSI_SOUHA));
             }
+            //完全格
+            List<Kanzenkaku.Result> lstResult = Kanzenkaku.GetKanzenkaku(person);
+            if (lstResult != null)
+            {
+                foreach (var item in lstResult)
+                {
+                    lstDetail.Add(new InsenDetail(item.name, item.name, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANZENKAKU));
+                    if(! string.IsNullOrEmpty(item.subInfo))
+                    {
+                        lstDetail.Add(new InsenDetail(item.subInfo, null, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KANZENKAKU_SUB));
+                    }
+                }
+            }
+
 
         }
 
