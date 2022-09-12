@@ -720,6 +720,8 @@ namespace DivinationApp
             bool bGogyou = parentForm.IsChkGogyou();
             bool bGotoku = parentForm.IsChkGotoku();
             bool bZougan = parentForm.IsChkZougan();
+            bool bJuniSinkanHou = parentForm.IsChkJuniSinkanHou();
+
 
             DrawKoutenUn drawItem2 = new DrawKoutenUn(koutenun.person, koutenun.picture,
                                         taiunKansi, nenunKansi, null,
@@ -730,7 +732,7 @@ namespace DivinationApp
                                         bGogyou,         //五行 
                                         bGotoku,         //五徳
                                         bZougan,         //蔵元
-                                        false,           //十二親干法
+                                        bJuniSinkanHou,   //十二親干法
                                         10               //フォントサイズ
                                         );
             drawItem2.rangeWidth = koutenunRectWidth;

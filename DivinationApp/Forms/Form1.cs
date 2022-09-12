@@ -472,6 +472,11 @@ namespace DivinationApp
         {
             return chkZougan.Checked;
         }
+        //十二親干法有無チェックボックス情報取得
+        public bool IsChkJuniSinkanHou()
+        {
+            return chkJuniSinkanHou.Checked;
+        }
 
         public ListView GetTaiunListView()
         {

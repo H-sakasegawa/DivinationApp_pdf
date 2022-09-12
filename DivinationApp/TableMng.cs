@@ -848,6 +848,11 @@ namespace DivinationApp
                 return null;
 
             }
+
+            public bool IsHankai(string siName1, string siName2)
+            {
+                return GetHankai(siName1, siName2) != null ? true : false;
+            }
             //半会テーブルの五行（色）を取得
             public string GetGogyou(string siName1, string siName2)
             {

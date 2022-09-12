@@ -395,7 +395,7 @@ namespace DivinationApp
         }
 
 
-        public Size CalcDrawAreaSize(GraphicsBase g=null)
+        public Size CalcDrawAreaSize(GraphicsBase graphBase=null)
         {
             matrix.Clear();
             matrixBottom.Clear();
@@ -406,7 +406,7 @@ namespace DivinationApp
             idxMtxButtom = 0;
             maxDrawStringAreaY = 0;
 
-            if (g == null)
+            if (graphBase == null)
             {
                 //派生先クラスの描画I/F呼び出し
                 Bitmap canvas = new Bitmap(pictureBaseWidth, pictureBaseHeight);
@@ -414,6 +414,9 @@ namespace DivinationApp
                 //g = Graphics.FromImage(canvas);
                 //g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                 g = new FormGraphics(Graphics.FromImage(canvas));
+            }else
+            {
+                g = graphBase;
             }
             DrawItem(g);
             //if (pictureBox != null)

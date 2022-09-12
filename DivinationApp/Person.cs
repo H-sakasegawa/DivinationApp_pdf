@@ -1891,6 +1891,34 @@ namespace DivinationApp
 
         }
 
+        //支の組み合わせに支合があるか？
+        public bool IsExistSigou()
+        {
+            if (tblMng.sigouTbl.IsSgou(nikkansi.si, gekkansi.si)) return true;
+            if (tblMng.sigouTbl.IsSgou(nikkansi.si, nenkansi.si)) return true;
+            if (tblMng.sigouTbl.IsSgou(gekkansi.si, nenkansi.si)) return true;
+
+            return false;
+        }
+        //支の組み合わせに半会があるか？
+        public bool IsExistHankai()
+        {
+            if (tblMng.hankaiTbl.IsHankai(nikkansi.si, gekkansi.si)) return true;
+            if (tblMng.hankaiTbl.IsHankai(nikkansi.si, nenkansi.si)) return true;
+            if (tblMng.hankaiTbl.IsHankai(gekkansi.si, nenkansi.si)) return true;
+
+            return false;
+        }
+        //干の組み合わせに干合があるか？
+        public bool IsExistKangou()
+        {
+            if (tblMng.kangouTbl.IsKangou(nikkansi.si, gekkansi.si)) return true;
+            if (tblMng.kangouTbl.IsKangou(nikkansi.si, nenkansi.si)) return true;
+            if (tblMng.kangouTbl.IsKangou(gekkansi.si, nenkansi.si)) return true;
+
+            return false;
+        }
+
 
 
     }

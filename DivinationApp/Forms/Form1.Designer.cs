@@ -618,20 +618,20 @@ namespace DivinationApp
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
-            this.label11.Location = new System.Drawing.Point(4, 269);
+            this.label11.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label11.Location = new System.Drawing.Point(4, 281);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(54, 20);
+            this.label11.Size = new System.Drawing.Size(47, 17);
             this.label11.TabIndex = 13;
             this.label11.Text = "年運：";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
+            this.label12.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label12.Location = new System.Drawing.Point(4, 6);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(54, 20);
+            this.label12.Size = new System.Drawing.Size(47, 17);
             this.label12.TabIndex = 13;
             this.label12.Text = "大運：";
             // 
@@ -1006,10 +1006,10 @@ namespace DivinationApp
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
-            this.label17.Location = new System.Drawing.Point(4, 536);
+            this.label17.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label17.Location = new System.Drawing.Point(4, 552);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(54, 20);
+            this.label17.Size = new System.Drawing.Size(47, 17);
             this.label17.TabIndex = 50;
             this.label17.Text = "月運：";
             // 
@@ -1525,7 +1525,7 @@ namespace DivinationApp
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(122, 10);
+            this.splitContainer1.Location = new System.Drawing.Point(122, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -1587,12 +1587,12 @@ namespace DivinationApp
             this.lvGetuun.FullRowSelect = true;
             this.lvGetuun.GridLines = true;
             this.lvGetuun.HideSelection = false;
-            this.lvGetuun.Location = new System.Drawing.Point(8, 558);
+            this.lvGetuun.Location = new System.Drawing.Point(8, 571);
             this.lvGetuun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvGetuun.MultiSelect = false;
             this.lvGetuun.Name = "lvGetuun";
             this.lvGetuun.OwnerDraw = true;
-            this.lvGetuun.Size = new System.Drawing.Size(711, 250);
+            this.lvGetuun.Size = new System.Drawing.Size(711, 253);
             this.lvGetuun.TabIndex = 51;
             this.lvGetuun.UseCompatibleStateImageBehavior = false;
             this.lvGetuun.View = System.Windows.Forms.View.Details;
@@ -1656,12 +1656,12 @@ namespace DivinationApp
             this.lvNenun.FullRowSelect = true;
             this.lvNenun.GridLines = true;
             this.lvNenun.HideSelection = false;
-            this.lvNenun.Location = new System.Drawing.Point(8, 291);
+            this.lvNenun.Location = new System.Drawing.Point(8, 299);
             this.lvNenun.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvNenun.MultiSelect = false;
             this.lvNenun.Name = "lvNenun";
             this.lvNenun.OwnerDraw = true;
-            this.lvNenun.Size = new System.Drawing.Size(715, 240);
+            this.lvNenun.Size = new System.Drawing.Size(715, 253);
             this.lvNenun.TabIndex = 43;
             this.lvNenun.UseCompatibleStateImageBehavior = false;
             this.lvNenun.View = System.Windows.Forms.View.Details;
@@ -1733,7 +1733,7 @@ namespace DivinationApp
             this.lvTaiun.MultiSelect = false;
             this.lvTaiun.Name = "lvTaiun";
             this.lvTaiun.OwnerDraw = true;
-            this.lvTaiun.Size = new System.Drawing.Size(534, 240);
+            this.lvTaiun.Size = new System.Drawing.Size(534, 253);
             this.lvTaiun.TabIndex = 40;
             this.lvTaiun.UseCompatibleStateImageBehavior = false;
             this.lvTaiun.View = System.Windows.Forms.View.Details;
