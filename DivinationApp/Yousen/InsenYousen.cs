@@ -360,10 +360,13 @@ namespace DivinationApp
                     lstDetail.Add(new InsenDetail(item, item, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_KAKEI_SHUUIN));
             }
             //全支集印
-            str = ZensiShuuin.GetZensiShuuin(person);
-            if (!string.IsNullOrEmpty(str))
+            lstStr = ZensiShuuin.GetZensiShuuin(person);
+            if (lstStr != null)
             {
-                lstDetail.Add(new InsenDetail(str, str, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_ZENSI_SHUUIN));
+                foreach (var item in lstStr)
+                {
+                    lstDetail.Add(new InsenDetail(item, item, sExpressionType, Const.InsenDetailType.INSEN_DETAIL_ZENSI_SHUUIN));
+                }
             }
 
             //律音と納音
