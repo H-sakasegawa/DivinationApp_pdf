@@ -160,13 +160,17 @@ namespace DivinationApp
 
         static void MargeAttr(List<JukanSiGogyouTbl> lstTbl, TableMng.KansiAttrTblMng kansiAttrTbl)
         {
+            //日干
             lstTbl[0].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrKan;
-            lstTbl[1].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi;
-
-            lstTbl[2].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrKan;
-            lstTbl[3].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi;
-
-            lstTbl[4].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrKan;
+            //月干
+            lstTbl[1].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrKan;
+            //年干
+            lstTbl[2].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrKan;
+            //日支
+            lstTbl[3].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.NIKKANSI].attrSi;
+            //月支
+            lstTbl[4].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.GEKKANSI].attrSi;
+            //年支
             lstTbl[5].insenGogyo = kansiAttrTbl[(int)Const.enumKansiItemID.NENKANSI].attrSi;
         }
 

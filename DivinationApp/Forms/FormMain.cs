@@ -204,7 +204,7 @@ namespace DivinationApp
             Group group = frm.GetCurrentGroup();
 
             frmFinder = new FormFinder(this, group, person);
-            frmFinder.OnClose += OnModelessFormClose;
+            frmFinder.OnClose += OnFrmFinder_Close;
             frmFinder.Show();
             lstModlessForms.Add(frmFinder);
         }
@@ -212,7 +212,8 @@ namespace DivinationApp
         private void OnFrmFinder_Close(ModelessBase frm)
         {
             lstModlessForms.Remove(frm);
-            if(frm == frmFinder) frmFinder = null;
+            if(frm == frmFinder)
+                frmFinder = null;
         }
 
         private void toolFind_Click(object sender, EventArgs e)
