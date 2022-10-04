@@ -24,6 +24,8 @@ namespace DivinationApp
 
         const string keyLastDataFile = "LastDataFile";
 
+        public ShortCutkeyMng shortCutKeyMng = new ShortCutkeyMng();
+
         List<ModelessBase> lstModlessForms = new List<ModelessBase>();
         FormFinder frmFinder = null;
         FormFinderCustom frmFinderCustom = null;
@@ -38,8 +40,11 @@ namespace DivinationApp
         public FormMain()
         {
             InitializeComponent();
+            exePath = Path.GetDirectoryName(Application.ExecutablePath);
 
             frmMain = this;
+
+            shortCutKeyMng.LoadShortCutKey();
 
             //tabControl1.Dock = DockStyle.Fill;
             tabControl1.TabPages.Clear();
@@ -68,7 +73,6 @@ namespace DivinationApp
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            exePath = Path.GetDirectoryName(Application.ExecutablePath);
 
             personList = Persons.GetPersons();
             //setuiribiTbl = new SetuiribiTable();
@@ -381,7 +385,7 @@ namespace DivinationApp
                 return;
             }
 
-            frmExplanation = new FormExplanation();
+            frmExplanation = new FormExplanation(this);
             frmExplanation.OnClose += OnModelessFormClose;
             frmExplanation.Show( type,  key);
             lstModlessForms.Add(frmExplanation);
@@ -411,7 +415,7 @@ namespace DivinationApp
                 return;
             }
 
-            frmPDF = new FormPDF(personList);
+            frmPDF = new FormPDF(this, personList);
             frmPDF.OnClose += OnModelessFormClose;
             frmPDF.Show();
             lstModlessForms.Add(frmPDF);
@@ -433,11 +437,17 @@ namespace DivinationApp
                 return;
             }
 
-            frmPDF = new FormPDF(personList);
+            frmPDF = new FormPDF(this, personList);
             frmPDF.OnClose += OnModelessFormClose;
             frmPDF.Show();
             lstModlessForms.Add(frmPDF);
 
+        }
+
+        private void mnuShortCutKey_Click(object sender, EventArgs e)
+        {
+            FormShortCutKey frm = new FormShortCutKey(shortCutKeyMng);
+            frm.ShowDialog();
         }
     }
 }

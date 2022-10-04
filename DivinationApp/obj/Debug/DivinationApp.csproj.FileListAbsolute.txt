@@ -84,3 +84,5 @@ D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\
 D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\Debug\DivinationApp.csproj.CopyComplete
 D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\Debug\DivinationApp.exe
 D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\Debug\DivinationApp.pdb
+D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\Debug\DivinationApp.FormShortCutKey.resources
+D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\Debug\DivinationApp.ModalBase.resources

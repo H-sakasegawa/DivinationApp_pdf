@@ -37,7 +37,7 @@ namespace DivinationApp
         ComboBox[] cmbJudaiShusei;
         ComboBox[] cmbJunidaijusei;
 
-        public FormFinderCustom(FormMain _parentForm)
+        public FormFinderCustom(FormMain _parentForm) : base(_parentForm)
         {
             InitializeComponent();
 

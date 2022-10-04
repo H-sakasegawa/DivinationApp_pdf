@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DivinationApp
 {
-    public partial class FormAddTab : Form
+    public partial class FormAddTab : ModalBase
     {
         public Person selectPerson = null;
         Persons personList;

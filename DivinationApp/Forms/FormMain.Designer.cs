@@ -53,6 +53,7 @@ namespace DivinationApp
             this.tabControl1 = new DivinationApp.TabControlEx();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.mnuShortCutKey = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -100,33 +101,37 @@ namespace DivinationApp
             // mnuAddTab
             // 
             this.mnuAddTab.Name = "mnuAddTab";
-            this.mnuAddTab.Size = new System.Drawing.Size(158, 22);
+            this.mnuAddTab.Size = new System.Drawing.Size(198, 22);
             this.mnuAddTab.Text = "タブ追加";
             this.mnuAddTab.Click += new System.EventHandler(this.mnuAddTab_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
             // 
             // mnuSerch
             // 
             this.mnuSerch.Name = "mnuSerch";
-            this.mnuSerch.Size = new System.Drawing.Size(158, 22);
+            this.mnuSerch.ShortcutKeyDisplayString = "";
+            this.mnuSerch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.mnuSerch.Size = new System.Drawing.Size(198, 22);
             this.mnuSerch.Text = "大運・年運検索";
             this.mnuSerch.Click += new System.EventHandler(this.mnuSerch_Click);
             // 
             // パターン条件検索ToolStripMenuItem
             // 
             this.パターン条件検索ToolStripMenuItem.Name = "パターン条件検索ToolStripMenuItem";
-            this.パターン条件検索ToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.パターン条件検索ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.パターン条件検索ToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.パターン条件検索ToolStripMenuItem.Text = "パターン条件検索";
             this.パターン条件検索ToolStripMenuItem.Click += new System.EventHandler(this.mnuPatternCondFind_Click);
             // 
             // mnuSetting
             // 
             this.mnuSetting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuOption});
+            this.mnuOption,
+            this.mnuShortCutKey});
             this.mnuSetting.Name = "mnuSetting";
             this.mnuSetting.Size = new System.Drawing.Size(43, 20);
             this.mnuSetting.Text = "設定";
@@ -134,7 +139,7 @@ namespace DivinationApp
             // mnuOption
             // 
             this.mnuOption.Name = "mnuOption";
-            this.mnuOption.Size = new System.Drawing.Size(118, 22);
+            this.mnuOption.Size = new System.Drawing.Size(180, 22);
             this.mnuOption.Text = "オプション";
             this.mnuOption.Click += new System.EventHandler(this.mnuOption_Click);
             // 
@@ -269,6 +274,13 @@ namespace DivinationApp
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // mnuShortCutKey
+            // 
+            this.mnuShortCutKey.Name = "mnuShortCutKey";
+            this.mnuShortCutKey.Size = new System.Drawing.Size(180, 22);
+            this.mnuShortCutKey.Text = "ショートカットキー";
+            this.mnuShortCutKey.Click += new System.EventHandler(this.mnuShortCutKey_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -319,5 +331,6 @@ namespace DivinationApp
         private System.Windows.Forms.ToolStripMenuItem mnuOption;
         private System.Windows.Forms.ToolStripMenuItem mnuPDF;
         private System.Windows.Forms.ToolStripButton toolOutputPDF;
+        private System.Windows.Forms.ToolStripMenuItem mnuShortCutKey;
     }
 }

@@ -22,7 +22,7 @@ namespace DivinationApp
         //陰占 描画オブジェクト
         DrawInsen drawInsen = null;
 
-        public FormKonkihou()
+        public FormKonkihou(Form frmParent) : base(frmParent)
         {
             InitializeComponent();
         }

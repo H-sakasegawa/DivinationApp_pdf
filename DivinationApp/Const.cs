@@ -175,6 +175,7 @@ namespace DivinationApp
 
 
         public const string explanationFileDefName = "ExplanationFileDef.ini";
+        public const string shortCutKeyDefFileName = "ShortCutKeyDef.ini";
 
     }
 }

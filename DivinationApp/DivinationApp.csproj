@@ -70,6 +70,18 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Const.cs" />
+    <Compile Include="Forms\ModalBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModalBase.Designer.cs">
+      <DependentUpon>ModalBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormShortCutKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormShortCutKey.Designer.cs">
+      <DependentUpon>FormShortCutKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ModelessBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +98,7 @@
     <Compile Include="DrawHelper\DrawJuniSinKanHou.cs" />
     <Compile Include="DrawHelper\DrawKoutenUn.cs" />
     <Compile Include="DrawHelper\DrawShukumei.cs" />
+    <Compile Include="Tools\ShortCutkey.cs" />
     <Compile Include="Yousen\EiseiHou.cs" />
     <Compile Include="Excel\ExcelReader.cs" />
     <Compile Include="Excel\ExplanationReader.cs" />
@@ -228,6 +241,9 @@
     <EmbeddedResource Include="Forms\FormAddTab.resx">
       <DependentUpon>FormAddTab.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModalBase.resx">
+      <DependentUpon>ModalBase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditCareer.resx">
       <DependentUpon>FormEditCareer.cs</DependentUpon>
     </EmbeddedResource>
@@ -260,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPersonInfo.resx">
       <DependentUpon>FormPersonInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormShortCutKey.resx">
+      <DependentUpon>FormShortCutKey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormShugoSinHou.resx">
       <DependentUpon>FormShugoSinHou.cs</DependentUpon>

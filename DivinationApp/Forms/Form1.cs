@@ -1991,7 +1991,7 @@ namespace DivinationApp
         //根気法画面表示
         private void button4_Click(object sender, EventArgs e)
         {
-            frmKonkihou = new FormKonkihou();
+            frmKonkihou = new FormKonkihou(this);
             frmKonkihou.OnClose += OnModelessFormClose;
 
             ShowModless(frmKonkihou);
@@ -2010,7 +2010,7 @@ namespace DivinationApp
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-            formJuniSinKanHou = new FormJuniSinKanHou();
+            formJuniSinKanHou = new FormJuniSinKanHou(this);
             formJuniSinKanHou.OnClose += OnModelessFormClose;
 
             ShowModless(formJuniSinKanHou);
@@ -2029,7 +2029,7 @@ namespace DivinationApp
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            FormShugoSinHou = new FormShugoSinHou();
+            FormShugoSinHou = new FormShugoSinHou(this);
             FormShugoSinHou.OnClose += OnModelessFormClose;
             FormShugoSinHou.OnUpdateShugosin += OnFormUpdateShugosin;
 
@@ -2160,7 +2160,87 @@ namespace DivinationApp
 
         }
 
-         //=================================================
+
+
+         /// <summary>
+         /// ショートカットキー制御
+         /// </summary>
+         /// <param name="sender"></param>
+         /// <param name="e"></param>
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            FunctionID id = ((FormMain)mainForm).shortCutKeyMng.GetFunction(e);
+
+            switch(id)
+            {
+                case FunctionID.KonkiHou:
+                    button4_Click(null, null);
+                    break;
+                case FunctionID.Junisikanhou:
+                    button5_Click(null, null);
+                    break;
+                case FunctionID.ShugosinHou:
+                    button6_Click(null, null);
+                    break;
+                case FunctionID.NenunHikaku:
+                    button10_Click(null, null);
+                    break;
+                case FunctionID.KyokiHenka:
+                    button3_Click(null, null);
+                    break;
+                case FunctionID.Gogyou_Sigou:
+                    chkGogyou.Checked = true;
+                    chkRefrectSigou.Checked = !chkRefrectSigou.Checked;
+                    break;
+                case FunctionID.Gogyou_Hankai:
+                    chkGogyou.Checked = true;
+                    chkRefrectHankai.Checked = !chkRefrectHankai.Checked;
+                    break;
+                case FunctionID.Gogyou_Kangou:
+                    chkGogyou.Checked = true;
+                    chkRefrectKangou.Checked = !chkRefrectKangou.Checked;
+                    break;
+                case FunctionID.Gogyou_Housani:
+                    chkGogyou.Checked = true;
+                    chkRefrectHousani.Checked = !chkRefrectHousani.Checked;
+                    break;
+                case FunctionID.Gogyou_SangouKaikyoku:
+                    chkGogyou.Checked = true;
+                    chkRefrectSangouKaikyoku.Checked = !chkRefrectSangouKaikyoku.Checked;
+                    break;
+                case FunctionID.Gotoku_Sigou:
+                    chkGotoku.Checked = true;
+                    chkRefrectSigou.Checked = !chkRefrectSigou.Checked;
+                    break;
+                case FunctionID.Gotoku_Hankai:
+                    chkGotoku.Checked = true;
+                    chkRefrectHankai.Checked = !chkRefrectHankai.Checked;
+                    break;
+                case FunctionID.Gotoku_Kangou:
+                    chkGotoku.Checked = true;
+                    chkRefrectKangou.Checked = !chkRefrectKangou.Checked;
+                    break;
+                case FunctionID.Gotoku_Housani:
+                    chkGotoku.Checked = true;
+                    chkRefrectHousani.Checked = !chkRefrectHousani.Checked;
+                    break;
+                case FunctionID.Gotoku_SangouKaikyoku:
+                    chkGotoku.Checked = true;
+                    chkRefrectSangouKaikyoku.Checked = !chkRefrectSangouKaikyoku.Checked;
+                    break;
+                case FunctionID.Disp_Housani:
+                    chkSangouKaikyoku.Checked = !chkSangouKaikyoku.Checked;
+                    break;
+                case FunctionID.Disp_Zougan:
+                    chkZougan.Checked = !chkZougan.Checked;
+                    break;
+                case FunctionID.Disp_Junisinkanhou:
+                    chkJuniSinkanHou.Checked = !chkJuniSinkanHou.Checked;
+                    break;
+            }
+        }
+
+        //=================================================
         //Owner Draw 　⇒  ListViewExに統合しました
         //=================================================
         //----------------------------------------

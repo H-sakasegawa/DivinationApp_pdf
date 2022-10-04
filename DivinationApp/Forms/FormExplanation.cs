@@ -27,7 +27,7 @@ namespace DivinationApp
 
         //const string explanationFileDefName = "ExplanationFileDef.ini";
 
-        public FormExplanation()
+        public FormExplanation(Form frmParent) : base(frmParent)
         {
             InitializeComponent();
         }

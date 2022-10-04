@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DivinationApp
 {
-    public partial class FormPersonInfo : Form
+    public partial class FormPersonInfo : ModalBase
     {
         public enum Mode
         {

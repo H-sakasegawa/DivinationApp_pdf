@@ -1912,9 +1912,9 @@ namespace DivinationApp
         //干の組み合わせに干合があるか？
         public bool IsExistKangou()
         {
-            if (tblMng.kangouTbl.IsKangou(nikkansi.si, gekkansi.si)) return true;
-            if (tblMng.kangouTbl.IsKangou(nikkansi.si, nenkansi.si)) return true;
-            if (tblMng.kangouTbl.IsKangou(gekkansi.si, nenkansi.si)) return true;
+            if (tblMng.kangouTbl.IsKangou(nikkansi.kan, gekkansi.kan)) return true;
+            if (tblMng.kangouTbl.IsKangou(nikkansi.kan, nenkansi.kan)) return true;
+            if (tblMng.kangouTbl.IsKangou(gekkansi.kan, nenkansi.kan)) return true;
 
             return false;
         }

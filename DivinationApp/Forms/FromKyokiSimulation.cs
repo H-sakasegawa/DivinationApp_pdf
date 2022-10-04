@@ -25,7 +25,7 @@ namespace DivinationApp
         private const bool bReflectGetuunToYearList = false;
 
 
-        public FromKyokiSimulation( Form1 parent)
+        public FromKyokiSimulation( Form1 parent): base( parent )
         {
             InitializeComponent();
 

@@ -12,7 +12,7 @@ using NPOI.XSSF.UserModel;
 
 namespace DivinationApp
 {
-    public partial class FormExcelPictureTest : Form
+    public partial class FormExcelPictureTest : ModalBase
     {
         
         public class ExplanationData

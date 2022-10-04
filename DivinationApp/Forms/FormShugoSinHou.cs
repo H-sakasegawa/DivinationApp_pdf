@@ -28,7 +28,7 @@ namespace DivinationApp
 
         bool bEditCustom = false;
 
-        public FormShugoSinHou()
+        public FormShugoSinHou(Form frmParent) : base(frmParent)
         {
             InitializeComponent();
 
