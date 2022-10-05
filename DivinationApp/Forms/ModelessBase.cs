@@ -14,7 +14,7 @@ namespace DivinationApp
     {
         public event Common.CloseHandler OnClose = null;
 
-        public ModelessBase(Form frmParent)
+        public ModelessBase()
         {
             InitializeComponent();
 

@@ -385,7 +385,7 @@ namespace DivinationApp
                 return;
             }
 
-            frmExplanation = new FormExplanation(this);
+            frmExplanation = new FormExplanation();
             frmExplanation.OnClose += OnModelessFormClose;
             frmExplanation.Show( type,  key);
             lstModlessForms.Add(frmExplanation);
@@ -415,7 +415,7 @@ namespace DivinationApp
                 return;
             }
 
-            frmPDF = new FormPDF(this, personList);
+            frmPDF = new FormPDF( personList);
             frmPDF.OnClose += OnModelessFormClose;
             frmPDF.Show();
             lstModlessForms.Add(frmPDF);
@@ -437,7 +437,7 @@ namespace DivinationApp
                 return;
             }
 
-            frmPDF = new FormPDF(this, personList);
+            frmPDF = new FormPDF( personList);
             frmPDF.OnClose += OnModelessFormClose;
             frmPDF.Show();
             lstModlessForms.Add(frmPDF);

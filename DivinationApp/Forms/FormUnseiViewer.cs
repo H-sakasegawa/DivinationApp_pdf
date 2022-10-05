@@ -26,7 +26,7 @@ namespace DivinationApp
 
         class KoutenUn
         {
-            public KoutenUn(Form frmParent, Person _person, SplitContainer _sc, PictureBox _picture)
+            public KoutenUn( Person _person, SplitContainer _sc, PictureBox _picture)
             {
                 person = _person;
                 sc = _sc;
@@ -63,7 +63,7 @@ namespace DivinationApp
 
         double Magnification = 1; //倍率
 
-        public FormUnseiViewer(Form _parenForm, Persons _persons, Person _basePerson): base(_parenForm)
+        public FormUnseiViewer(Form _parenForm, Persons _persons, Person _basePerson)
         {
             InitializeComponent();
 
@@ -654,7 +654,7 @@ namespace DivinationApp
             sc.BorderStyle = BorderStyle.FixedSingle;
 
             flowLayoutPanel1.Controls.Add(sc);
-            lstKoutenUn.Add(new KoutenUn(this, person, sc, pictureBox));
+            lstKoutenUn.Add(new KoutenUn( person, sc, pictureBox));
 
 
         }

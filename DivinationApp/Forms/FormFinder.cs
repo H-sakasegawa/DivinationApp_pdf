@@ -32,7 +32,7 @@ namespace DivinationApp
         Group curGroup = null;
         bool bShowCtrlArea = true;
 
-        public FormFinder(FormMain _parentForm, Group group, Person person) : base(_parentForm)
+        public FormFinder(FormMain _parentForm, Group group, Person person) 
         {
             InitializeComponent();
 
@@ -40,7 +40,7 @@ namespace DivinationApp
             curPerson = person;
             curGroup = group;
         }
-        public FormFinder(FormMain _parentForm) : base(_parentForm)
+        public FormFinder(FormMain _parentForm) 
         {
             InitializeComponent();
 

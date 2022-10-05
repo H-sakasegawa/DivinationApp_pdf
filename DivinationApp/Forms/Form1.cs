@@ -1991,7 +1991,7 @@ namespace DivinationApp
         //根気法画面表示
         private void button4_Click(object sender, EventArgs e)
         {
-            frmKonkihou = new FormKonkihou(this);
+            frmKonkihou = new FormKonkihou();
             frmKonkihou.OnClose += OnModelessFormClose;
 
             ShowModless(frmKonkihou);
@@ -2010,7 +2010,7 @@ namespace DivinationApp
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-            formJuniSinKanHou = new FormJuniSinKanHou(this);
+            formJuniSinKanHou = new FormJuniSinKanHou();
             formJuniSinKanHou.OnClose += OnModelessFormClose;
 
             ShowModless(formJuniSinKanHou);
@@ -2029,7 +2029,7 @@ namespace DivinationApp
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            FormShugoSinHou = new FormShugoSinHou(this);
+            FormShugoSinHou = new FormShugoSinHou();
             FormShugoSinHou.OnClose += OnModelessFormClose;
             FormShugoSinHou.OnUpdateShugosin += OnFormUpdateShugosin;
 

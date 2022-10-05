@@ -19,7 +19,7 @@ namespace DivinationApp
 
         delegate void delegateUpdateDisplay(Person person, int cnt, int cntMax);
 
-        public FormPDF(Form frmParent, Persons persons) : base(frmParent)
+        public FormPDF( Persons persons) 
         {
             InitializeComponent();
 
