@@ -118,7 +118,6 @@ namespace DivinationApp
 
                 Task.Run(() =>
                 {
-                    int cnt = 0;
                     //人名一覧でチェックの付いている人をすべてPDF化
                     foreach (var person in lstPdfPersons)
                     {

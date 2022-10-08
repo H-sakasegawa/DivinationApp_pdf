@@ -174,6 +174,7 @@ namespace DivinationApp
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblFilterlingMsg = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -994,11 +995,11 @@ namespace DivinationApp
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.txtBaseGekkansiNo);
             this.tabPage2.Controls.Add(this.txtBaseDay);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(399, 133);
+            this.tabPage2.Size = new System.Drawing.Size(399, 135);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "算出基準値";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1042,7 +1043,7 @@ namespace DivinationApp
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(218, 2);
+            this.button2.Location = new System.Drawing.Point(297, 2);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 24);
@@ -1557,6 +1558,7 @@ namespace DivinationApp
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.lblFilterlingMsg);
             this.splitContainer1.Panel2.Controls.Add(this.label17);
             this.splitContainer1.Panel2.Controls.Add(this.lvGetuun);
             this.splitContainer1.Panel2.Controls.Add(this.label11);
@@ -1779,6 +1781,16 @@ namespace DivinationApp
             this.columnHeader23.Text = "詳細";
             this.columnHeader23.Width = 120;
             // 
+            // lblFilterlingMsg
+            // 
+            this.lblFilterlingMsg.AutoSize = true;
+            this.lblFilterlingMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblFilterlingMsg.Location = new System.Drawing.Point(52, 7);
+            this.lblFilterlingMsg.Name = "lblFilterlingMsg";
+            this.lblFilterlingMsg.Size = new System.Drawing.Size(32, 15);
+            this.lblFilterlingMsg.TabIndex = 78;
+            this.lblFilterlingMsg.Text = "label";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1976,8 +1988,9 @@ namespace DivinationApp
         private System.Windows.Forms.ContextMenuStrip contextMenuDetail;
         private System.Windows.Forms.ToolStripMenuItem mnuExplanation;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+       // private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label lblFilterlingMsg;
     }
 }
 

@@ -695,9 +695,15 @@ namespace DivinationApp
 
         public static  string GetListViewItemString(GouhouSannpouResult[] lstGouhouSanpouResult, params string[] ary)
         {
+            var lstFilter = FormMain.GetFormMain().lstGouhouSanpouFilter;
+
             string result = "";
             foreach (var item in lstGouhouSanpouResult)
             {
+                if (lstFilter != null)
+                {
+                    if (!lstFilter.Contains(item.displayName)) continue;
+                }
                 if (!string.IsNullOrEmpty(result)) result += " ";
                 if (item.bEnable) result += item.displayName;
                 else result += string.Format("[{0}]", item.displayName);

@@ -38,8 +38,11 @@ namespace DivinationApp
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuSerch = new System.Windows.Forms.ToolStripMenuItem();
             this.パターン条件検索ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuGouhouSanpouFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOption = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuShortCutKey = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExcelPicture = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPDF = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +56,6 @@ namespace DivinationApp
             this.tabControl1 = new DivinationApp.TabControlEx();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.mnuShortCutKey = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -93,7 +95,9 @@ namespace DivinationApp
             this.mnuAddTab,
             this.toolStripSeparator1,
             this.mnuSerch,
-            this.パターン条件検索ToolStripMenuItem});
+            this.パターン条件検索ToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.mnuGouhouSanpouFilter});
             this.mnuPatternCondFind.Name = "mnuPatternCondFind";
             this.mnuPatternCondFind.Size = new System.Drawing.Size(59, 20);
             this.mnuPatternCondFind.Text = "機能(&U)";
@@ -127,6 +131,18 @@ namespace DivinationApp
             this.パターン条件検索ToolStripMenuItem.Text = "パターン条件検索";
             this.パターン条件検索ToolStripMenuItem.Click += new System.EventHandler(this.mnuPatternCondFind_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
+            // 
+            // mnuGouhouSanpouFilter
+            // 
+            this.mnuGouhouSanpouFilter.Name = "mnuGouhouSanpouFilter";
+            this.mnuGouhouSanpouFilter.Size = new System.Drawing.Size(198, 22);
+            this.mnuGouhouSanpouFilter.Text = "合法・散法 表示フィルタ";
+            this.mnuGouhouSanpouFilter.Click += new System.EventHandler(this.mnuGouhouSanpouFilter_Click);
+            // 
             // mnuSetting
             // 
             this.mnuSetting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -139,9 +155,16 @@ namespace DivinationApp
             // mnuOption
             // 
             this.mnuOption.Name = "mnuOption";
-            this.mnuOption.Size = new System.Drawing.Size(180, 22);
+            this.mnuOption.Size = new System.Drawing.Size(149, 22);
             this.mnuOption.Text = "オプション";
             this.mnuOption.Click += new System.EventHandler(this.mnuOption_Click);
+            // 
+            // mnuShortCutKey
+            // 
+            this.mnuShortCutKey.Name = "mnuShortCutKey";
+            this.mnuShortCutKey.Size = new System.Drawing.Size(149, 22);
+            this.mnuShortCutKey.Text = "ショートカットキー";
+            this.mnuShortCutKey.Click += new System.EventHandler(this.mnuShortCutKey_Click);
             // 
             // testToolStripMenuItem
             // 
@@ -151,18 +174,19 @@ namespace DivinationApp
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.testToolStripMenuItem.Text = "Test";
+            this.testToolStripMenuItem.Visible = false;
             // 
             // mnuExcelPicture
             // 
             this.mnuExcelPicture.Name = "mnuExcelPicture";
-            this.mnuExcelPicture.Size = new System.Drawing.Size(171, 22);
+            this.mnuExcelPicture.Size = new System.Drawing.Size(180, 22);
             this.mnuExcelPicture.Text = "Excel画像読み込み";
             this.mnuExcelPicture.Click += new System.EventHandler(this.mnuExcelPicture_Click);
             // 
             // mnuPDF
             // 
             this.mnuPDF.Name = "mnuPDF";
-            this.mnuPDF.Size = new System.Drawing.Size(171, 22);
+            this.mnuPDF.Size = new System.Drawing.Size(180, 22);
             this.mnuPDF.Text = "PDF出力";
             this.mnuPDF.Click += new System.EventHandler(this.mnuPDF_Click);
             // 
@@ -274,13 +298,6 @@ namespace DivinationApp
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // mnuShortCutKey
-            // 
-            this.mnuShortCutKey.Name = "mnuShortCutKey";
-            this.mnuShortCutKey.Size = new System.Drawing.Size(180, 22);
-            this.mnuShortCutKey.Text = "ショートカットキー";
-            this.mnuShortCutKey.Click += new System.EventHandler(this.mnuShortCutKey_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -332,5 +349,7 @@ namespace DivinationApp
         private System.Windows.Forms.ToolStripMenuItem mnuPDF;
         private System.Windows.Forms.ToolStripButton toolOutputPDF;
         private System.Windows.Forms.ToolStripMenuItem mnuShortCutKey;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnuGouhouSanpouFilter;
     }
 }

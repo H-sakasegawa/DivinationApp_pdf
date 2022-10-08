@@ -274,7 +274,6 @@ namespace DivinationApp
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkDispBaseYearRange;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private DataGridViewEx grdViewNenUn;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

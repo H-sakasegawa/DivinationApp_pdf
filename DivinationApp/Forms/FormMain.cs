@@ -22,15 +22,17 @@ namespace DivinationApp
         static string exePath = "";
         int tabId = -1;
 
-        const string keyLastDataFile = "LastDataFile";
 
         public ShortCutkeyMng shortCutKeyMng = new ShortCutkeyMng();
+        public List<string> lstGouhouSanpouFilter = null;
+
 
         List<ModelessBase> lstModlessForms = new List<ModelessBase>();
         FormFinder frmFinder = null;
         FormFinderCustom frmFinderCustom = null;
         FormExplanation frmExplanation = null;
         FormPDF frmPDF = null;
+
 
         static FormMain frmMain = null;
 
@@ -42,6 +44,17 @@ namespace DivinationApp
             InitializeComponent();
             exePath = Path.GetDirectoryName(Application.ExecutablePath);
 
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //大運、年運、月運 フィルタ文字列
+            var setting = config.AppSettings.Settings[Const.CFGKEY_LIST_FILTER];
+            if (setting == null || string.IsNullOrEmpty(setting.Value))
+            {
+                lstGouhouSanpouFilter = GetListFilterStrings();
+            }
+            else
+            {
+                lstGouhouSanpouFilter = setting.Value.Split(',').ToList();
+            }
             frmMain = this;
 
             shortCutKeyMng.LoadShortCutKey();
@@ -92,7 +105,7 @@ namespace DivinationApp
 
 
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string lastDataFile = config.AppSettings.Settings[keyLastDataFile].Value;
+            string lastDataFile = config.AppSettings.Settings[Const.CFGKEY_LAST_DATAFILE].Value;
             if (string.IsNullOrEmpty(lastDataFile))
             {
                 lastDataFile = exePath + @"\名簿.xls";
@@ -317,7 +330,7 @@ namespace DivinationApp
             {
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-                config.AppSettings.Settings[keyLastDataFile].Value = dlg.FileName;
+                config.AppSettings.Settings[Const.CFGKEY_LAST_DATAFILE].Value = dlg.FileName;
                 config.Save();
 
                 //MainFormから表示されているモードレスダイアログを閉じる
@@ -444,10 +457,43 @@ namespace DivinationApp
 
         }
 
+        /// <summary>
+        /// ショートカットキー編集
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuShortCutKey_Click(object sender, EventArgs e)
         {
             FormShortCutKey frm = new FormShortCutKey(shortCutKeyMng);
             frm.ShowDialog();
+        }
+
+        /// <summary>
+        /// 合法・散法 表示フィルタ編集
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuGouhouSanpouFilter_Click(object sender, EventArgs e)
+        {
+            FormGouhouSanpouFilter frm = new FormGouhouSanpouFilter();
+            frm.ShowDialog();
+
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            lstGouhouSanpouFilter = config.AppSettings.Settings[Const.CFGKEY_LIST_FILTER].Value.Split(',').ToList();
+            foreach (TabPage tp in tabControl1.TabPages)
+            {
+                Form1 frm2 = (Form1)tp.Controls[0];
+                frm2.UpdateTaiunAndNenunAndGetuun();
+            }
+        }
+        public List<string> GetListFilterStrings()
+        {
+            List<string> lstFilter = tblMng.gouhouSanpouTbl.GetGouhouSanpouItemNames();
+            //七殺、干合
+            lstFilter.Add(Const.sNanasatu);
+            lstFilter.Add(Const.sKangou);
+
+            return lstFilter;
         }
     }
 }

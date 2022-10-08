@@ -32,7 +32,7 @@ namespace DivinationApp
 
             for (int i = 0; i < gogyous.Length; i++)
             {
-                bool bFind = false;
+                //bool bFind = false;
                 //gogyous[i]が対象者の十大主星の五行にふくまれているか？
                 for (int j = 0; j < person.judaiShuseiAry.Length; j++)
                 {

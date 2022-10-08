@@ -267,7 +267,7 @@ namespace DivinationApp
                 filePath = readFilePath;
             }
 
-            var version = "xls";
+            //var version = "xls";
             var workbook = ExcelReader.CreateWorkbook();
             if (workbook == null)
             {

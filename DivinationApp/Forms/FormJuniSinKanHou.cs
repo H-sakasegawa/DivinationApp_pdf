@@ -24,7 +24,6 @@ namespace DivinationApp
 
 
         //文字描画領域サイズ
-        Rectangle rectKan;
         public FormJuniSinKanHou()
         {
             InitializeComponent();

@@ -17,9 +17,9 @@ namespace DivinationApp
     {
         Parameter param;
         //Document doc;
-        int hedderAreaH = 20;
-        int lastDrawY = 0;
-        public PdfContentByte contentByte;
+        //int hedderAreaH = 20;
+        //int lastDrawY = 0;
+        //public PdfContentByte contentByte;
 
         float areaTop = 50;
         float areaBottom = 50;
@@ -51,7 +51,7 @@ namespace DivinationApp
             public bool bDispGetuun;
             public bool bGogyou;
             public bool bGotoku;
-            public bool bRefrectSigou;
+           // public bool bRefrectSigou;
             //public bool bRefrectHankai;
             //public bool bRefrectKangou;
             //public bool bRefrectHousani;

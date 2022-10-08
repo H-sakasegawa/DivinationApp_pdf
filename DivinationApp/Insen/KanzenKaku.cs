@@ -380,7 +380,7 @@ namespace DivinationApp
         static bool IsCheckJukanGokaku(List<JukanSiGogyouTbl> lstTbl, string chkAttr1, string chkAttr2, ref List<int> lstNgAttrIndex)
         {
             lstNgAttrIndex.Clear();
-            bool bResult = true;
+            //bool bResult = true;
             for (int i = 1; i < lstTbl.Count; i++)
             {
                 string insenGogyo = lstTbl[i].insenGogyo;

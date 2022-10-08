@@ -71,7 +71,7 @@ namespace DivinationApp
         {
             List<Result> lstResult = new List<Result>();
 
-            int resultCnt = 0;
+            //int resultCnt = 0;
 
             string[] patternVer = new string[]
             {

@@ -86,3 +86,4 @@ D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\bin\
 D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\bin\Release\NPOI.OpenXml4Net.pdb
 D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\bin\Release\NPOI.OpenXmlFormats.pdb
 D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\Release\DivinationApp.csproj.CopyComplete
+D:\Development\桑原さんソフト\GitHub\DivinationApp_pdf\DivinationApp\obj\Release\DivinationApp.FormGouhouSanpouFilter.resources

@@ -177,5 +177,11 @@ namespace DivinationApp
         public const string explanationFileDefName = "ExplanationFileDef.ini";
         public const string shortCutKeyDefFileName = "ShortCutKeyDef.ini";
 
+        //--------------------------------------------------
+        // Config キー
+        //--------------------------------------------------
+        public const string CFGKEY_LAST_DATAFILE = "LastDataFile";
+        public const string CFGKEY_LIST_FILTER = "ListFilter";
+
     }
 }

@@ -603,6 +603,28 @@ namespace DivinationApp
             //    }
             //    return s;
             //}
+            public List<string> GetGouhouSanpouItemNames()
+            {
+                List<string> lstNames = new List<string>();
+
+                foreach ( var item  in dicGouhouSanpou)
+                {
+                    foreach( var s in item.Value)
+                    {
+                        if (string.IsNullOrEmpty(s)) continue;
+                        var aryItem = s.Split(',');
+
+                        foreach (var name in aryItem)
+                        {
+                            string n = name.Trim();
+                            if (lstNames.IndexOf(n) >= 0) continue;
+                            lstNames.Add(n);
+                        }
+
+                    }
+                }
+                return lstNames;
+            }
 
         }
         public GouhouSanpouTbl gouhouSanpouTbl = null;

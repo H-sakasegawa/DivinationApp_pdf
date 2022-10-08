@@ -26,9 +26,9 @@ namespace DivinationApp
         private const string sep = "---";
         FormMain parentForm = null;
         TableMng tblMng;
-        Persons personList;
+        //Persons personList;
 
-        Person curPerson = null;
+        //Person curPerson = null;
 
         FinderCustom finder = new FinderCustom();
 

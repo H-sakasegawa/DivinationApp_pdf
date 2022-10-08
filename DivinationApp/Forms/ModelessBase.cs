@@ -22,14 +22,12 @@ namespace DivinationApp
          }
         private void ModelessBase_Load(object sender, EventArgs e)
         {
-            //Parent = frmParent;
-            Size parentSz = FormMain.GetFormMain().Size;
-            Size sz = this.Size;
-            sz = parentSz-sz;
-            sz.Width = sz.Width / 2;
-            sz.Height = sz.Height / 2;
+            //var frmMain = FormMain.GetFormMain();
+            //if (frmMain == null) return;
+            //Size parentSz = FormMain.GetFormMain().Size;
+            //Size sz = new Size((frmMain.Size.Width - Size.Width) / 2, (frmMain.Size.Height - Size.Height) / 2);
 
-            this.Location = new Point(FormMain.GetFormMain().Location.X + sz.Width, FormMain.GetFormMain().Location.Y + sz.Height);
+            //this.Location = new Point(frmMain.Location.X + sz.Width, frmMain.Location.Y + sz.Height);
 
         }
 

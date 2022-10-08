@@ -864,7 +864,10 @@ namespace DivinationApp
             }
         }
 
-
+        public void UpdateTaiunAndNenunAndGetuun()
+        {
+            DispTaiun(curPerson);
+        }
 
         //====================================================
         // 大運 表示処理
@@ -948,6 +951,16 @@ namespace DivinationApp
 
 #endif
             lvTaiun.Items[0].Selected = true;
+
+            if( ((FormMain)mainForm).GetListFilterStrings().Count != ((FormMain)mainForm).lstGouhouSanpouFilter.Count)
+            {
+                lblFilterlingMsg.Text = "フィルタリング表示中です..";
+            }
+            else
+            {
+                lblFilterlingMsg.Text = "";
+
+            }
 
         }
         ///// <summary>
@@ -2238,6 +2251,16 @@ namespace DivinationApp
                     chkJuniSinkanHou.Checked = !chkJuniSinkanHou.Checked;
                     break;
             }
+        }
+
+        /// <summary>
+        /// 大運、年運、月運のフィルタ機能
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
 
         //=================================================

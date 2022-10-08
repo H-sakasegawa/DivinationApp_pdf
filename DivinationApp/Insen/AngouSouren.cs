@@ -15,8 +15,6 @@ namespace DivinationApp
         public static string GetAngouSouren(Person person)
         {
 
-            string result = null;
-
             TableMng tblMng = TableMng.GetTblManage();
 
             string nitiKan = person.nikkansi.kan;
