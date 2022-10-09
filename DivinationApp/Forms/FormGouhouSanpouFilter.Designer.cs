@@ -104,6 +104,7 @@ namespace DivinationApp
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormGouhouSanpouFilter";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "表示フィルタ設定";
             this.Load += new System.EventHandler(this.FormGouhouSanpouFilter_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdNames)).EndInit();

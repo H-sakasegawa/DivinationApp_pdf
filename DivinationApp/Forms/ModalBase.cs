@@ -15,6 +15,8 @@ namespace DivinationApp
         public ModalBase()
         {
             InitializeComponent();
+
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         private void FormBase_KeyPress(object sender, KeyPressEventArgs e)

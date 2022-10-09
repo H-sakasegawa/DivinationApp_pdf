@@ -171,8 +171,9 @@ namespace DivinationApp
             // mnuGouhouSanpouFilter
             // 
             this.mnuGouhouSanpouFilter.Name = "mnuGouhouSanpouFilter";
-            this.mnuGouhouSanpouFilter.Size = new System.Drawing.Size(189, 22);
-            this.mnuGouhouSanpouFilter.Text = "合法・散法 表示フィルタ";
+            this.mnuGouhouSanpouFilter.Size = new System.Drawing.Size(180, 22);
+            this.mnuGouhouSanpouFilter.Text = " 表示フィルタ";
+            this.mnuGouhouSanpouFilter.Click += new System.EventHandler(this.mnuGouhouSanpouFilter_Click);
             // 
             // testToolStripMenuItem
             // 
