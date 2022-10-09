@@ -38,12 +38,24 @@ namespace DivinationApp
             this.panel1 = new System.Windows.Forms.Panel();
             this.lstKeys = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.lstMainKey = new System.Windows.Forms.ListBox();
+            this.lstSubKey = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.picExplanation)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // picExplanation
@@ -56,7 +68,7 @@ namespace DivinationApp
             this.picExplanation.Location = new System.Drawing.Point(23, 20);
             this.picExplanation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picExplanation.Name = "picExplanation";
-            this.picExplanation.Size = new System.Drawing.Size(306, 200);
+            this.picExplanation.Size = new System.Drawing.Size(297, 200);
             this.picExplanation.TabIndex = 0;
             this.picExplanation.TabStop = false;
             // 
@@ -135,10 +147,10 @@ namespace DivinationApp
             this.lstKeys.FormattingEnabled = true;
             this.lstKeys.IntegralHeight = false;
             this.lstKeys.ItemHeight = 15;
-            this.lstKeys.Location = new System.Drawing.Point(5, 36);
+            this.lstKeys.Location = new System.Drawing.Point(13, 152);
             this.lstKeys.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstKeys.Name = "lstKeys";
-            this.lstKeys.Size = new System.Drawing.Size(98, 213);
+            this.lstKeys.Size = new System.Drawing.Size(69, 98);
             this.lstKeys.TabIndex = 9;
             this.lstKeys.SelectedIndexChanged += new System.EventHandler(this.lstKeys_SelectedIndexChanged);
             // 
@@ -155,28 +167,93 @@ namespace DivinationApp
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.lstKeys);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.picExplanation);
-            this.splitContainer1.Size = new System.Drawing.Size(458, 292);
-            this.splitContainer1.SplitterDistance = 108;
+            this.splitContainer1.Size = new System.Drawing.Size(603, 292);
+            this.splitContainer1.SplitterDistance = 267;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 10;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.lstKeys);
+            this.splitContainer2.Size = new System.Drawing.Size(267, 292);
+            this.splitContainer2.SplitterDistance = 166;
+            this.splitContainer2.TabIndex = 11;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.lstMainKey);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.lstSubKey);
+            this.splitContainer3.Size = new System.Drawing.Size(166, 292);
+            this.splitContainer3.SplitterDistance = 83;
+            this.splitContainer3.TabIndex = 11;
+            // 
+            // lstMainKey
+            // 
+            this.lstMainKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstMainKey.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lstMainKey.FormattingEnabled = true;
+            this.lstMainKey.IntegralHeight = false;
+            this.lstMainKey.ItemHeight = 15;
+            this.lstMainKey.Location = new System.Drawing.Point(3, 68);
+            this.lstMainKey.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstMainKey.Name = "lstMainKey";
+            this.lstMainKey.Size = new System.Drawing.Size(74, 185);
+            this.lstMainKey.TabIndex = 10;
+            this.lstMainKey.SelectedIndexChanged += new System.EventHandler(this.lstMainKey_SelectedIndexChanged);
+            // 
+            // lstSubKey
+            // 
+            this.lstSubKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstSubKey.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lstSubKey.FormattingEnabled = true;
+            this.lstSubKey.IntegralHeight = false;
+            this.lstSubKey.ItemHeight = 15;
+            this.lstSubKey.Location = new System.Drawing.Point(3, 68);
+            this.lstSubKey.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstSubKey.Name = "lstSubKey";
+            this.lstSubKey.Size = new System.Drawing.Size(70, 185);
+            this.lstSubKey.TabIndex = 11;
+            this.lstSubKey.SelectedIndexChanged += new System.EventHandler(this.lstSubKey_SelectedIndexChanged);
             // 
             // FormExplanation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 324);
+            this.ClientSize = new System.Drawing.Size(610, 324);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Yu Gothic UI", 9F);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormExplanation";
             this.Text = "説明";
-           // this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormExplanation_FormClosing);
             this.Load += new System.EventHandler(this.FormExplanation_Load);
             this.Resize += new System.EventHandler(this.FormExplanation_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picExplanation)).EndInit();
@@ -185,6 +262,14 @@ namespace DivinationApp
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -200,5 +285,9 @@ namespace DivinationApp
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListBox lstKeys;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ListBox lstMainKey;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.ListBox lstSubKey;
     }
 }

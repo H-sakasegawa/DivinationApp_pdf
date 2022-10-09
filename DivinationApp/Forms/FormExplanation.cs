@@ -15,7 +15,7 @@ namespace DivinationApp
     public partial class FormExplanation : ModelessBase
     {
         //public event Common.CloseHandler OnClose = null;
-        ExplanationReader reader = new ExplanationReader();
+        ExplanationReader curReader = null;
         ExplanationReader.ExplanationData curData = null;
         string curType = "";
 
@@ -25,11 +25,15 @@ namespace DivinationApp
 
         string formTitle = "説明";
 
+        DocumentManager docMng;
+
         //const string explanationFileDefName = "ExplanationFileDef.ini";
 
         public FormExplanation()
         {
             InitializeComponent();
+
+            docMng = FormMain.GetFormMain().docMng;
         }
 
         private void FormExplanation_Load(object sender, EventArgs e)
@@ -37,6 +41,8 @@ namespace DivinationApp
             this.TopMost = true;
 
             lstKeys.Dock = DockStyle.Fill;
+            lstMainKey.Dock = DockStyle.Fill;
+            lstSubKey.Dock = DockStyle.Fill;
             picExplanation.Dock = DockStyle.Fill;
 
             //拡大縮小で縦横比率を維持
@@ -44,6 +50,79 @@ namespace DivinationApp
 
             picExplanation.MouseWheel
                 += new System.Windows.Forms.MouseEventHandler(this.picExplanation_MouseWheel);
+
+
+            var mainKeys = docMng.GetMainCategories();
+            //メインキー項目表示
+            lstMainKey.Items.Clear();
+            foreach (var name in mainKeys)
+            {
+                lstMainKey.Items.Add(name);
+            }
+            if (lstMainKey.Items.Count > 0)
+            {
+                lstMainKey.SelectedIndex = 0;
+            }
+
+            UpdatePagingPanel();
+        }
+        /// <summary>
+        /// 主キー項目変更
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lstMainKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstSubKey.Items.Clear();
+            lstKeys.Items.Clear();
+
+            int idx = lstMainKey.SelectedIndex;
+            if (idx < 0) return;
+
+            string mainKey = lstMainKey.Items[idx].ToString();
+
+            var subKeys = docMng.GetSubCategories(mainKey);
+            //サブキー項目表示
+            foreach (var name in subKeys)
+            {
+                lstSubKey.Items.Add(name);
+            }
+            if(lstSubKey.Items.Count>0)
+            {
+                lstSubKey.SelectedIndex = 0;
+            }
+
+        }
+        /// <summary>
+        /// サブキー項目変更
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lstSubKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstKeys.Items.Clear();
+
+            int idxSub = lstSubKey.SelectedIndex;
+            if (idxSub < 0) return;
+            string subKey = lstSubKey.Items[idxSub].ToString();
+
+
+            int idxMain = lstMainKey.SelectedIndex;
+            string mainKey = lstMainKey.Items[idxMain].ToString();
+
+
+            curReader = docMng.GetExplanationReader(mainKey, subKey);
+
+            var keys = curReader.GetExplanationKeys();
+            foreach (var item in keys)
+            {
+                lstKeys.Items.Add(item);
+            }
+            if (lstKeys.Items.Count > 0)
+            {
+                lstKeys.SelectedIndex = 0;
+            }
+
         }
 
         //private void FormExplanation_FormClosing(object sender, FormClosingEventArgs e)
@@ -54,96 +133,54 @@ namespace DivinationApp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="type">説明資料種別</param>
-        /// <param name="dispTargetKey">説明項目キー名</param>
-        public void Show( string type, string dispTargetKey)
+        /// <param name="contentKey">説明項目キー名</param>
+        public void Show( string contentKey = null)
         {
-            if (curType != type)
-            {
-                reader.Clear();
 
-                string fileName = Common.GetExplanationDataFileName(type);
-                if(string.IsNullOrEmpty(fileName))
-                {
-                    string filePath = Path.Combine(FormMain.GetExePath(), Const.explanationFileDefName);
-                    MessageBox.Show(string.Format("説明ファイル定義INIファイル[ {0 }]に\n{1}\nの定義がありません。", Const.explanationFileDefName, type));
-                    return;
-                }
-                string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName );
-
-                if(reader.ReadExcel(excelFilePath) !=0)
-                {
-                    MessageBox.Show(string.Format("説明ファイルの読み込みに失敗しま\n\n{0}", excelFilePath));
-                    return;
-                }
-
-                curType = type;
-
-                this.Text = string.Format("{0} : {1}", formTitle, Path.GetFileNameWithoutExtension(excelFilePath));
-
-                //項目一覧表示
-
-                var keys = reader.GetExplanationKeys();
-                foreach(var item in keys)
-                {
-                    lstKeys.Items.Add(item);
-                }
-
-            }
-
-            dispTargetKey = Common.TrimExplanationDataTargetKey(dispTargetKey);
-            //if (!string.IsNullOrEmpty(dispTargetKey))
-            //{
-            //    //キー文字から"(～)"などを除外
-            //    char[] splitKeys = new char[] { '(', ':', '：', '[' };
-            //    int index = dispTargetKey.IndexOfAny(splitKeys);
-            //    if (index >= 0)
-            //    {
-            //        dispTargetKey = dispTargetKey.Substring(0, index).Trim();
-            //    }
-            //}
-            //else
-            //{
-            //    dispTargetKey = null;
-            //}
-            SetCurrentExplanation(dispTargetKey);
-            //bool bEnable = true;
-            //curData = reader.GetExplanation(dispTargetKey);
-            //if (curData != null)
-            //{
-            //    label1.Text = string.Format("/{0}", curData.pictureInfos.Count);
-            //    lblPage.Text = "1";
-            //    ShowPage(1);
-            //    ResizeWindow(1);
-            //}
-            //else
-            //{
-            //    label1.Text = "/0";
-            //    lblPage.Text = "0";
-            //    bEnable = false;
-            //    FormExplanation_Resize(null, null);
-            //}
-            //button1.Enabled = bEnable;
-            //button2.Enabled = bEnable;
-            //button3.Enabled = bEnable;
-            //button4.Enabled = bEnable;
             base.Show();
+            if (!string.IsNullOrEmpty(contentKey))
+            {
+                contentKey = Common.TrimExplanationDataTargetKey(contentKey);
 
+                var result = docMng.GetExplanationReader(contentKey);
+                curReader = result.reader;
+                if(curReader==null)
+                {
+                    MessageBox.Show($"指定された項目（{contentKey}）の説明データがありません");
+                }else
+                {
+                    //メインカテゴリを選択
+                    SelectMainContentItem( result.mainCategoryName );
+                    lstSubKey.SelectedItem = result.subCategoryName;
+
+                    SetCurrentExplanation(contentKey, false);
+                }
+            }
+        }
+        private void SelectMainContentItem( string name)
+        {
+            foreach(var item in lstMainKey.Items)
+            {
+                if((string)item == name)
+                {
+                    lstMainKey.SelectedItem = item;
+                }
+            }
         }
 
-        private void SetCurrentExplanation( string dispTargetKey, bool bResize=true )
+        private void SetCurrentExplanation( string contentKey, bool bResize=true )
         {
             bool bEnable = true;
-            if (!string.IsNullOrEmpty(dispTargetKey))
+            if (!string.IsNullOrEmpty(contentKey))
             {
-                curData = reader.GetExplanation(dispTargetKey);
+                curData = curReader.GetExplanation(contentKey);
             }else
             {
                 //最初の項目をデフォルトとして表示
-                var kyes = reader.GetExplanationKeys();
+                var kyes = curReader.GetExplanationKeys();
                 if (kyes.Count > 0)
                 {
-                    curData = reader.GetExplanation(kyes[0]);
+                    curData = curReader.GetExplanation(kyes[0]);
                 }
             }
             if (curData != null)
@@ -151,12 +188,10 @@ namespace DivinationApp
                 lblPage.Text = string.Format("{0}/{1}", 1, curData.pictureInfos.Count);
                 ShowPage(1);
                 if (bResize) ResizeWindow(1);
-                lstKeys.SelectedItem = dispTargetKey;
-
+                lstKeys.SelectedItem = contentKey;
             }
             else
             {
-
                 ShowPage(-1);
                 bEnable = false;
                 FormExplanation_Resize(null, null);
@@ -280,8 +315,14 @@ namespace DivinationApp
 
         private void FormExplanation_Resize(object sender, EventArgs e)
         {
+            UpdatePagingPanel();
+         }
+
+        private void UpdatePagingPanel()
+        {
             //ページ切り替えコントロールパネル位置を左右中央に設定
             panel1.Left = (this.Width - panel1.Width) / 2;
+
         }
 
         // マウスホイールイベント  
@@ -305,5 +346,6 @@ namespace DivinationApp
             SetCurrentExplanation(key, false);
 
         }
-    }
+
+     }
 }

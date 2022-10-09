@@ -26,6 +26,8 @@ namespace DivinationApp
         public ShortCutkeyMng shortCutKeyMng = new ShortCutkeyMng();
         public List<string> lstGouhouSanpouFilter = null;
 
+        public DocumentManager docMng = new DocumentManager();
+
 
         List<ModelessBase> lstModlessForms = new List<ModelessBase>();
         FormFinder frmFinder = null;
@@ -43,6 +45,8 @@ namespace DivinationApp
         {
             InitializeComponent();
             exePath = Path.GetDirectoryName(Application.ExecutablePath);
+
+            docMng.Initialize(Path.Combine(exePath, "ExplanationData"));
 
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             //大運、年運、月運 フィルタ文字列
@@ -393,14 +397,28 @@ namespace DivinationApp
         {
             if (frmExplanation != null)
             {
-                frmExplanation.Show(type, key);
+                frmExplanation.Show( key);
                 frmExplanation.Activate();
                 return;
             }
 
             frmExplanation = new FormExplanation();
             frmExplanation.OnClose += OnModelessFormClose;
-            frmExplanation.Show( type,  key);
+            frmExplanation.Show( key);
+            lstModlessForms.Add(frmExplanation);
+        }
+        private void mnuDocViewer_Click(object sender, EventArgs e)
+        {
+            if (frmExplanation != null)
+            {
+                frmExplanation.Show();
+                frmExplanation.Activate();
+                return;
+            }
+
+            frmExplanation = new FormExplanation();
+            frmExplanation.OnClose += OnModelessFormClose;
+            frmExplanation.Show();
             lstModlessForms.Add(frmExplanation);
         }
 
@@ -488,6 +506,7 @@ namespace DivinationApp
         }
         public List<string> GetListFilterStrings()
         {
+            //合法・三法
             List<string> lstFilter = tblMng.gouhouSanpouTbl.GetGouhouSanpouItemNames();
             //七殺、干合
             lstFilter.Add(Const.sNanasatu);
@@ -495,5 +514,6 @@ namespace DivinationApp
 
             return lstFilter;
         }
-    }
+
+     }
 }

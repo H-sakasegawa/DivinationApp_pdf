@@ -120,6 +120,7 @@
     <Compile Include="DrawHelper\DrawJuniSinKanHou.cs" />
     <Compile Include="DrawHelper\DrawKoutenUn.cs" />
     <Compile Include="DrawHelper\DrawShukumei.cs" />
+    <Compile Include="Tools\DocumentManager.cs" />
     <Compile Include="Tools\ShortCutkey.cs" />
     <Compile Include="Yousen\EiseiHou.cs" />
     <Compile Include="Excel\ExcelReader.cs" />

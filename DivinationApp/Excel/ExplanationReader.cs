@@ -12,14 +12,14 @@ namespace DivinationApp
     /// <summary>
     /// 説明用Excelファイルから画像データを管理提供するクラス
     /// </summary>
-    class ExplanationReader
+    public class ExplanationReader
     {
 
         public class ExplanationData
         {
-            public ExplanationData(string _id, ExcelReader.PictureInfo _pictureInfo)
+            public ExplanationData(string contentKey, ExcelReader.PictureInfo _pictureInfo)
             {
-                id = _id;
+                this.contentKey = contentKey;
                 pictureInfos.Add(_pictureInfo);
             }
             public void AddPictureInfo(ExcelReader.PictureInfo _pictureInfo)
@@ -45,21 +45,25 @@ namespace DivinationApp
                 return maxH;
 
             }
-            public string id;
+            public string contentKey;
             public List<ExcelReader.PictureInfo> pictureInfos = new List<ExcelReader.PictureInfo>();
         }
 
         //Key:項目キー名
         private Dictionary<string, ExplanationData> dic = new Dictionary<string, ExplanationData>();
+        public string keyName;
 
-
-        public int ReadExcel(string excelFilePath)
+        public int ReadExcel(string keyName, string excelFilePath)
         {
-            if( !File.Exists(excelFilePath))
+            this.keyName = keyName;
+            return ReadExcel(excelFilePath);
+        }
+        public int ReadExcel( string excelFilePath)
+        {
+            if ( !File.Exists(excelFilePath))
             {
                 return -1;
             }
-
 
             string exePath = FormMain.GetExePath();
 
