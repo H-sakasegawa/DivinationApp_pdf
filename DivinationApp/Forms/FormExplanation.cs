@@ -149,12 +149,12 @@ namespace DivinationApp
                 contentKey = Common.TrimExplanationDataTargetKey(contentKey);
 
                 var result = docMng.GetExplanationReader(contentKey);
-                curReader = result.reader;
-                if(curReader==null)
+                if(result == null || result.reader==null)
                 {
                     MessageBox.Show($"指定された項目（{contentKey}）の説明データがありません");
                 }else
                 {
+                    curReader = result.reader;
                     //メインカテゴリを選択
                     SelectMainContentItem( result.mainCategoryName );
                     lstSubKey.SelectedItem = result.subCategoryName;
