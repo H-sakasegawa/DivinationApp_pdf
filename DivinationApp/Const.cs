@@ -158,10 +158,13 @@ namespace DivinationApp
         public const string sJunRittin = "準律音";
 
         public const string sKangou = "干合";
-        public const string sInyou = "陰陽";
         public const string sNanasatu = "七殺";
 
         public const string sOkidou = "冲動";
+
+        public const string sDaihankai = "大半会";
+
+        public const string sInyou = "陰陽";
 
         public const string sGogyouMoku = "木";
         public const string sGogyouKa = "火";
@@ -181,7 +184,6 @@ namespace DivinationApp
         // Config キー
         //--------------------------------------------------
         public const string CFGKEY_LAST_DATAFILE = "LastDataFile";
-        public const string CFGKEY_LIST_FILTER = "ListFilter";
 
     }
 }

@@ -50,15 +50,8 @@ namespace DivinationApp
 
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             //大運、年運、月運 フィルタ文字列
-            var setting = config.AppSettings.Settings[Const.CFGKEY_LIST_FILTER];
-            if (setting == null || string.IsNullOrEmpty(setting.Value))
-            {
-                lstGouhouSanpouFilter = GetListFilterStrings();
-            }
-            else
-            {
-                lstGouhouSanpouFilter = setting.Value.Split(',').ToList();
-            }
+            lstGouhouSanpouFilter = GetListFilterStrings();
+
             frmMain = this;
 
             shortCutKeyMng.LoadShortCutKey();
@@ -496,13 +489,16 @@ namespace DivinationApp
             FormGouhouSanpouFilter frm = new FormGouhouSanpouFilter();
             frm.ShowDialog();
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            lstGouhouSanpouFilter = config.AppSettings.Settings[Const.CFGKEY_LIST_FILTER].Value.Split(',').ToList();
+        }
+        public void UpdateFilter(List<string> lstFilter)
+        {
+            lstGouhouSanpouFilter = lstFilter;
             foreach (TabPage tp in tabControl1.TabPages)
             {
                 Form1 frm2 = (Form1)tp.Controls[0];
                 frm2.UpdateTaiunAndNenunAndGetuun();
             }
+
         }
         public List<string> GetListFilterStrings()
         {
@@ -511,6 +507,16 @@ namespace DivinationApp
             //七殺、干合
             lstFilter.Add(Const.sNanasatu);
             lstFilter.Add(Const.sKangou);
+            //納音,準納音
+            lstFilter.Add(Const.sNattin);
+            lstFilter.Add(Const.sJunNattin);
+            //律音,準律音
+            lstFilter.Add(Const.sRittin);
+            lstFilter.Add(Const.sJunRittin);
+            //大半会
+            lstFilter.Add(Const.sDaihankai);
+
+
 
             return lstFilter;
         }

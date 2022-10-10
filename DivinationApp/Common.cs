@@ -708,10 +708,17 @@ namespace DivinationApp
                 if (item.bEnable) result += item.displayName;
                 else result += string.Format("[{0}]", item.displayName);
             }
+
             foreach (var item in ary)
             {
                 if (!string.IsNullOrEmpty(item))
                 {
+
+                    if (lstFilter != null)
+                    {
+                        if (!lstFilter.Contains(item)) continue;
+                    }
+
                     if (!string.IsNullOrEmpty(result)) result += " ";
                     result += item;
                 }

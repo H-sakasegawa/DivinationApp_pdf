@@ -1028,7 +1028,7 @@ namespace DivinationApp
                         }
                         if (no == no2)
                         {
-                            result.displayName = "大半会";
+                            result.displayName = Const.sDaihankai; //"大半会";
                         }
                         else
                         {
@@ -1040,7 +1040,7 @@ namespace DivinationApp
                             }
                             if (no == no2)
                             {
-                                result.displayName = "大半会";
+                                result.displayName = Const.sDaihankai; //"大半会";
                             }
                         }
                         //if (Math.Abs( no1 - no2)== 20)
