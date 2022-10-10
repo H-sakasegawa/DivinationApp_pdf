@@ -40,6 +40,10 @@ namespace DivinationApp
         {
             this.TopMost = true;
 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer2.Dock = DockStyle.Fill;
+            splitContainer3.Dock = DockStyle.Fill;
+
             lstKeys.Dock = DockStyle.Fill;
             lstMainKey.Dock = DockStyle.Fill;
             lstSubKey.Dock = DockStyle.Fill;
@@ -65,6 +69,9 @@ namespace DivinationApp
             }
 
             UpdatePagingPanel();
+
+            SetActiveList(lstMainKey);
+
         }
         /// <summary>
         /// 主キー項目変更
@@ -347,5 +354,92 @@ namespace DivinationApp
 
         }
 
-     }
+  
+        private void FormExplanation_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        button2_Click(null, null);
+                        break;
+                    case Keys.Right:
+                        button1_Click(null, null);
+                        break;
+                }
+            }
+
+        }
+
+        private void lstMainKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if ( e.KeyCode == Keys.Left)
+            {
+                e.Handled = true;
+            }
+            else if( e.KeyCode == Keys.Right)
+            {
+                SetActiveList(lstSubKey);
+
+                e.Handled = true;
+            }
+        }
+
+        private void lstSubKey_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                e.Handled = true;
+                return;
+            }
+            if (e.KeyCode == Keys.Left)
+            {
+                SetActiveList(lstMainKey);
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                SetActiveList(lstKeys);
+                e.Handled = true;
+            }
+
+        }
+
+        private void lstKeys_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                e.Handled = true;
+                return;
+            }
+            if (e.KeyCode == Keys.Left)
+            {
+                SetActiveList( lstSubKey );
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                e.Handled = true;
+            }
+
+        }
+
+        private void SetActiveList( Control ctrl )
+        {
+            ActiveControl = ctrl;
+
+            lstMainKey.BackColor = Color.White;
+            lstSubKey.BackColor = Color.White;
+            lstKeys.BackColor = Color.White;
+            ctrl.BackColor = Color.LightYellow;
+
+        }
+    }
 }
