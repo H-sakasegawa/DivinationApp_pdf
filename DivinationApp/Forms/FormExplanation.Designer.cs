@@ -68,7 +68,7 @@ namespace DivinationApp
             this.picExplanation.Location = new System.Drawing.Point(23, 20);
             this.picExplanation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picExplanation.Name = "picExplanation";
-            this.picExplanation.Size = new System.Drawing.Size(300, 164);
+            this.picExplanation.Size = new System.Drawing.Size(300, 201);
             this.picExplanation.TabIndex = 0;
             this.picExplanation.TabStop = false;
             // 
@@ -162,7 +162,7 @@ namespace DivinationApp
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 38);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 1);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -173,7 +173,7 @@ namespace DivinationApp
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.picExplanation);
-            this.splitContainer1.Size = new System.Drawing.Size(603, 256);
+            this.splitContainer1.Size = new System.Drawing.Size(603, 293);
             this.splitContainer1.SplitterDistance = 267;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 10;

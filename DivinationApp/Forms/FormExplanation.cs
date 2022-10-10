@@ -40,7 +40,6 @@ namespace DivinationApp
         {
             this.TopMost = true;
 
-            splitContainer1.Dock = DockStyle.Fill;
             splitContainer2.Dock = DockStyle.Fill;
             splitContainer3.Dock = DockStyle.Fill;
 
