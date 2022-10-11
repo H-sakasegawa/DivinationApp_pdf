@@ -153,7 +153,9 @@ namespace DivinationApp
             this.lstKeys.Size = new System.Drawing.Size(69, 103);
             this.lstKeys.TabIndex = 3;
             this.lstKeys.SelectedIndexChanged += new System.EventHandler(this.lstKeys_SelectedIndexChanged);
+            this.lstKeys.Enter += new System.EventHandler(this.lstKeys_Enter);
             this.lstKeys.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstKeys_KeyDown);
+            this.lstKeys.Leave += new System.EventHandler(this.lstKeys_Leave);
             // 
             // splitContainer1
             // 
@@ -226,7 +228,9 @@ namespace DivinationApp
             this.lstMainKey.Size = new System.Drawing.Size(74, 89);
             this.lstMainKey.TabIndex = 1;
             this.lstMainKey.SelectedIndexChanged += new System.EventHandler(this.lstMainKey_SelectedIndexChanged);
+            this.lstMainKey.Enter += new System.EventHandler(this.lstMainKey_Enter);
             this.lstMainKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstMainKey_KeyDown);
+            this.lstMainKey.Leave += new System.EventHandler(this.lstMainKey_Leave);
             // 
             // lstSubKey
             // 
@@ -242,7 +246,9 @@ namespace DivinationApp
             this.lstSubKey.Size = new System.Drawing.Size(70, 89);
             this.lstSubKey.TabIndex = 2;
             this.lstSubKey.SelectedIndexChanged += new System.EventHandler(this.lstSubKey_SelectedIndexChanged);
+            this.lstSubKey.Enter += new System.EventHandler(this.lstSubKey_Enter);
             this.lstSubKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstSubKey_KeyDown);
+            this.lstSubKey.Leave += new System.EventHandler(this.lstSubKey_Leave);
             // 
             // FormExplanation
             // 

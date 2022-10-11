@@ -356,17 +356,14 @@ namespace DivinationApp
   
         private void FormExplanation_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control)
+            switch (e.KeyCode)
             {
-                switch (e.KeyCode)
-                {
-                    case Keys.Left:
-                        button2_Click(null, null);
-                        break;
-                    case Keys.Right:
-                        button1_Click(null, null);
-                        break;
-                }
+                case Keys.Left:
+                    button2_Click(null, null);
+                    break;
+                case Keys.Right:
+                    button1_Click(null, null);
+                    break;
             }
 
         }
@@ -375,57 +372,72 @@ namespace DivinationApp
         {
             if (e.Control)
             {
+
+                if (e.KeyCode == Keys.Right)
+                {
+                    SetActiveList(lstSubKey);
+
+                }
                 e.Handled = true;
-                return;
+            }
+            else
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                    case Keys.Right:
+                        e.Handled = true;
+                        break;
+                }
             }
 
-            if ( e.KeyCode == Keys.Left)
-            {
-                e.Handled = true;
-            }
-            else if( e.KeyCode == Keys.Right)
-            {
-                SetActiveList(lstSubKey);
-
-                e.Handled = true;
-            }
         }
 
         private void lstSubKey_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control)
             {
+                if (e.KeyCode == Keys.Left)
+                {
+                    SetActiveList(lstMainKey);
+                }
+                else if (e.KeyCode == Keys.Right)
+                {
+                    SetActiveList(lstKeys);
+                }
                 e.Handled = true;
-                return;
             }
-            if (e.KeyCode == Keys.Left)
+            else
             {
-                SetActiveList(lstMainKey);
-                e.Handled = true;
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                    case Keys.Right:
+                        e.Handled = true;
+                        break;
+                }
             }
-            else if (e.KeyCode == Keys.Right)
-            {
-                SetActiveList(lstKeys);
-                e.Handled = true;
-            }
-
         }
 
         private void lstKeys_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control)
             {
-                e.Handled = true;
-                return;
-            }
-            if (e.KeyCode == Keys.Left)
-            {
-                SetActiveList( lstSubKey );
+                if (e.Control && e.KeyCode == Keys.Left)
+                {
+                    SetActiveList(lstSubKey);
+                }
                 e.Handled = true;
             }
-            else if (e.KeyCode == Keys.Right)
+            else
             {
-                e.Handled = true;
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                    case Keys.Right:
+                        e.Handled = true;
+                        break;
+                }
             }
 
         }
@@ -433,12 +445,36 @@ namespace DivinationApp
         private void SetActiveList( Control ctrl )
         {
             ActiveControl = ctrl;
+        }
 
+        private void lstMainKey_Enter(object sender, EventArgs e)
+        {
+            lstMainKey.BackColor = Color.LightYellow;
+        }
+
+        private void lstMainKey_Leave(object sender, EventArgs e)
+        {
             lstMainKey.BackColor = Color.White;
-            lstSubKey.BackColor = Color.White;
-            lstKeys.BackColor = Color.White;
-            ctrl.BackColor = Color.LightYellow;
+        }
 
+        private void lstSubKey_Enter(object sender, EventArgs e)
+        {
+            lstSubKey.BackColor = Color.LightYellow;
+        }
+
+        private void lstSubKey_Leave(object sender, EventArgs e)
+        {
+            lstSubKey.BackColor = Color.White;
+        }
+
+        private void lstKeys_Enter(object sender, EventArgs e)
+        {
+            lstKeys.BackColor = Color.LightYellow;
+        }
+
+        private void lstKeys_Leave(object sender, EventArgs e)
+        {
+            lstKeys.BackColor = Color.White;
         }
     }
 }

@@ -196,9 +196,7 @@ namespace DivinationApp
                 bControlEventEnable = true;
             }
 
-            lstInsenDetail.ContextMenuStrip = contextMenuDetail;
-            listYousenDetail.ContextMenuStrip = contextMenuDetail;
-
+         
             lstInsenDetail.MouseUp += listBox_MouseUp;
             listYousenDetail.MouseUp += listBox_MouseUp;
 
