@@ -151,7 +151,7 @@ namespace DivinationApp
                 var result = docMng.GetExplanationReader(contentKey);
                 if(result == null || result.reader==null)
                 {
-                    MessageBox.Show($"指定された項目（{contentKey}）の説明データがありません");
+                    MessageBox.Show(this, $"指定された項目（{contentKey}）の説明データがありません");
                 }else
                 {
                     curReader = result.reader;

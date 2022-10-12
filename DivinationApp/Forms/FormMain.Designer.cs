@@ -57,6 +57,7 @@ namespace DivinationApp
             this.tabControl1 = new DivinationApp.TabControlEx();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.mnuReloadDoc = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -98,7 +99,8 @@ namespace DivinationApp
             this.mnuSerch,
             this.パターン条件検索ToolStripMenuItem,
             this.toolStripSeparator3,
-            this.mnuDocViewer});
+            this.mnuDocViewer,
+            this.mnuReloadDoc});
             this.mnuPatternCondFind.Name = "mnuPatternCondFind";
             this.mnuPatternCondFind.Size = new System.Drawing.Size(59, 20);
             this.mnuPatternCondFind.Text = "機能(&U)";
@@ -157,14 +159,14 @@ namespace DivinationApp
             // mnuOption
             // 
             this.mnuOption.Name = "mnuOption";
-            this.mnuOption.Size = new System.Drawing.Size(189, 22);
+            this.mnuOption.Size = new System.Drawing.Size(180, 22);
             this.mnuOption.Text = "オプション";
             this.mnuOption.Click += new System.EventHandler(this.mnuOption_Click);
             // 
             // mnuShortCutKey
             // 
             this.mnuShortCutKey.Name = "mnuShortCutKey";
-            this.mnuShortCutKey.Size = new System.Drawing.Size(189, 22);
+            this.mnuShortCutKey.Size = new System.Drawing.Size(180, 22);
             this.mnuShortCutKey.Text = "ショートカットキー";
             this.mnuShortCutKey.Click += new System.EventHandler(this.mnuShortCutKey_Click);
             // 
@@ -307,6 +309,13 @@ namespace DivinationApp
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // mnuReloadDoc
+            // 
+            this.mnuReloadDoc.Name = "mnuReloadDoc";
+            this.mnuReloadDoc.Size = new System.Drawing.Size(197, 22);
+            this.mnuReloadDoc.Text = "ドキュメント再読み込み";
+            this.mnuReloadDoc.Click += new System.EventHandler(this.mnuReloadDoc_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -361,5 +370,6 @@ namespace DivinationApp
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnuDocViewer;
         private System.Windows.Forms.ToolStripMenuItem mnuGouhouSanpouFilter;
+        private System.Windows.Forms.ToolStripMenuItem mnuReloadDoc;
     }
 }

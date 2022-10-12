@@ -146,6 +146,7 @@ namespace DivinationApp
             this.listYousenDetail = new System.Windows.Forms.ListBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblFilterlingMsg = new System.Windows.Forms.Label();
             this.lvGetuun = new DivinationApp.ListViewEx();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -174,7 +175,6 @@ namespace DivinationApp
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lblFilterlingMsg = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -1477,7 +1477,6 @@ namespace DivinationApp
             this.lstInsenDetail.Name = "lstInsenDetail";
             this.lstInsenDetail.Size = new System.Drawing.Size(163, 196);
             this.lstInsenDetail.TabIndex = 78;
-            this.lstInsenDetail.DoubleClick += new System.EventHandler(this.lstInsenDetail_DoubleClick);
             // 
             // panel1
             // 
@@ -1512,7 +1511,6 @@ namespace DivinationApp
             this.listYousenDetail.Name = "listYousenDetail";
             this.listYousenDetail.Size = new System.Drawing.Size(161, 136);
             this.listYousenDetail.TabIndex = 80;
-            this.listYousenDetail.DoubleClick += new System.EventHandler(this.listYousenDetail_DoubleClick);
             // 
             // toolStripMenuItem1
             // 
@@ -1572,6 +1570,16 @@ namespace DivinationApp
             this.splitContainer1.Size = new System.Drawing.Size(1201, 833);
             this.splitContainer1.SplitterDistance = 471;
             this.splitContainer1.TabIndex = 81;
+            // 
+            // lblFilterlingMsg
+            // 
+            this.lblFilterlingMsg.AutoSize = true;
+            this.lblFilterlingMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblFilterlingMsg.Location = new System.Drawing.Point(52, 7);
+            this.lblFilterlingMsg.Name = "lblFilterlingMsg";
+            this.lblFilterlingMsg.Size = new System.Drawing.Size(32, 15);
+            this.lblFilterlingMsg.TabIndex = 78;
+            this.lblFilterlingMsg.Text = "label";
             // 
             // lvGetuun
             // 
@@ -1780,16 +1788,6 @@ namespace DivinationApp
             // 
             this.columnHeader23.Text = "詳細";
             this.columnHeader23.Width = 120;
-            // 
-            // lblFilterlingMsg
-            // 
-            this.lblFilterlingMsg.AutoSize = true;
-            this.lblFilterlingMsg.ForeColor = System.Drawing.Color.Red;
-            this.lblFilterlingMsg.Location = new System.Drawing.Point(52, 7);
-            this.lblFilterlingMsg.Name = "lblFilterlingMsg";
-            this.lblFilterlingMsg.Size = new System.Drawing.Size(32, 15);
-            this.lblFilterlingMsg.TabIndex = 78;
-            this.lblFilterlingMsg.Text = "label";
             // 
             // Form1
             // 

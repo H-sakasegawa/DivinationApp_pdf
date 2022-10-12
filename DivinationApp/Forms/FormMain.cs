@@ -521,5 +521,14 @@ namespace DivinationApp
             return lstFilter;
         }
 
-     }
+        /// <summary>
+        /// ドキュメントデータ再読み込み
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuReloadDoc_Click(object sender, EventArgs e)
+        {
+            docMng.Reload();
+        }
+    }
 }

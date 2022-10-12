@@ -97,7 +97,7 @@ namespace DivinationApp
         }
 
         Dictionary<string, DocMainCategory> dicDocuments = new Dictionary<string, DocMainCategory>();
-
+        string targetPath;
 
         public DocumentManager(  )
         {
@@ -105,6 +105,9 @@ namespace DivinationApp
 
         public int Initialize(string docPath)
         {
+            targetPath = docPath;
+
+
             //指定されたドキュメントフォルダ直下のフォルダ名を収集
             var dirs = Directory.GetDirectories(docPath);
 
@@ -123,6 +126,13 @@ namespace DivinationApp
             }
 
             return 0;
+        }
+
+        public int Reload()
+        {
+            dicDocuments.Clear();
+
+            return Initialize(targetPath);
         }
 
         /// <summary>

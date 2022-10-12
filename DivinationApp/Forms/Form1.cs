@@ -202,20 +202,20 @@ namespace DivinationApp
 
 
             //説明コンテキストメニュー割付
-            lstInsenDetail.ContextMenuStrip = contextMenuDetail;
-            listYousenDetail.ContextMenuStrip = contextMenuDetail;
-            pictureBox1.ContextMenuStrip = contextMenuDetail;
-            pictureBox2.ContextMenuStrip = contextMenuDetail;
+            lstInsenDetail.DoubleClick += OnDblClick_DispExplanation;
+            listYousenDetail.DoubleClick += OnDblClick_DispExplanation;
+            pictureBox1.DoubleClick += OnDblClick_DispExplanation;
+            pictureBox2.DoubleClick += OnDblClick_DispExplanation;
             //十大主星
-            lblJudaiShuseiA.ContextMenuStrip = contextMenuDetail;
-            lblJudaiShuseiB.ContextMenuStrip = contextMenuDetail;
-            lblJudaiShuseiC.ContextMenuStrip = contextMenuDetail;
-            lblJudaiShuseiD.ContextMenuStrip = contextMenuDetail;
-            lblJudaiShuseiE.ContextMenuStrip = contextMenuDetail;
+            lblJudaiShuseiA.DoubleClick += OnDblClick_DispExplanation;
+            lblJudaiShuseiB.DoubleClick += OnDblClick_DispExplanation;
+            lblJudaiShuseiC.DoubleClick += OnDblClick_DispExplanation;
+            lblJudaiShuseiD.DoubleClick += OnDblClick_DispExplanation;
+            lblJudaiShuseiE.DoubleClick += OnDblClick_DispExplanation;
             //十二大従星
-            lblJunidaiJuseiA.ContextMenuStrip = contextMenuDetail;
-            lblJunidaiJuseiB.ContextMenuStrip = contextMenuDetail;
-            lblJunidaiJuseiC.ContextMenuStrip = contextMenuDetail;
+            lblJunidaiJuseiA.DoubleClick += OnDblClick_DispExplanation;
+            lblJunidaiJuseiB.DoubleClick += OnDblClick_DispExplanation;
+            lblJunidaiJuseiC.DoubleClick += OnDblClick_DispExplanation;
 
         }
         /// <summary>
@@ -668,39 +668,87 @@ namespace DivinationApp
             insen.DispInsenDetailInfo(person, lstInsenDetail);
 
         }
+
         /// <summary>
-        /// 陰占　詳細情報リストボックスダブルクリック
+        /// 説明表示
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lstInsenDetail_DoubleClick(object sender, EventArgs e)
+        void OnDblClick_DispExplanation(object sender, EventArgs e)
         {
-            var item = (InsenDetail)lstInsenDetail.SelectedItem;
-
-            switch (item.type)
+            if ((ModifierKeys & Keys.Control)== Keys.Control)
             {
-                case Const.InsenDetailType.INSEN_DETAIL_SANKAKUANGOU:
-                    {
-                        FormFinder frm = new FormFinder((FormMain)mainForm);
-                        frm.Show();
-                        lstModlessForms.Add(frm);
-                        frm.FindSankakuAngouActive(curPerson);
-                    }
-                    break;
-                case Const.InsenDetailType.INSEN_DETAIL_RITIN_NATIN:
-                    {
-                        FormFinder frm = new FormFinder((FormMain)mainForm);
-                        frm.Show();
-                        lstModlessForms.Add(frm);
-                        frm.FindRittin(curPerson);
-                    }
-            
-                    break;
+                var item = (InsenDetail)lstInsenDetail.SelectedItem;
 
+                switch (item.type)
+                {
+                    case Const.InsenDetailType.INSEN_DETAIL_SANKAKUANGOU:
+                        {
+                            FormFinder frm = new FormFinder((FormMain)mainForm);
+                            frm.Show();
+                            lstModlessForms.Add(frm);
+                            frm.FindSankakuAngouActive(curPerson);
+                        }
+                        break;
+                    case Const.InsenDetailType.INSEN_DETAIL_RITIN_NATIN:
+                        {
+                            FormFinder frm = new FormFinder((FormMain)mainForm);
+                            frm.Show();
+                            lstModlessForms.Add(frm);
+                            frm.FindRittin(curPerson);
+                        }
+
+                        break;
+
+                }
+            }
+            else
+            {
+                if (sender == lstInsenDetail)//陰占特徴リストボックス
+                {
+                    InsenDetail item = (InsenDetail)lstInsenDetail.SelectedItem;
+                    if (item != null)
+                    {
+                        ((FormMain)mainForm).ShowExplanation(item.expressionType, item.expressionKey);
+                    }
+
+                }
+                else if (sender == listYousenDetail)//陽占特徴リストボックス
+                {
+                    YousenDetail item = (YousenDetail)listYousenDetail.SelectedItem;
+                    if (item != null)
+                    {
+                        ((FormMain)mainForm).ShowExplanation(item.expressionType, item.expressionKey);
+                    }
+
+                }
+                else if (sender == pictureBox2) //後天運ピクチャー領域
+                {
+                    ((FormMain)mainForm).ShowExplanation("位相法後天運", null);
+                }
+                else if (sender == pictureBox1) //宿命ピクチャー領域
+                {
+                    ((FormMain)mainForm).ShowExplanation("位相法宿命", null);
+                }
+                else if (sender == lblJudaiShuseiA
+                      || sender == lblJudaiShuseiB
+                      || sender == lblJudaiShuseiC
+                      || sender == lblJudaiShuseiD
+                      || sender == lblJudaiShuseiE
+                      ) //十大主星
+                {
+                    ((FormMain)mainForm).ShowExplanation("十大主星", ((Label)sender).Text);
+                }
+                else if (sender == lblJunidaiJuseiA
+                      || sender == lblJunidaiJuseiB
+                      || sender == lblJunidaiJuseiC
+                      ) //十二大従星
+                {
+                    ((FormMain)mainForm).ShowExplanation("十二大従星", ((Label)sender).Text);
+                }
             }
         }
 
 
+ 
         //==================================================================
         // 人体図表示（陽占）
         //==================================================================
@@ -752,10 +800,7 @@ namespace DivinationApp
 
         }
 
-        private void listYousenDetail_DoubleClick(object sender, EventArgs e)
-        {
-        }
-
+  
 
         /// <summary>
         /// 天中殺 カラー設定（陽占）
@@ -2251,16 +2296,8 @@ namespace DivinationApp
             }
         }
 
-        /// <summary>
-        /// 大運、年運、月運のフィルタ機能
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+ 
+  
         //=================================================
         //Owner Draw 　⇒  ListViewExに統合しました
         //=================================================
