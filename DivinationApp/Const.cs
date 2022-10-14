@@ -179,6 +179,13 @@ namespace DivinationApp
 
         public const string explanationFileDefName = "ExplanationFileDef.ini";
         public const string shortCutKeyDefFileName = "ShortCutKeyDef.ini";
+        public const string windowPosFileName = "WindowPos.ini";
+
+        //--------------------------------------------------
+        // ウィンドウ位置
+        //--------------------------------------------------
+        public const string SECTION_WINDOWPOS = "WindowPosition";
+
 
         //--------------------------------------------------
         // Config キー
