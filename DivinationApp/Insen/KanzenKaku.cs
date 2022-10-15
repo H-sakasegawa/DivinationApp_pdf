@@ -181,15 +181,11 @@ namespace DivinationApp
             {
 
                 //一気格判定
-                if (IsIkkiKaku("木", lstTbl)) { lstResult.Add(new Result("木性一気格(曲直格)")); return lstResult; }
-                if (IsIkkiKaku("火", lstTbl)) { lstResult.Add(new Result("火性一気格(炎上格)")); return lstResult; }
-                if (IsIkkiKaku("土", lstTbl)) { lstResult.Add(new Result("土性一気格(稼穡格)")); return lstResult; }
-                if (IsIkkiKaku("金", lstTbl)) { lstResult.Add(new Result("金性一気格(従革格)")); return lstResult; }
-                if (IsIkkiKaku("水", lstTbl)) { lstResult.Add(new Result("水性一気格(潤下格)")); return lstResult; }
-
+                if (IsIkkiKaku(lstTbl, ref lstResult)) { return lstResult; }
+ 
 
                 //印綬格判定
-                if (IsInjuKaku(lstTbl)) { lstResult.Add(new Result("印綬格")); return lstResult; }
+                if (IsInjuKaku(lstTbl, ref lstResult)) { return lstResult; }
 
 
                 //従化五格判定
@@ -228,21 +224,50 @@ namespace DivinationApp
         /// <param name="attr">判定属性</param>
         /// <param name="insenGogyo">陰占の五行属性リスト</param>
         /// <returns></returns>
-        static bool IsIkkiKaku(string attr, List<JukanSiGogyouTbl> lstTbl)
+        static bool IsIkkiKaku( List<JukanSiGogyouTbl> lstTbl, ref List<Result> lstResult)
         {
+            ResultInf inf = new ResultInf();
+
+            if (IsIkkiKaku_Sub("木性一気格(曲直格)", "木", lstTbl, ref lstResult)) { return true; }
+            if (IsIkkiKaku_Sub("火性一気格(炎上格)", "火", lstTbl, ref lstResult)) { return true; }
+            if (IsIkkiKaku_Sub("土性一気格(稼穡格)", "土", lstTbl, ref lstResult)) { return true; }
+            if (IsIkkiKaku_Sub("金性一気格(従革格)", "金", lstTbl, ref lstResult)) { return true; }
+            if (IsIkkiKaku_Sub("水性一気格(潤下格)", "水", lstTbl, ref lstResult)) { return true; }
+            return false;
+        }
+        static bool IsIkkiKaku_Sub(string title, string attr, List<JukanSiGogyouTbl> lstTbl, ref List<Result> lstResult)
+        {
+
             //指定されたattrと異なるものが１つもない（全てattr)
-            if(lstTbl.FirstOrDefault(x=> x.insenGogyo != attr)==null)
+            int cnt = lstTbl.Count(x => x.insenGogyo != attr);
+
+            if (cnt == 0)
             {
+                lstResult.Add(new Result(title));
                 return true;
+            }
+            else if (cnt == 1)
+            {
+                Result result = new Result(title + ":一点破格");
+                //一点破格
+
+                int index = lstTbl.FindIndex(x => x.insenGogyo != attr);
+                result.subInfo = string.Format("  {0}が破の守護神", GetShugosin(lstTbl[index]));
+
+                lstResult.Add(result);
+
+                return true;
+
             }
             return false;
         }
+
         /// <summary>
         /// 印綬格判定
         /// </summary>
         /// <param name="insenGogyo">陰占の五行属性リスト</param>
         /// <returns></returns>
-        static bool IsInjuKaku(List<JukanSiGogyouTbl> lstTbl)
+        static bool IsInjuKaku(List<JukanSiGogyouTbl> lstTbl, ref List<Result> lstResult)
         {
             TableMng tblMng = TableMng.GetTblManage();
 
@@ -253,11 +278,24 @@ namespace DivinationApp
             string createFromAttr = tblMng.gogyouAttrRelationshipTbl.GetCreatFrom(nikkanAttr);
 
             //日干以外の干支が全て日干を相生するものか？
+            List<int> lstNgIndex = new List<int>();
             for (int i = 1; i < lstTbl.Count; i++)
             {
-                if (lstTbl[i].insenGogyo != createFromAttr) return false;
+                if (lstTbl[i].insenGogyo != createFromAttr) lstNgIndex.Add( i );
             }
-            return true;
+            if(lstNgIndex.Count==0)
+            {
+                lstResult.Add(new Result("印綬格"));
+                return true;
+            }else if(lstNgIndex.Count == 1)
+            {
+                Result result = new Result("印綬格:一点破格");
+
+                result.subInfo = string.Format("  {0}が破の守護神", GetShugosin(lstTbl[lstNgIndex[0]]));
+                lstResult.Add(result);
+                return true;
+            }
+            return false;
         }
 
         static bool IsJukaGoKaku( List<JukanSiGogyouTbl> lstTbl, ref ResultInf inf)
@@ -362,7 +400,7 @@ namespace DivinationApp
                         break;
                     }
                 }
-                else if (tblItem.id == Const.enumKansiItemID.NENKANSI)//蔵元(年
+                else if (tblItem.id == Const.enumKansiItemID.NENKANSI)//蔵元(年)
                 {
                     string s = insen.nenkansiHongen[idx].name;
                     if (!string.IsNullOrEmpty(s))
