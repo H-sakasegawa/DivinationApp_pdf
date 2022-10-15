@@ -1,7 +1,7 @@
 ﻿
 namespace DivinationApp
 {
-    partial class ModalBase
+    partial class DialogBase
     {
         /// <summary>
         /// Required designer variable.
@@ -31,16 +31,18 @@ namespace DivinationApp
         {
             this.SuspendLayout();
             // 
-            // ModalBase
+            // DialogBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(242, 132);
+            this.ClientSize = new System.Drawing.Size(168, 160);
             this.KeyPreview = true;
-            this.Name = "ModalBase";
+            this.Name = "DialogBase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FormBase";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormBase_KeyPress);
+            this.Text = "DialogBase2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DialogBase2_FormClosing);
+            this.Load += new System.EventHandler(this.DialogBase_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DialogBase_KeyPress);
             this.ResumeLayout(false);
 
         }

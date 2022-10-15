@@ -10,28 +10,21 @@ using System.Windows.Forms;
 
 namespace DivinationApp
 {
-    public partial class ModelessBase : Form
+    public partial class DialogBase : Form
     {
         public event Common.CloseHandler OnClose = null;
 
         string filePath = "";
         string entryName;
-        public ModelessBase()
+        public DialogBase()
         {
             InitializeComponent();
             entryName = GetType().Name;
             filePath = System.IO.Path.Combine(FormMain.GetExePath(), Const.windowPosFileName);
 
         }
-        private void ModelessBase_Load(object sender, EventArgs e)
+        private void DialogBase_Load(object sender, EventArgs e)
         {
-            //var frmMain = FormMain.GetFormMain();
-            //if (frmMain == null) return;
-            //Size parentSz = FormMain.GetFormMain().Size;
-            //Size sz = new Size((frmMain.Size.Width - Size.Width) / 2, (frmMain.Size.Height - Size.Height) / 2);
-
-            //this.Location = new Point(frmMain.Location.X + sz.Width, frmMain.Location.Y + sz.Height);
-
 
             IniFile iniFile = new IniFile(filePath);
 
@@ -77,7 +70,7 @@ namespace DivinationApp
 
         }
 
-        private void ModelessBase2_FormClosing(object sender, FormClosingEventArgs e)
+        private void DialogBase2_FormClosing(object sender, FormClosingEventArgs e)
         {
             IniFile iniFile = new IniFile(filePath);
             iniFile.WriteString(Const.SECTION_WINDOWPOS, entryName, $"{Location.X},{Location.Y}, {Width},{Height}");
@@ -86,7 +79,7 @@ namespace DivinationApp
 
         }
 
-        private void ModelessBase_KeyPress(object sender, KeyPressEventArgs e)
+        private void DialogBase_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Escape)
             {

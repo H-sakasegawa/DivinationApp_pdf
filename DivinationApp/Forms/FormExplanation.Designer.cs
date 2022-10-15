@@ -42,6 +42,7 @@ namespace DivinationApp
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.lstMainKey = new System.Windows.Forms.ListBox();
             this.lstSubKey = new System.Windows.Forms.ListBox();
+            this.txtExplanation = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picExplanation)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -68,7 +69,7 @@ namespace DivinationApp
             this.picExplanation.Location = new System.Drawing.Point(23, 20);
             this.picExplanation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picExplanation.Name = "picExplanation";
-            this.picExplanation.Size = new System.Drawing.Size(300, 201);
+            this.picExplanation.Size = new System.Drawing.Size(223, 144);
             this.picExplanation.TabIndex = 0;
             this.picExplanation.TabStop = false;
             // 
@@ -174,6 +175,7 @@ namespace DivinationApp
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtExplanation);
             this.splitContainer1.Panel2.Controls.Add(this.picExplanation);
             this.splitContainer1.Size = new System.Drawing.Size(603, 293);
             this.splitContainer1.SplitterDistance = 267;
@@ -250,6 +252,16 @@ namespace DivinationApp
             this.lstSubKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstSubKey_KeyDown);
             this.lstSubKey.Leave += new System.EventHandler(this.lstSubKey_Leave);
             // 
+            // txtExplanation
+            // 
+            this.txtExplanation.Location = new System.Drawing.Point(23, 194);
+            this.txtExplanation.Multiline = true;
+            this.txtExplanation.Name = "txtExplanation";
+            this.txtExplanation.ReadOnly = true;
+            this.txtExplanation.Size = new System.Drawing.Size(141, 57);
+            this.txtExplanation.TabIndex = 5;
+            this.txtExplanation.Text = "Text";
+            // 
             // FormExplanation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -268,6 +280,7 @@ namespace DivinationApp
             this.panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -297,5 +310,6 @@ namespace DivinationApp
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.ListBox lstSubKey;
+        private System.Windows.Forms.TextBox txtExplanation;
     }
 }

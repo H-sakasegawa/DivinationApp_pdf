@@ -367,7 +367,7 @@ namespace DivinationApp
             this.lblGekkansiNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblGekkansiNo.Location = new System.Drawing.Point(352, 89);
             this.lblGekkansiNo.Name = "lblGekkansiNo";
-            this.lblGekkansiNo.Size = new System.Drawing.Size(37, 14);
+            this.lblGekkansiNo.Size = new System.Drawing.Size(37, 16);
             this.lblGekkansiNo.TabIndex = 16;
             // 
             // label3
@@ -995,11 +995,11 @@ namespace DivinationApp
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.txtBaseGekkansiNo);
             this.tabPage2.Controls.Add(this.txtBaseDay);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(399, 135);
+            this.tabPage2.Size = new System.Drawing.Size(399, 133);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "算出基準値";
             this.tabPage2.UseVisualStyleBackColor = true;

@@ -12,7 +12,7 @@ using System.IO;
 
 namespace DivinationApp
 {
-    public partial class FormExplanation : ModelessBase
+    public partial class FormExplanation : DialogBase
     {
         //public event Common.CloseHandler OnClose = null;
         ExplanationReader curReader = null;
@@ -40,6 +40,10 @@ namespace DivinationApp
         {
             this.TopMost = true;
 
+            picExplanation.Visible = false;
+            txtExplanation.Visible = false;
+
+
             splitContainer2.Dock = DockStyle.Fill;
             splitContainer3.Dock = DockStyle.Fill;
 
@@ -47,6 +51,7 @@ namespace DivinationApp
             lstMainKey.Dock = DockStyle.Fill;
             lstSubKey.Dock = DockStyle.Fill;
             picExplanation.Dock = DockStyle.Fill;
+            txtExplanation.Dock = DockStyle.Fill;
 
             //拡大縮小で縦横比率を維持
             picExplanation.SizeMode = PictureBoxSizeMode.Zoom;
@@ -130,25 +135,49 @@ namespace DivinationApp
             }
 
         }
-
-        //private void FormExplanation_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    if (OnClose != null) OnClose(this);
-        //}
+        public void ShowExplanation()
+        {
+            base.Show();
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="contentKey">説明項目キー名</param>
-        public void Show( string contentKey = null)
+        /// <param name="subCategory">サブカテゴリ名</param>
+        public void ShowSubCategory(string subCategory)
         {
 
             base.Show();
+            subCategory = Common.TrimExplanationDataTargetKey(subCategory);
+
+            //サブカテゴリのみ指定
+            if (!string.IsNullOrEmpty(subCategory))
+            {
+
+                var result = docMng.GetExplanationSubCategory(subCategory);
+                if (result != null)
+                {
+                    SelectMainContentItem(result.mainCategoryName);
+                    lstSubKey.SelectedItem = result.subCategoryName;
+                    return;
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="subCategory">サブカテゴリ名</param>
+        /// <param name="contentKey">説明項目キー名</param>
+        public void ShowContents( string contentKey = null)
+        {
+
+            base.Show();
+            
             if (!string.IsNullOrEmpty(contentKey))
             {
                 contentKey = Common.TrimExplanationDataTargetKey(contentKey);
 
-                var result = docMng.GetExplanationReader(contentKey);
+                var result = docMng.GetExplanationContents(contentKey);
                 if(result == null || result.reader==null)
                 {
                     MessageBox.Show(this, $"指定された項目（{contentKey}）の説明データがありません");
@@ -170,6 +199,7 @@ namespace DivinationApp
                 if((string)item == name)
                 {
                     lstMainKey.SelectedItem = item;
+                    break;
                 }
             }
         }
@@ -191,7 +221,7 @@ namespace DivinationApp
             }
             if (curData != null)
             {
-                lblPage.Text = string.Format("{0}/{1}", 1, curData.pictureInfos.Count);
+                lblPage.Text = string.Format("{0}/{1}", 1, curData.Count);
                 ShowPage(1);
                 if (bResize) ResizeWindow(1);
                 lstKeys.SelectedItem = contentKey;
@@ -212,21 +242,31 @@ namespace DivinationApp
         //指定されたページの画像サイズにピクチャー（ウィンドウは＋α）サイズに合わせる
         private void ResizeWindow(int pageNo)
         {
-            if (pageNo > curData.pictureInfos.Count) return;
-            if (curData.pictureInfos[pageNo - 1] == null) return;
+            if (pageNo > curData.Count) return;
+            if (curData[ pageNo ] == null) return;
 
-            ImageConverter imgconv = new ImageConverter();
-            Image img = (Image)imgconv.ConvertFrom(curData.pictureInfos[pageNo - 1].pictureData.Data);
+            var data = curData[pageNo];
+            if (data.type == ExcelReader.InfoType.PICTURE)
+            {
+                ExcelReader.PictureInfo picData = (ExcelReader.PictureInfo)data;
 
-            Size szForm = this.Size;
-            Size szSplitWin = splitContainer1.Size;
- 
-            int ofsW = szForm.Width - szSplitWin.Width;
-            int ofsH = szForm.Height - szSplitWin.Height;
+                ImageConverter imgconv = new ImageConverter();
+                Image img = (Image)imgconv.ConvertFrom(picData.pictureData.Data);
+
+                Size szForm = this.Size;
+                Size szSplitWin = splitContainer1.Size;
+
+                int ofsW = szForm.Width - szSplitWin.Width;
+                int ofsH = szForm.Height - szSplitWin.Height;
 
 
-            this.Width = img.Width + ofsW+ splitContainer1.Panel1.Width + splitContainer1.SplitterWidth;
-            this.Height = img.Height + ofsH;
+                this.Width = img.Width + ofsW + splitContainer1.Panel1.Width + splitContainer1.SplitterWidth;
+                this.Height = img.Height + ofsH;
+            }
+            else if (data.type == ExcelReader.InfoType.TEXT)
+            {
+                //テキストボックスについてはサイズ調整不要
+            }
 
         }
 
@@ -243,18 +283,35 @@ namespace DivinationApp
             if (curData == null) return;
 
             picExplanation.Image = null;
-            if (pageNo > curData.pictureInfos.Count) return;
-            if (curData.pictureInfos[pageNo - 1] == null) return;
+            if (pageNo > curData.Count) return;
+            if (curData[pageNo] == null) return;
             curPageNo = pageNo;
 
             if (curPageNo >= 0)
             {
                 if (curData == null) return;
-                ImageConverter imgconv = new ImageConverter();
-                curImage = (Image)imgconv.ConvertFrom(curData.pictureInfos[pageNo - 1].pictureData.Data);
-                picExplanation.Image = curImage;
+                var data = curData[pageNo];
+                if (data.type == ExcelReader.InfoType.PICTURE)
+                {
+                    ExcelReader.PictureInfo picData = (ExcelReader.PictureInfo)data;
 
-                lblPage.Text = string.Format("{0}/{1}", curPageNo, curData.pictureInfos.Count);
+                    ImageConverter imgconv = new ImageConverter();
+                    curImage = (Image)imgconv.ConvertFrom(picData.pictureData.Data);
+                    picExplanation.Image = curImage;
+
+                    picExplanation.Visible = true;
+                    txtExplanation.Visible = false;
+                }
+                else if(data.type == ExcelReader.InfoType.TEXT)
+                {
+                    ExcelReader.TextInfo txtData = (ExcelReader.TextInfo)data;
+                    txtExplanation.Text = txtData.textData;
+                    picExplanation.Visible = false;
+                    txtExplanation.Visible = true;
+
+                }
+
+                lblPage.Text = string.Format("{0}/{1}", curPageNo, curData.Count);
             }
             else
             {
@@ -272,7 +329,7 @@ namespace DivinationApp
 
         private void PageUp()
         {
-            if (curData == null || curPageNo >= curData.pictureInfos.Count) return;
+            if (curData == null || curPageNo >= curData.Count) return;
             ShowPage(curPageNo + 1);
         }
 
@@ -296,7 +353,7 @@ namespace DivinationApp
         // ">|"ボタン
         private void button4_Click(object sender, EventArgs e)
         {
-            ShowPage(curData.pictureInfos.Count);
+            ShowPage(curData.Count);
         }
 
         protected override bool ProcessDialogKey(Keys keyData)

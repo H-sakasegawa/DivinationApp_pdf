@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DivinationApp
 {
-    public partial class FormFinderCustom : ModelessBase
+    public partial class FormFinderCustom : DialogBase
     {
         class FindResultItem : LvItemDataBase
         {

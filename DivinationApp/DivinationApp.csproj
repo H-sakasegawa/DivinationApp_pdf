@@ -93,23 +93,17 @@
     <Compile Include="Forms\FormGouhouSanpouFilter.Designer.cs">
       <DependentUpon>FormGouhouSanpouFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModalBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ModalBase.Designer.cs">
-      <DependentUpon>ModalBase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormShortCutKey.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormShortCutKey.Designer.cs">
       <DependentUpon>FormShortCutKey.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ModelessBase.cs">
+    <Compile Include="Forms\DialogBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ModelessBase.Designer.cs">
-      <DependentUpon>ModelessBase.cs</DependentUpon>
+    <Compile Include="Forms\DialogBase.Designer.cs">
+      <DependentUpon>DialogBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Insen\KanzenKaku.cs" />
     <Compile Include="OtherFunction\AttrAndColorRefrectHelper.cs" />
@@ -268,9 +262,6 @@
     <EmbeddedResource Include="Forms\FormGouhouSanpouFilter.resx">
       <DependentUpon>FormGouhouSanpouFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModalBase.resx">
-      <DependentUpon>ModalBase.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditCareer.resx">
       <DependentUpon>FormEditCareer.cs</DependentUpon>
     </EmbeddedResource>
@@ -316,8 +307,8 @@
     <EmbeddedResource Include="Forms\FromKyokiSimulation.resx">
       <DependentUpon>FromKyokiSimulation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModelessBase.resx">
-      <DependentUpon>ModelessBase.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DialogBase.resx">
+      <DependentUpon>DialogBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -14,7 +14,7 @@ namespace DivinationApp
     /// <summary>
     /// 根気法　表示画面
     /// </summary>
-    public partial class FormKonkihou : ModelessBase
+    public partial class FormKonkihou : DialogBase
     {
         public delegate void CloseHandler();
         Person person;

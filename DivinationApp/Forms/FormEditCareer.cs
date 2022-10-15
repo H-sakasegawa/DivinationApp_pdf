@@ -13,7 +13,7 @@ namespace DivinationApp
     /// <summary>
     /// 経歴編集画面
     /// </summary>
-    public partial class FormEditCareer : ModalBase
+    public partial class FormEditCareer : DialogBase
     {
 
         public FormEditCareer(int _year, Person _person)

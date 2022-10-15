@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DivinationApp
 {
-    public partial class FormShortCutKey : ModalBase
+    public partial class FormShortCutKey : DialogBase
     {
         ShortCutkeyMng mng;
         public FormShortCutKey(ShortCutkeyMng mng)

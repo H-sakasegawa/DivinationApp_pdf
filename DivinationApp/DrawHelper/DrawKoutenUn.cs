@@ -559,9 +559,14 @@ namespace DivinationApp
             bool bInyouNenunTaiun = person.IsInyou(nenunKansi, taiunKansi); //（年運 - 大運) の関係
             bool bInyouGetuunNenun = person.IsInyou(getuunKansi, nenunKansi); //（月運 - 年運) の関係
             bool bInyouGetuunTaiun = person.IsInyou(getuunKansi, taiunKansi); //（月運 - 大運) の関係
-            int idxInyouNenunTaiun = SetMatrixUp(bInyouNenunTaiun, Const.bitFlgNenun, (Const.bitFlgNenun | Const.bitFlgTaiun));//年運 - 大運
+            int idxInyouNenunTaiun = -1;
             int idxInyouGetuunNenun = -1;
             int idxInyouGetuunTaiun = -1;
+
+            if (bDispNenun && bDispTaiun)
+            {
+                idxInyouNenunTaiun = SetMatrixUp(bInyouNenunTaiun, Const.bitFlgNenun, (Const.bitFlgNenun | Const.bitFlgTaiun));//年運 - 大運
+            }
             if (bDispGetuun)
             {
                 idxInyouGetuunNenun = SetMatrixUp(bInyouGetuunNenun, Const.bitFlgGetuun, (Const.bitFlgGetuun | Const.bitFlgNenun));//月運 - 年運
@@ -574,28 +579,36 @@ namespace DivinationApp
             bool bInyouTaiunNiti = person.IsInyou(taiunKansi, person.nikkansi); //（大運-日) の関係
             bool bInyouTaiunGetu = person.IsInyou(taiunKansi, person.gekkansi); //（大運-月) の関係
             bool bInyouTaiunNen = person.IsInyou(taiunKansi, person.nenkansi);//（大運-年) の関係
-            int idxInyouTaiunNiti = SetMatrixUp(bInyouTaiunNiti, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNiti));//大運 - 日
-            int idxInyouTaiunGetu = SetMatrixUp(bInyouTaiunGetu, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgGetu));//大運 - 月
-            int idxInyouTaiunNen = SetMatrixUp(bInyouTaiunNen, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNen));//大運 - 年
-
-
+            int idxInyouTaiunNiti = -1;
+            int idxInyouTaiunGetu = -1;
+            int idxInyouTaiunNen = -1;
+            if (bDispTaiun)
+            {
+                idxInyouTaiunNiti = SetMatrixUp(bInyouTaiunNiti, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNiti));//大運 - 日
+                idxInyouTaiunGetu = SetMatrixUp(bInyouTaiunGetu, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgGetu));//大運 - 月
+                idxInyouTaiunNen = SetMatrixUp(bInyouTaiunNen, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNen));//大運 - 年
+            }
             //陰陽(年運→＊）
             //-------------------               
             chkBitFlg = Const.bitFlgNenun | Const.bitFlgTaiun | bitFlgNitiGetuNen;
             bool bInyouNenunNiti = person.IsInyou(nenunKansi, person.nikkansi); //（年運-日) の関係
             bool bInyouNenunGetu = person.IsInyou(nenunKansi, person.gekkansi);//（年運-月) の関係
-            bool bInyouNenunNen = person.IsInyou(nenunKansi, person.nenkansi);//（年運-年) の関係
-            int idxInyouNenunNiti = SetMatrixUp(bInyouNenunNiti, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNiti));//年運 - 日
-            int idxInyouNenunGetu = SetMatrixUp(bInyouNenunGetu, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgGetu));//年運 - 月
-            int idxInyouNenunNen = SetMatrixUp(bInyouNenunNen, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNen));//年運 - 年
-
-
+            bool bInyouNenunNen  = person.IsInyou(nenunKansi, person.nenkansi);//（年運-年) の関係
+            int idxInyouNenunNiti = -1;
+            int idxInyouNenunGetu = -1;
+            int idxInyouNenunNen  = -1;
+            if (bDispNenun)
+            {
+                idxInyouNenunNiti = SetMatrixUp(bInyouNenunNiti, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNiti));//年運 - 日
+                idxInyouNenunGetu = SetMatrixUp(bInyouNenunGetu, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgGetu));//年運 - 月
+                idxInyouNenunNen = SetMatrixUp(bInyouNenunNen, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNen));//年運 - 年
+            }
             //陰陽(月運→＊）
             //-------------------               
             chkBitFlg = Const.bitFlgGetuun | Const.bitFlgNenun | Const.bitFlgTaiun | bitFlgNitiGetuNen;
             bool bInyouGetuunNiti = person.IsInyou(getuunKansi, person.nikkansi); //（月運-日) の関係
             bool bInyouGetuunGetu = person.IsInyou(getuunKansi, person.gekkansi);//（月運-月) の関係
-            bool bInyouGetuunNen = person.IsInyou(getuunKansi, person.nenkansi);//（月運-年) の関係
+            bool bInyouGetuunNen  = person.IsInyou(getuunKansi, person.nenkansi);//（月運-年) の関係
             int idxInyouGetuunNiti = -1;
             int idxInyouGetuunGetu = -1;
             int idxInyouGetuunNen  = -1;
@@ -608,7 +621,7 @@ namespace DivinationApp
 
             //干合(年運→大運、月運→年運、月運→大運運）
             //-------------------               
-            bool bKangouNenunTaiun = person.IsKango(nenunKansi, taiunKansi); //（年運 - 大運) の関係
+            bool bKangouNenunTaiun  = person.IsKango(nenunKansi, taiunKansi); //（年運 - 大運) の関係
             bool bKangouGetuunNenun = person.IsKango(getuunKansi, nenunKansi); //（月運 - 年運) の関係
             bool bKangouGetuunTaiun = person.IsKango(getuunKansi, taiunKansi); //（月運 - 大運) の関係
             int idxKangouNenunTaiun = SetMatrixUp(bKangouNenunTaiun, Const.bitFlgNenun | Const.bitFlgTaiun | bitFlgNitiGetuNen, (Const.bitFlgNenun | Const.bitFlgTaiun));//年運 - 大運
@@ -625,10 +638,10 @@ namespace DivinationApp
             chkBitFlg = Const.bitFlgTaiun | bitFlgNitiGetuNen;
             bool bKangouTaiunNiti = person.IsKango(taiunKansi, person.nikkansi);//（大運-日) の関係
             bool bKangouTaiunGetu = person.IsKango(taiunKansi, person.gekkansi);//（大運-月) の関係
-            bool bKangouTaiunNen = person.IsKango(taiunKansi, person.nenkansi);//（大運-年) の関係
+            bool bKangouTaiunNen  = person.IsKango(taiunKansi, person.nenkansi);//（大運-年) の関係
             int idxKangouTaiunNiti = SetMatrixUp(bKangouTaiunNiti, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNiti));//大運 - 日
             int idxKangouTaiunGetu = SetMatrixUp(bKangouTaiunGetu, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgGetu));//大運 - 月
-            int idxKangouTaiunNen = SetMatrixUp(bKangouTaiunNen, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNen));//大運 - 年
+            int idxKangouTaiunNen  = SetMatrixUp(bKangouTaiunNen, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNen));//大運 - 年
 
 
             //干合(年運→＊）
@@ -636,25 +649,25 @@ namespace DivinationApp
             chkBitFlg = Const.bitFlgNenun | Const.bitFlgTaiun | bitFlgNitiGetuNen;
             bool bKangouNenunNiti = person.IsKango(nenunKansi, person.nikkansi);//（年運-日) の関係
             bool bKangouNenunGetu = person.IsKango(nenunKansi, person.gekkansi);//（年運-月) の関係
-            bool bKangouNenunNen = person.IsKango(nenunKansi, person.nenkansi);//（年運-年) の関係
+            bool bKangouNenunNen  = person.IsKango(nenunKansi, person.nenkansi);//（年運-年) の関係
             int idxKangouNenunNiti = SetMatrixUp(bKangouNenunNiti, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNiti));//年運 - 日
             int idxKangouNenunGetu = SetMatrixUp(bKangouNenunGetu, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgGetu));//年運 - 月
-            int idxKangouNenunNen = SetMatrixUp(bKangouNenunNen, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNen));//年運 - 年
+            int idxKangouNenunNen  = SetMatrixUp(bKangouNenunNen, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNen));//年運 - 年
 
             //干合(月運→＊）
             //-------------------
             chkBitFlg = Const.bitFlgGetuun | bitFlgNitiGetuNen;
             bool bKangouGetuunNiti = person.IsKango(getuunKansi, person.nikkansi);//（月運-日) の関係
             bool bKangouGetuunGetu = person.IsKango(getuunKansi, person.gekkansi);//（月運-月) の関係
-            bool bKangouGetuunNen = person.IsKango(getuunKansi, person.nenkansi);//（月運-年) の関係
+            bool bKangouGetuunNen  = person.IsKango(getuunKansi, person.nenkansi);//（月運-年) の関係
             int idxKangouGetuunNiti = -1;
             int idxKangouGetuunGetu = -1;
-            int idxKangouGetuunNen = -1;
+            int idxKangouGetuunNen  = -1;
             if (bDispGetuun)
             {
                 idxKangouGetuunNiti = SetMatrixUp(bKangouGetuunNiti, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgNiti));//月運 - 日
                 idxKangouGetuunGetu = SetMatrixUp(bKangouGetuunGetu, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgGetu));//月運 - 月
-                idxKangouGetuunNen = SetMatrixUp(bKangouGetuunNen, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgNen));//月運 - 年
+                idxKangouGetuunNen  = SetMatrixUp(bKangouGetuunNen, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgNen));//月運 - 年
             }
 
         
@@ -664,13 +677,17 @@ namespace DivinationApp
             int idxNanasatuPointNenunTaiun = 0;
             int idxNanasatuPointGetuunNenun = 0;
             int idxNanasatuPointGetuunTaiun = 0;
-            bool bNanasatuNenunTaiun = person.IsNanasatu(nenunKansi, taiunKansi, ref idxNanasatuPointNenunTaiun); //（年運 - 大運) の関係
+            bool bNanasatuNenunTaiun  = person.IsNanasatu(nenunKansi, taiunKansi, ref idxNanasatuPointNenunTaiun); //（年運 - 大運) の関係
             bool bNanasatuGetuunNenun = person.IsNanasatu(getuunKansi, nenunKansi, ref idxNanasatuPointGetuunNenun); //（月運 - 年運) の関係
             bool bNanasatuGetuunTaiun = person.IsNanasatu(getuunKansi, taiunKansi, ref idxNanasatuPointGetuunTaiun); //（月運 - 大運) の関係
 
-            int idxNanasatuNenunTaiun = SetMatrixUp(bNanasatuNenunTaiun, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgTaiun));//年運 - 大運
+            int idxNanasatuNenunTaiun  = -1;
             int idxNanasatuGetuunNenun = -1;
             int idxNanasatuGetuunTaiun = -1;
+            if (bDispNenun && bDispTaiun)
+            {
+                idxNanasatuNenunTaiun = SetMatrixUp(bNanasatuNenunTaiun, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgTaiun));//年運 - 大運
+            }
             if (bDispGetuun)
             {
                 idxNanasatuGetuunNenun = SetMatrixUp(bNanasatuGetuunNenun, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgTaiun));//月運 - 年運
@@ -681,47 +698,58 @@ namespace DivinationApp
             chkBitFlg = Const.bitFlgTaiun | bitFlgNitiGetuNen;
             int idxNanasatuPointTaiunNiti = 0;
             int idxNanasatuPointTaiunGetu = 0;
-            int idxNanasatuPointTaiunNen = 0;
+            int idxNanasatuPointTaiunNen  = 0;
             bool bNanasatuTaiunNiti = person.IsNanasatu(taiunKansi, person.nikkansi, ref idxNanasatuPointTaiunNiti);//（大運-日) の関係
             bool bNanasatuTaiunGetu = person.IsNanasatu(taiunKansi, person.gekkansi, ref idxNanasatuPointTaiunGetu);//（大運-月) の関係
-            bool bNanasatuTaiunNen = person.IsNanasatu(taiunKansi, person.nenkansi, ref idxNanasatuPointTaiunNen);//（大運-年) の関係
+            bool bNanasatuTaiunNen  = person.IsNanasatu(taiunKansi, person.nenkansi, ref idxNanasatuPointTaiunNen);//（大運-年) の関係
 
-            int idxNanasatuTaiunNiti = SetMatrixUp(bNanasatuTaiunNiti, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNiti));//大運 - 日
-            int idxNanasatuTaiunGetu = SetMatrixUp(bNanasatuTaiunGetu, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgGetu));//大運 - 月
-            int idxNanasatuTaiunNen = SetMatrixUp(bNanasatuTaiunNen, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNen));//大運 - 年
+            int idxNanasatuTaiunNiti = -1;
+            int idxNanasatuTaiunGetu = -1;
+            int idxNanasatuTaiunNen = -1;
 
+            if (bDispTaiun)
+            {
+                idxNanasatuTaiunNiti = SetMatrixUp(bNanasatuTaiunNiti, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNiti));//大運 - 日
+                idxNanasatuTaiunGetu = SetMatrixUp(bNanasatuTaiunGetu, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgGetu));//大運 - 月
+                idxNanasatuTaiunNen  = SetMatrixUp(bNanasatuTaiunNen, chkBitFlg, (Const.bitFlgTaiun | Const.bitFlgNen));//大運 - 年
+            }
             //七殺(年運→＊）
             //-------------------
             chkBitFlg = Const.bitFlgNenun | Const.bitFlgTaiun | bitFlgNitiGetuNen;
             int idxNanasatuPointNenunNiti = 0;
             int idxNanasatuPointNenunGetu = 0;
-            int idxNanasatuPointNenunNen = 0;
+            int idxNanasatuPointNenunNen  = 0;
             bool bNanasatuNenunNiti = person.IsNanasatu(nenunKansi, person.nikkansi, ref idxNanasatuPointNenunNiti);//（年運-日) の関係
             bool bNanasatuNenunGetu = person.IsNanasatu(nenunKansi, person.gekkansi, ref idxNanasatuPointNenunGetu);//（年運-月) の関係
-            bool bNanasatuNenunNen = person.IsNanasatu(nenunKansi, person.nenkansi, ref idxNanasatuPointNenunNen);//（年運-年) の関係
+            bool bNanasatuNenunNen  = person.IsNanasatu(nenunKansi, person.nenkansi, ref idxNanasatuPointNenunNen);//（年運-年) の関係
 
-            int idxNanasatuNenunNiti = SetMatrixUp(bNanasatuNenunNiti, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNiti));//年運 - 日
-            int idxNanasatuNenunGetu = SetMatrixUp(bNanasatuNenunGetu, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgGetu));//年運 - 月
-            int idxNanasatuNenunNen = SetMatrixUp(bNanasatuNenunNen, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNen));//年運 - 年
-
+            int idxNanasatuNenunNiti = -1;
+            int idxNanasatuNenunGetu = -1;
+            int idxNanasatuNenunNen  = -1;
+            if (bDispNenun)
+            {
+                idxNanasatuNenunNiti = SetMatrixUp(bNanasatuNenunNiti, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNiti));//年運 - 日
+                idxNanasatuNenunGetu = SetMatrixUp(bNanasatuNenunGetu, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgGetu));//年運 - 月
+                idxNanasatuNenunNen  = SetMatrixUp(bNanasatuNenunNen, chkBitFlg, (Const.bitFlgNenun | Const.bitFlgNen));//年運 - 年
+            }
             //七殺(月運→＊）
             //-------------------
             chkBitFlg = Const.bitFlgGetuun | Const.bitFlgNenun | Const.bitFlgTaiun | bitFlgNitiGetuNen;
             int idxNanasatuPointGetuunNiti = 0;
             int idxNanasatuPointGetuunGetu = 0;
-            int idxNanasatuPointGetuunNen = 0;
+            int idxNanasatuPointGetuunNen  = 0;
             bool bNanasatuGetuunNiti = person.IsNanasatu(getuunKansi, person.nikkansi, ref idxNanasatuPointGetuunNiti);//（月運-日) の関係
             bool bNanasatuGetuunGetu = person.IsNanasatu(getuunKansi, person.gekkansi, ref idxNanasatuPointGetuunGetu);//（月運-月) の関係
-            bool bNanasatuGetuunNen = person.IsNanasatu(getuunKansi, person.nenkansi, ref idxNanasatuPointGetuunNen);//（月運-年) の関係
+            bool bNanasatuGetuunNen  = person.IsNanasatu(getuunKansi, person.nenkansi, ref idxNanasatuPointGetuunNen);//（月運-年) の関係
 
             int idxNanasatuGetuunNiti = -1;
             int idxNanasatuGetuunGetu = -1;
-            int idxNanasatuGetuunNen = -1;
+            int idxNanasatuGetuunNen  = -1;
             if (bDispGetuun)
             {
                 idxNanasatuGetuunNiti = SetMatrixUp(bNanasatuGetuunNiti, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgNiti));//月運 - 日
                 idxNanasatuGetuunGetu = SetMatrixUp(bNanasatuGetuunGetu, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgGetu));//月運 - 月
-                idxNanasatuGetuunNen = SetMatrixUp(bNanasatuGetuunNen, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgNen));//月運 - 年
+                idxNanasatuGetuunNen  = SetMatrixUp(bNanasatuGetuunNen, chkBitFlg, (Const.bitFlgGetuun | Const.bitFlgNen));//月運 - 年
             }
 
             //三合会局
@@ -733,129 +761,6 @@ namespace DivinationApp
             //干支の上部に表示する情報の段数から干支表示基準座標を計算
             CalcCoord();
 
-            /*
-                        Color[] colorGetuunKansi = null;
-                        Color[] colorNenunKansi = null;
-                        Color[] colorTaiunKansi = null;
-                        Color[] colorNikkansi = null;
-                        Color[] colorGekkansi = null;
-                        Color[] colorNenkansi = null;
-
-                        Color[] colorGetuunKansiOrg = new Color[2];
-                        Color[] colorNenunKansiOrg = new Color[2];
-                        Color[] colorTaiunKansiOrg = new Color[2];
-                        Color[] colorNikkansiOrg = new Color[2];
-                        Color[] colorGekkansiOrg = new Color[2];
-                        Color[] colorNenkansiOrg = new Color[2];
-
-                        CreateGogyouAttrMatrix(person, getuunKansi, nenunKansi, taiunKansi);
-
-                        if (bDispGogyou)
-                        {   //五行色表示
-                            colorNikkansi = GetGogyouColor(Const.enumKansiItemID.NIKKANSI);
-                            colorGekkansi = GetGogyouColor(Const.enumKansiItemID.GEKKANSI);
-                            colorNenkansi = GetGogyouColor(Const.enumKansiItemID.NENKANSI);
-
-                            colorGetuunKansi = GetGogyouColor(Const.enumKansiItemID.GETUUN); //月運
-                            colorNenunKansi = GetGogyouColor(Const.enumKansiItemID.NENUN);   //年運
-                            colorTaiunKansi = GetGogyouColor(Const.enumKansiItemID.TAIUN);   //大運
-
-                        }
-                        else if (bDispGotoku)
-                        {   //五徳色表示
-                            string baseKan = person.nikkansi.kan;
-                            colorNikkansi = GetGotokuColor(baseKan, person.nikkansi, true);
-                            colorGekkansi = GetGotokuColor(baseKan, person.gekkansi);
-                            colorNenkansi = GetGotokuColor(baseKan, person.nenkansi);
-
-                            colorGetuunKansi = GetGotokuColor(baseKan, getuunKansi);
-                            colorNenunKansi = GetGotokuColor(baseKan, nenunKansi);
-                            colorTaiunKansi = GetGotokuColor(baseKan, taiunKansi);
-                        }
-
-                        if( colorGetuunKansi != null) colorGetuunKansi.CopyTo(colorGetuunKansiOrg, 0);
-                        if (colorNenunKansi != null) colorNenunKansi.CopyTo(colorNenunKansiOrg, 0);
-                        if (colorTaiunKansi != null) colorTaiunKansi.CopyTo(colorTaiunKansiOrg, 0);
-
-                        if (colorNikkansi != null) colorNikkansi.CopyTo(colorNikkansiOrg, 0);
-                        if (colorGekkansi != null) colorGekkansi.CopyTo(colorGekkansiOrg, 0);
-                        if (colorNenkansi != null) colorNenkansi.CopyTo(colorNenkansiOrg, 0);
-
-                        //合法反映
-                        if (bDispRefrectGouhou)
-                        {
-                            //支の変換
-                            RefrectGouhou(
-                                            colorNikkansi, colorGekkansi, colorNenkansi,
-                                            colorGetuunKansi, colorNenunKansi, colorTaiunKansi,
-                                            getuunKansi, nenunKansi, taiunKansi,
-                                            bDispGetuun
-                                            );
-                            //干の変換
-                            RefrectKangou(
-                                            colorNikkansi, colorGekkansi, colorNenkansi,
-                                            colorGetuunKansi, colorNenunKansi, colorTaiunKansi,
-                                            getuunKansi, nenunKansi, taiunKansi,
-                                             bDispGetuun
-                                           );
-
-                        }
-                        //三合会局・方三位　反映
-                        if (bDispRefrectSangouKaiyoku)
-                        {
-                            RefrectSangouKaikyokuHousanni(
-                                            lstSangouKaikyoku, lstHouSani,
-                                            colorNikkansi, colorGekkansi, colorNenkansi,
-                                            colorGetuunKansi, colorNenunKansi, colorTaiunKansi
-                                            );
-                        }
-                        //五徳表示の時に、合法反映、三合会局・方三位　反映があった場合は、属性が変わっているので
-                        //変わった属性をもとに再度表示カラーを求める
-                        if (bDispGotoku && (bDispRefrectGouhou || bDispRefrectSangouKaiyoku) )
-                        {
-                            var attrBaseItem = GetAttrTblItem(Const.enumKansiItemID.NIKKANSI);
-
-                            var attrItem = GetAttrTblItem(Const.enumKansiItemID.NIKKANSI);
-                            colorNikkansi = GetGotokuColor(colorNikkansi, attrBaseItem.attrKan, null, attrItem.attrSi);
-
-                            attrItem = GetAttrTblItem(Const.enumKansiItemID.GEKKANSI);
-                            colorGekkansi = GetGotokuColor(colorGekkansi, attrBaseItem.attrKan, attrItem.attrKan, attrItem.attrSi);
-
-                            attrItem = GetAttrTblItem(Const.enumKansiItemID.NENKANSI);
-                            colorNenkansi = GetGotokuColor(colorNenkansi, attrBaseItem.attrKan, attrItem.attrKan, attrItem.attrSi);
-
-                            attrItem = GetAttrTblItem(Const.enumKansiItemID.GETUUN);
-                            colorGetuunKansi = GetGotokuColor(colorGetuunKansi, attrBaseItem.attrKan, attrItem.attrKan, attrItem.attrSi);
-
-                            attrItem = GetAttrTblItem(Const.enumKansiItemID.NENUN);
-                            colorNenunKansi = GetGotokuColor(colorNenunKansi, attrBaseItem.attrKan, attrItem.attrKan, attrItem.attrSi);
-
-                            attrItem = GetAttrTblItem(Const.enumKansiItemID.TAIUN);
-                            colorTaiunKansi = GetGotokuColor(colorTaiunKansi, attrBaseItem.attrKan, attrItem.attrKan, attrItem.attrSi);
-
-
-                        }
-
-
-                        //干支表示
-                        rectGetuunTitle = new Rectangle(getuun.X, getuun.Y - GetSmallFontHeight() / 2, rangeWidth, GetSmallFontHeight());
-                        rectNenunTitle = new Rectangle(nenun.X, nenun.Y - GetSmallFontHeight() / 2, rangeWidth, GetSmallFontHeight());
-                        rectTaiunTitle = new Rectangle(taiun.X, taiun.Y - GetSmallFontHeight() / 2, rangeWidth, GetSmallFontHeight());
-
-                        if (bDispGetuun)
-                        {
-                            DrawKansi(getuunKansi, rectGetuunKan, rectGetuunSi, colorGetuunKansi, Const.enumKansiItemID.GETUUN);　//月運干支
-                            DrawString(rectGetuunTitle, "<月運>");
-                        }
-                        DrawKansi(nenunKansi, rectNenunKan, rectNenunSi, colorNenunKansi, Const.enumKansiItemID.NENUN);//年運干支
-                        DrawKansi(taiunKansi, rectTaiunKan, rectTaiunSi, colorTaiunKansi, Const.enumKansiItemID.TAIUN);//大運干支
-                        DrawString(rectNenunTitle, "<年運>");
-                        DrawString(rectTaiunTitle, "<大運>");
-
-                        DrawKansi(person.nikkansi, rectNikansiKan, rectNikansiSi, colorNikkansi, Const.enumKansiItemID.NIKKANSI);//日干支
-                        DrawKansi(person.gekkansi, rectGekkansiKan, rectGekkansiSi, colorGekkansi, Const.enumKansiItemID.GEKKANSI);//月干支
-                        DrawKansi(person.nenkansi, rectNenkansiKan, rectNenkansiSi, colorNenkansi, Const.enumKansiItemID.NENKANSI);//年干支
-            */
             if (bDispJuniSinkanHou)
             {
                 var attr = new JuniSinkankanHouAttr(person);

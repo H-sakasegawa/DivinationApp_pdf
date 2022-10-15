@@ -58,7 +58,7 @@ namespace DivinationApp
 
         List<Form> lstModlessForms = new List<Form>();
 
-        void OnModelessFormClose(ModelessBase frm)
+        void OnModelessFormClose(DialogBase frm)
         {
             frm.Dispose();
             lstModlessForms.Remove(frm);

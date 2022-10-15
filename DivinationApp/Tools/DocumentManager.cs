@@ -19,6 +19,7 @@ namespace DivinationApp
         }
         public class SubCategoryFindResult
         {
+            public string mainCategoryName;
             public string subCategoryName;
             public ExplanationReader reader;
 
@@ -29,12 +30,13 @@ namespace DivinationApp
         /// </summary>
         class DocMainCategory
         {
-            public string keyName;　//メインカテゴリ名
+            public string mainCategoryName;　//メインカテゴリ名
+            //Dictionary< サブカテゴリ名, サブカテゴリのExcelReader>
             public Dictionary<string, ExplanationReader> mapExcel = new Dictionary<string, ExplanationReader>();
 
             public DocMainCategory(string keyName)
             {
-                this.keyName = keyName;
+                this.mainCategoryName = keyName;
             }
             public int Add( string filePath)
             {
@@ -52,14 +54,14 @@ namespace DivinationApp
                 return mapExcel.Keys.ToList();
             }
             /// <summary>
-            /// subKeyに該当するサブカテゴリーのExcelReader取得
+            /// subCategoryに該当するサブカテゴリーのExcelReader取得
             /// </summary>
             /// <param name="subKey"></param>
             /// <returns></returns>
-            public ExplanationReader GetExplanationReader(string subKey)
+            public ExplanationReader GetExplanationSubCategoryReader(string subCategory)
             {
-                if (!mapExcel.ContainsKey(subKey)) return null;
-                return mapExcel[subKey];
+                if (!mapExcel.ContainsKey(subCategory)) return null;
+                return mapExcel[subCategory];
             }
             /// <summary>
             /// すべてのサブカテゴリからcontentsKeyが含まれるサブカテゴリーのExcelReaderを取得
@@ -70,14 +72,15 @@ namespace DivinationApp
             {
                 List<SubCategoryFindResult> lstResult = new List<SubCategoryFindResult>();
 
-                foreach ( var pairExcel in mapExcel)
+                foreach (var pairExcel in mapExcel)
                 {
                     var keys = pairExcel.Value.GetExplanationKeys();
-                    foreach( var key in keys)
+                    foreach (var key in keys)
                     {
-                        if( key == contentsKey)
+                        if (key == contentsKey)
                         {
                             SubCategoryFindResult result = new SubCategoryFindResult();
+                            result.mainCategoryName = mainCategoryName;
                             result.subCategoryName = pairExcel.Key;
                             result.reader = pairExcel.Value;
 
@@ -89,9 +92,11 @@ namespace DivinationApp
                 return lstResult;
             }
 
+
+
             public override string ToString()
             {
-                return keyName;
+                return mainCategoryName;
             }
 
         }
@@ -167,16 +172,42 @@ namespace DivinationApp
             if (!dicDocuments.ContainsKey(mainKey)) return null;
             var doc = dicDocuments[mainKey];
 
-            return doc.GetExplanationReader(subKey);
+            return doc.GetExplanationSubCategoryReader(subKey);
 
         }
+
+        /// <summary>
+        /// サブカテゴリを検索して返す
+        /// </summary>
+        /// <param name="subCutegory"></param>
+        /// <returns></returns>
+        public SubCategoryFindResult GetExplanationSubCategory(string subCutegory)
+        {
+            foreach (var pairMain in dicDocuments)
+            {
+                DocMainCategory mainCategory = pairMain.Value;
+
+                var subCategory = mainCategory.GetExplanationSubCategoryReader(subCutegory);
+                if (subCategory!=null)
+                {
+                    SubCategoryFindResult result = new SubCategoryFindResult();
+                    result.mainCategoryName = pairMain.Key;
+                    result.subCategoryName = subCutegory;
+                    result.reader = subCategory;
+                    return result;
+                }
+            }
+            return null;
+        }
+
+
         /// <summary>
         /// 全てのドキュメントから指定されたキーがコンテンツキーとして
         /// 登録されているExplanationReaderを取得
         /// </summary>
         /// <param name="contentKey"></param>
         /// <returns></returns>
-        public ContentFindResult GetExplanationReader(string contentKey)
+        public ContentFindResult GetExplanationContents(string contentKey)
         {
             List<ExplanationReader> lstReader = new List<ExplanationReader>();
 
@@ -191,7 +222,7 @@ namespace DivinationApp
                var subCategories =  mainCategory.GetExplanationReaderByContentsKey(contentKey);
                 if (subCategories.Count > 0)
                 {
-                    result.mainCategoryName = mainCategory.keyName;
+                    result.mainCategoryName = mainCategory.mainCategoryName;
                     result.subCategoryName  = subCategories[0].subCategoryName;
                     result.contentKeyName   = contentKey;
                     result.reader           = subCategories[0].reader;
@@ -201,6 +232,6 @@ namespace DivinationApp
             }
             return null;
         }
-
+  
     }
 }

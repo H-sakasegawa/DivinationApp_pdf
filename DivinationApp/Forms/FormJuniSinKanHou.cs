@@ -13,7 +13,7 @@ namespace DivinationApp
     /// <summary>
     /// 十二親干法 表示画面
     /// </summary>
-    public partial class FormJuniSinKanHou : ModelessBase
+    public partial class FormJuniSinKanHou : DialogBase
     {
         public delegate void CloseHandler();
 

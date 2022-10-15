@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace DivinationApp
 {
 
-    public partial class FromKyokiSimulation : ModelessBase
+    public partial class FromKyokiSimulation : DialogBase
     {
 
 

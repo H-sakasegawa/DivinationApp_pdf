@@ -34,7 +34,8 @@ namespace DivinationApp
 
         PDFUtility pdfUtil;
 
- 
+        DocumentManager docMng;
+
 
         public class Parameter
         {
@@ -72,6 +73,8 @@ namespace DivinationApp
             this.param = param;
 
             pdfUtil = new PDFUtility();
+            docMng = FormMain.GetFormMain().docMng;
+
         }
         public int WritePDF(string pdfFilePath)
         {
@@ -857,18 +860,27 @@ namespace DivinationApp
             string expressionType = string.Format("守護神{0}{1}", person.nikkansi.kan, gogyo);
             //string expressionKey = string.Format("{0}{1}", person.nikkansi.kan, gogyo);
 
-            ExplanationReader reader = new ExplanationReader(); 
-            string fileName = Common.GetExplanationDataFileName(expressionType);
-            string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
-            pdfUtil.RestoreState();
+            //ExplanationReader reader = new ExplanationReader(); 
+            //string fileName = Common.GetExplanationDataFileName(expressionType);
+            //string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
+            //pdfUtil.RestoreState();
 
-            if (reader.ReadExcel(excelFilePath) != 0)
+            //if (reader.ReadExcel(excelFilePath) != 0)
+            //{
+            //    pdfUtil.DrawString(x, drawY + 20, "説明データがありません");
+            //    return 0;
+            //}
+
+            var result = docMng.GetExplanationContents(expressionType);
+            if(result == null)
             {
                 pdfUtil.DrawString(x, drawY + 20, "説明データがありません");
                 return 0;
             }
+            ExplanationReader reader = result.reader;
+
             drawY = pdfUtil.lastDrawY + 10;
-            foreach (var key in reader.GetExplanationKeys())
+            foreach (var key in result.reader.GetExplanationKeys())
             {
                 writeExplanation(x, drawY, reader, key, ref lastY);
 
@@ -1129,15 +1141,15 @@ namespace DivinationApp
         int writeExplanationInsen(float x, float y, ref float lastY)
         {
             string type = "陰占特徴";
-            ExplanationReader reader = new ExplanationReader();
-            string fileName = Common.GetExplanationDataFileName(type);
-            string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
+            //ExplanationReader reader = new ExplanationReader();
+            //string fileName = Common.GetExplanationDataFileName(type);
+            //string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
 
-            if (reader.ReadExcel(excelFilePath) != 0)
-            {
-                pdfUtil.DrawString(x, y, "説明データがありません");
-                return 0;
-            }
+            //if (reader.ReadExcel(excelFilePath) != 0)
+            //{
+            //    pdfUtil.DrawString(x, y, "説明データがありません");
+            //    return 0;
+            //}
 
             List<InsenDetail> lstDetail = new List<InsenDetail>();
 
@@ -1146,9 +1158,9 @@ namespace DivinationApp
             foreach (var item in lstDetail)
             {
                 pdfUtil.NewPage();
-
                 pdfUtil.DrawString(x, y, string.Format("■{0}:{1}", "陰占", item.sText));
-                writeExplanation(x, y + fntH + 5, reader, item.sText, ref lastY);
+
+                 writeExplanation(x, y + fntH + 5,  item.sText, ref lastY);
 
             }
             return 0;
@@ -1163,15 +1175,15 @@ namespace DivinationApp
         int writeExplanationYousen(float x, float y, ref float lastY)
         {
             string type = "陽占特徴";
-            ExplanationReader reader = new ExplanationReader();
-            string fileName = Common.GetExplanationDataFileName(type);
-            string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
+            //ExplanationReader reader = new ExplanationReader();
+            //string fileName = Common.GetExplanationDataFileName(type);
+            //string excelFilePath = Path.Combine(FormMain.GetExePath(), fileName);
 
-            if (reader.ReadExcel(excelFilePath) != 0)
-            {
-                pdfUtil.DrawString(x, y, "説明データがありません");
-                return 0;
-            }
+            //if (reader.ReadExcel(excelFilePath) != 0)
+            //{
+            //    pdfUtil.DrawString(x, y, "説明データがありません");
+            //    return 0;
+            //}
 
             List<YousenDetail> lstDetail = new List<YousenDetail>();
 
@@ -1182,7 +1194,9 @@ namespace DivinationApp
                  pdfUtil.NewPage();
 
                 pdfUtil.DrawString(x, y, string.Format("■{0}:{1}", "陽占", item.sText));
-                writeExplanation(x, y + fntH + 5, reader, item.sText, ref lastY);
+
+
+                writeExplanation(x, y + fntH + 5,  item.sText, ref lastY);
 
             }
             return 0;
@@ -1197,18 +1211,35 @@ namespace DivinationApp
         /// <param name="targetKey"></param>
         /// <param name="lastY"></param>
         /// <returns></returns>
-        int writeExplanation(float x, float y, ExplanationReader reader, string targetKey, ref float lastY)
+        int writeExplanation(float x, float y, string targetKey, ref float lastY)
         {
 
             targetKey = Common.TrimExplanationDataTargetKey(targetKey);
 
-            ExplanationReader.ExplanationData curData = reader.GetExplanation(targetKey);
-            if(curData==null || curData.pictureInfos.Count==0 || curData.pictureInfos[0]==null)
+
+            var result = docMng.GetExplanationContents(targetKey);
+            if (result == null || result.reader == null)
             {
                 pdfUtil.DrawString(x, y, targetKey);
-                pdfUtil.DrawString(x, pdfUtil.lastDrawY+5, "   ※説明データがありません");
+                pdfUtil.DrawString(x, pdfUtil.lastDrawY + 5, "   ※説明データがありません");
                 return 0;
             }
+
+            ExplanationReader reader = result.reader;
+
+            return writeExplanation(x, y, reader, targetKey, ref lastY);
+
+        }
+        int writeExplanation(float x, float y, ExplanationReader reader ,string targetKey, ref float lastY)
+        { 
+
+            ExplanationReader.ExplanationData curData = reader.GetExplanation(targetKey);
+            //if (curData == null || curData.Count == 0 /* || curData.pictureInfos[0]==null */)
+            //{
+            //    pdfUtil.DrawString(x, y, targetKey);
+            //    pdfUtil.DrawString(x, pdfUtil.lastDrawY + 5, "   ※説明データがありません");
+            //    return 0;
+            //}
 
             System.Drawing.ImageConverter imgconv = new System.Drawing.ImageConverter();
 
@@ -1222,56 +1253,82 @@ namespace DivinationApp
             float limitWidth = rect.Width/2.0f - 60;
 
             lastY = y;
+            var data = curData[1];
+            if (data == null) return 0;
 
-            System.Drawing.Image imageWk = (System.Drawing.Image)imgconv.ConvertFrom(curData.pictureInfos[0].pictureData.Data);
-            if (drawY + imageWk.Height >= pdfUtil.GetPageSize().Height - areaBottom)
+            if (data.type == ExcelReader.InfoType.PICTURE)
             {
-                drawX = x;
-                drawY = areaTop;
-                lastY = drawY;
-                pdfUtil.NewPage();
-            }
+                ExcelReader.PictureInfo picData = (ExcelReader.PictureInfo)data;
 
-
-            pdfUtil.DrawString(x, drawY, targetKey);
-            drawY = pdfUtil.lastDrawY;
-
-            for (int page = 0; page < curData.pictureInfos.Count; page++)
-            {
-                if (curData.pictureInfos[page] == null) continue;
-
-                System.Drawing.Image image = (System.Drawing.Image)imgconv.ConvertFrom(curData.pictureInfos[page].pictureData.Data);
-
-                iTextSharp.text.Image pdfImage = iTextSharp.text.Image.GetInstance(image, BaseColor.WHITE);
-
-                scale = (limitWidth / pdfImage.Width);
-
-                float ofsY = (pdfImage.Height * scale) + 10;
-                if (drawY + ofsY >= rect.Height - areaBottom) 
+                System.Drawing.Image imageWk = (System.Drawing.Image)imgconv.ConvertFrom(picData.pictureData.Data);
+                if (drawY + imageWk.Height >= pdfUtil.GetPageSize().Height - areaBottom)
                 {
-                    if (drawX == x && y + ofsY < rect.Height - areaBottom)
-                    {
-                        pdfUtil.DrawLine(centerX, y, centerX, rect.Height - areaBottom, 1, BaseColor.BLACK);
-                        drawX = centerX + 10;
-                        drawY = y;
-                    }
-                    else
-                    {
-                        drawX = x;
-                        drawY = areaTop;
-                        pdfUtil.NewPage();
-                    }
-
+                    drawX = x;
+                    drawY = areaTop;
+                    lastY = drawY;
+                    pdfUtil.NewPage();
                 }
 
-                pdfUtil.DrawPicture(drawX, drawY, scale, pdfImage);
 
-                drawY += ofsY ;
+                pdfUtil.DrawString(x, drawY, targetKey);
+                drawY = pdfUtil.lastDrawY + 5;
 
-                if (lastY < drawY) lastY = drawY;
+                for (int page = 1; page <= curData.Count; page++)
+                {
+                    float ofsY=0;
+                    data = curData[page];
+                    if (data == null) continue;
+
+                    if (data.type == ExcelReader.InfoType.PICTURE)
+                    {
+                        picData = (ExcelReader.PictureInfo)data;
+
+                        System.Drawing.Image image = (System.Drawing.Image)imgconv.ConvertFrom(picData.pictureData.Data);
+
+                        iTextSharp.text.Image pdfImage = iTextSharp.text.Image.GetInstance(image, BaseColor.WHITE);
+
+                        scale = (limitWidth / pdfImage.Width);
+
+                        ofsY = (pdfImage.Height * scale) + 10;
+                        if (drawY + ofsY >= rect.Height - areaBottom)
+                        {
+                            if (drawX == x && y + ofsY < rect.Height - areaBottom)
+                            {
+                                pdfUtil.DrawLine(centerX, y, centerX, rect.Height - areaBottom, 1, BaseColor.BLACK);
+                                drawX = centerX + 10;
+                                drawY = y;
+                            }
+                            else
+                            {
+                                drawX = x;
+                                drawY = areaTop;
+                                pdfUtil.NewPage();
+                            }
+
+                        }
+
+                        pdfUtil.DrawPicture(drawX, drawY, scale, pdfImage);
+
+
+                    }
+                    else if (data.type == ExcelReader.InfoType.TEXT)
+                    {
+                        ExcelReader.TextInfo txtData = (ExcelReader.TextInfo)data;
+
+                        pdfUtil.DrawLine(drawX, drawY, drawX + limitWidth, drawY, 1, BaseColor.BLACK);
+                        ofsY = 180;
+                        Rectangle txtRect = new Rectangle(drawX, drawY, drawX + limitWidth, drawY+ ofsY);
+                        pdfUtil.DrawStringColumn(txtRect,
+                                            Element.ALIGN_LEFT | Element.ALIGN_TOP,
+                                            txtData.Text);
 
 
 
+
+                    }
+                    drawY += ofsY;
+                    if (lastY < drawY) lastY = drawY;
+                }
             }
 
             return 0;
@@ -1675,24 +1732,40 @@ namespace DivinationApp
             if (fmt == null) return;
             string str = string.Format(fmt, item);
 
+        
             System.Drawing.SizeF size = MeasureString(str);
             int x = (int)(rect.Left + 1);
-            switch (align)
+            int horAlign = align & (Element.ALIGN_LEFT | Element.ALIGN_CENTER | Element.ALIGN_RIGHT);
+            switch (horAlign)
             {
                 case iTextSharp.text.Element.ALIGN_LEFT:
                     x = (int)(rect.Left + 1);
                     break;
                 case iTextSharp.text.Element.ALIGN_CENTER:
                     x = (int)(rect.Left + (rect.Width - size.Width) / 2);
-                    
+
                     break;
                 case iTextSharp.text.Element.ALIGN_RIGHT:
                     x = (int)(rect.Right - size.Width);
                     break;
             }
 
+            int y = 0;
+            int verAlign = align & (Element.ALIGN_TOP| Element.ALIGN_BOTTOM| Element.ALIGN_MIDDLE);
+            switch (verAlign)
+            {
+                case iTextSharp.text.Element.ALIGN_TOP:
+                    y = (int)(rect.Top + 1);
+                    break;
+                case iTextSharp.text.Element.ALIGN_BOTTOM:
+                    y = (int)(rect.Right - size.Width);
+                    break;
 
-            int y = (int)(rect.Bottom + (rect.Height - size.Height) / 2 + size.Height); //y座標は文字の下の位置なので更に文字の高さを加算
+                case iTextSharp.text.Element.ALIGN_MIDDLE:
+                default:
+                    y = (int)(rect.Bottom + (rect.Height - size.Height) / 2 + size.Height); //y座標は文字の下の位置なので更に文字の高さを加算
+                    break;
+            }
 
             cb.SetColorFill(color);
             cb.BeginText(); //テキスト描画開始
@@ -1713,6 +1786,43 @@ namespace DivinationApp
             Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
 
             DrawString(rect_, align, lineColor_, fmt, item);
+
+        }
+
+
+        public void DrawStringColumn(Rectangle rect, int align, string fmt, params object[] item)
+        {
+
+            //BaseColor lineColor_ = new BaseColor(color);
+            Rectangle rect_ = new iTextSharp.text.Rectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
+
+            ColumnText columnText = new ColumnText(cb);
+            //columnText.SetSimpleColumn(
+            //      new Phrase(string.Format(fmt, item), font)
+            //      , rect.Left
+            //      , rect.Bottom
+            //      , rect.Right
+            //      , rect.Top
+            //      , fontSize
+            //      , Element.ALIGN_LEFT    //ちなみに、SetSimpleColumnでは、ALIGN_MIDDLE（縦方向の中寄せ）は使えない
+            //      ) ;
+
+            columnText.SetSimpleColumn(
+                   new Phrase(string.Format(fmt, item), font)
+                   , rect.Left
+                   , Y( rect.Bottom )
+                   , rect.Right
+                   , Y( rect.Top )
+                   , fontSize
+                   , Element.ALIGN_LEFT    //ちなみに、SetSimpleColumnでは、ALIGN_MIDDLE（縦方向の中寄せ）は使えない
+                   );
+
+            //テキスト描画シミュレーション
+            int result = columnText.Go();
+            if( result == ColumnText.NO_MORE_COLUMN)
+            {
+
+            }
 
         }
 

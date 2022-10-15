@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace DivinationApp
 {
-    public partial class FormOption : ModalBase
+    public partial class FormOption : DialogBase
     {
         public FormOption()
         {

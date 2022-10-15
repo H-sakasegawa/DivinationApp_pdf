@@ -12,7 +12,7 @@ using System.Configuration;
 
 namespace DivinationApp
 {
-    public partial class FormPDF : ModelessBase
+    public partial class FormPDF : DialogBase
     {
         Persons personList;
         bool bStop = false;

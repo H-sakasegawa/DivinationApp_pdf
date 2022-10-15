@@ -60,6 +60,19 @@ namespace DivinationApp
         }
 
         /// <summary>
+        /// 指定行の有効列数を取得
+        /// </summary>
+        /// <param name="sheet"></param>
+        /// <param name="idxRow"></param>
+        /// <returns></returns>
+        public static int GetCellCount(ISheet sheet, int idxRow)
+        {
+            var row = sheet.GetRow(idxRow);
+            if (row == null) return -1;
+
+            return row.LastCellNum;
+        }
+        /// <summary>
         ///  シート(Sheet)から行を取得関数
         /// </summary>
         /// <param name="sheet">シート</param>
@@ -214,11 +227,31 @@ namespace DivinationApp
         {
             return new HSSFWorkbook();
         }
-
-        public class PictureInfo
+        public enum InfoType
         {
+            NONE = 0,
+            PICTURE,
+            TEXT
+        }
+
+        public class InfoBase
+        {
+            public InfoType type;
             public int row;
             public int col;
+        }
+
+        public class TextInfo : InfoBase
+        {
+            public TextInfo() { type = InfoType.TEXT; }
+            public string Text { get { return textData; } }
+            public string textData;
+
+        }
+
+        public class PictureInfo : InfoBase
+        {
+            public PictureInfo() { type = InfoType.PICTURE; }
             public IPictureData pictureData;
             public int width;
             public int height;

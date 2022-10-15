@@ -189,7 +189,7 @@ namespace DivinationApp
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormOption";
-            this.Text = "FormOption";
+            this.Text = "オプション設定";
             this.Load += new System.EventHandler(this.FormOption_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

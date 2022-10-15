@@ -14,7 +14,7 @@ namespace DivinationApp
     /// <summary>
     /// 守護神法　表示画面
     /// </summary>
-    public partial class FormShugoSinHou : ModelessBase
+    public partial class FormShugoSinHou : DialogBase
     {
         public delegate void CloseHandler();
         public delegate void UpdateShugoSin();
@@ -212,11 +212,11 @@ namespace DivinationApp
         {
             string gogyo = tblMng.jyukanTbl.GetGogyo(person.nikkansi.kan);
 
-            string expressionType = string.Format("守護神{0}{1}", person.nikkansi.kan, gogyo);
+            //string expressionType = string.Format("守護神{0}{1}", person.nikkansi.kan, gogyo);
             string expressionKey = string.Format("{0}{1}", person.nikkansi.kan, gogyo);
 
             //画面に表示されている
-            FormMain.GetFormMain().ShowExplanation(expressionType, expressionKey);
+            FormMain.GetFormMain().ShowExplanation( expressionKey);
 
         }
     }

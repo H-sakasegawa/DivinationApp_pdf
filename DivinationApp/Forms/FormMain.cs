@@ -29,7 +29,7 @@ namespace DivinationApp
         public DocumentManager docMng = new DocumentManager();
 
 
-        List<ModelessBase> lstModlessForms = new List<ModelessBase>();
+        List<DialogBase> lstModlessForms = new List<DialogBase>();
         FormFinder frmFinder = null;
         FormFinderCustom frmFinderCustom = null;
         FormExplanation frmExplanation = null;
@@ -125,7 +125,7 @@ namespace DivinationApp
 
         }
 
-        private void OnModelessFormClose(ModelessBase frm)
+        private void OnModelessFormClose(DialogBase frm)
         {
             lstModlessForms.Remove(frm);
             if (frm == frmFinderCustom) frmFinderCustom = null;
@@ -223,7 +223,7 @@ namespace DivinationApp
             lstModlessForms.Add(frmFinder);
         }
 
-        private void OnFrmFinder_Close(ModelessBase frm)
+        private void OnFrmFinder_Close(DialogBase frm)
         {
             lstModlessForms.Remove(frm);
             if(frm == frmFinder)
@@ -385,34 +385,45 @@ namespace DivinationApp
             frm.ShowDialog();
         }
 
-
-        public void ShowExplanation(string type, string key)
+        public void ShowExplanation(string contentsKey)
         {
-            if (frmExplanation != null)
+            ShowExplanation(null, contentsKey);
+        }
+        public void ShowExplanation( string subCategory, string contentsKey)
+        {
+            if (frmExplanation == null)
             {
-                frmExplanation.Show( key);
-                frmExplanation.Activate();
-                return;
+                frmExplanation = new FormExplanation();
+                lstModlessForms.Add(frmExplanation);
+                frmExplanation.OnClose += OnModelessFormClose;
             }
 
-            frmExplanation = new FormExplanation();
-            frmExplanation.OnClose += OnModelessFormClose;
-            frmExplanation.Show( key);
-            lstModlessForms.Add(frmExplanation);
+            if (!string.IsNullOrEmpty(contentsKey))
+            {
+                frmExplanation.ShowContents(contentsKey);
+            }
+            else if (!string.IsNullOrEmpty(subCategory))
+            {
+                frmExplanation.ShowSubCategory(subCategory);
+            }else
+            {
+                frmExplanation.ShowExplanation();
+            }
+
+
+            frmExplanation.Activate();
         }
         private void mnuDocViewer_Click(object sender, EventArgs e)
         {
-            if (frmExplanation != null)
+            if (frmExplanation == null)
             {
-                frmExplanation.Show();
-                frmExplanation.Activate();
-                return;
+                frmExplanation = new FormExplanation();
+                frmExplanation.OnClose += OnModelessFormClose;
+                lstModlessForms.Add(frmExplanation);
             }
 
-            frmExplanation = new FormExplanation();
-            frmExplanation.OnClose += OnModelessFormClose;
-            frmExplanation.Show();
-            lstModlessForms.Add(frmExplanation);
+            frmExplanation.ShowContents();
+            frmExplanation.Activate();
         }
 
         /// <summary>

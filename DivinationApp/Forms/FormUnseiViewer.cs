@@ -12,7 +12,7 @@ using System.Configuration;
 namespace DivinationApp
 {
 
-    public partial class FormUnseiViewer : ModelessBase
+    public partial class FormUnseiViewer : DialogBase
     {
         //年運表行データTag情報
         class RowItems
