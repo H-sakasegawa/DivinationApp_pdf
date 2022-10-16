@@ -1710,6 +1710,9 @@ namespace DivinationApp
                         e.Handled = true;
                     }
                     break;
+                case Keys.Space:
+                    EditCarrer();
+                    break;
             }
         }
         private void lvGetuun_KeyDown(object sender, KeyEventArgs e)
@@ -1773,6 +1776,10 @@ namespace DivinationApp
         /// <param name="e"></param>
         private void lvNenun_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            EditCarrer();
+        }
+        void EditCarrer()
+        {
             ListViewItem item = lvNenun.SelectedItems[0];
 
             GetuunNenunLvItemData itemData = (GetuunNenunLvItemData)item.Tag;
@@ -1785,9 +1792,7 @@ namespace DivinationApp
                 DispCarrerList(curPerson);
             }
 
-
         }
-
 
 
 

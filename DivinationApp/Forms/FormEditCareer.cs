@@ -42,5 +42,14 @@ namespace DivinationApp
             person.career[year] = txtCareer.Text;
             person.career.Save();
         }
+
+        private void txtCareer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if( e.Shift && e.KeyCode==Keys.Enter)
+            {
+                button1_Click(null, null);
+                this.Close();
+            }
+        }
     }
 }

@@ -95,6 +95,7 @@ namespace DivinationApp
             this.txtCareer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtCareer.Size = new System.Drawing.Size(300, 86);
             this.txtCareer.TabIndex = 1;
+            this.txtCareer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCareer_KeyDown);
             // 
             // label3
             // 
@@ -132,7 +133,6 @@ namespace DivinationApp
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
             this.Name = "FormEditCareer";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "経歴編集";
             this.Load += new System.EventHandler(this.EditCareer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
