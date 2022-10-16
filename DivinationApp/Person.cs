@@ -2166,9 +2166,11 @@ namespace DivinationApp
                         string s = string.Format("{0},{1}", item.Key, value);
                         sw.WriteLine(s);
                     }
-                    string sMemo = string.Format("{0},{1}", KEY_MEMO, memo.Replace("\r\n", "\\n") );
-                    sw.WriteLine(sMemo);
-
+                    if (!string.IsNullOrEmpty(memo))
+                    {
+                        string sMemo = string.Format("{0},{1}", KEY_MEMO, memo.Replace("\r\n", "\\n"));
+                        sw.WriteLine(sMemo);
+                    }
                 }
 
             }
