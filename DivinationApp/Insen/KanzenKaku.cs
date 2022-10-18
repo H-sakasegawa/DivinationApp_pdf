@@ -176,6 +176,8 @@ namespace DivinationApp
 
         static List<Result> GetKanzenkaku_Sub( List<JukanSiGogyouTbl> lstTbl, string gogyouPattern=null)
         {
+            bool bIsKangouSigouHankai = gogyouPattern == null ? false : true;
+
             List<Result> lstResult = new List<Result>();
             try
             {
@@ -185,12 +187,12 @@ namespace DivinationApp
  
 
                 //印綬格判定
-                if (IsInjuKaku(lstTbl, ref lstResult)) { return lstResult; }
+                if (IsInjuKaku(lstTbl, bIsKangouSigouHankai, ref lstResult)) { return lstResult; }
 
 
                 //従化五格判定
                 ResultInf resultInf = new ResultInf();
-                if (IsJukaGoKaku( lstTbl, ref resultInf))
+                if (IsJukaGoKaku( lstTbl, bIsKangouSigouHankai, ref resultInf))
                 {
                     string name = string.Format("{0}", resultInf.subName);
                     string subInf = null;
@@ -267,7 +269,7 @@ namespace DivinationApp
         /// </summary>
         /// <param name="insenGogyo">陰占の五行属性リスト</param>
         /// <returns></returns>
-        static bool IsInjuKaku(List<JukanSiGogyouTbl> lstTbl, ref List<Result> lstResult)
+        static bool IsInjuKaku(List<JukanSiGogyouTbl> lstTbl, bool bIsKangouSigouHankai, ref List<Result> lstResult)
         {
             TableMng tblMng = TableMng.GetTblManage();
 
@@ -289,16 +291,29 @@ namespace DivinationApp
                 return true;
             }else if(lstNgIndex.Count == 1)
             {
-                Result result = new Result("印綬格:一点破格");
-
-                result.subInfo = string.Format("  {0}が破の守護神", GetShugosin(lstTbl[lstNgIndex[0]]));
-                lstResult.Add(result);
+                Result result=null;
+                if (bIsKangouSigouHankai) //支合、干合、半会のパターンの場合
+                {
+                    //日干と不足干支の五行が異なれば一点破格
+                    if (nikkanAttr != lstTbl[lstNgIndex[0]].insenGogyo)
+                        result = new Result("印綬格:一点破格");
+                }
+                else
+                {
+                    result = new Result("印綬格:一点破格");
+                }
+                if (result != null)
+                {
+                    result.subInfo = string.Format("  {0}が破の守護神", GetShugosin(lstTbl[lstNgIndex[0]]));
+                    lstResult.Add(result);
+                }
                 return true;
             }
             return false;
         }
 
-        static bool IsJukaGoKaku( List<JukanSiGogyouTbl> lstTbl, ref ResultInf inf)
+
+        static bool IsJukaGoKaku( List<JukanSiGogyouTbl> lstTbl, bool bIsKangouSigouHankai, ref ResultInf inf)
         {
             TableMng tblMng = TableMng.GetTblManage();
 
@@ -320,9 +335,12 @@ namespace DivinationApp
             if (IsCheckJukanGokaku(lstTbl, createToAttr, null, ref lstNgAttrIndex)) { inf.subName = "従生格"; return true; }
             else if (lstNgAttrIndex.Count == 1) 
             {
-                inf.subName = "従生格:一点破格";
-                inf.shugosin = GetShugosin( lstTbl[lstNgAttrIndex[0]]);
-                return true; 
+                if(IsIttenHakaku( bIsKangouSigouHankai, nikkanAttr, lstTbl[lstNgAttrIndex[0]].insenGogyo))
+                {
+                    inf.subName = "従生格:一点破格";
+                    inf.shugosin = GetShugosin(lstTbl[lstNgAttrIndex[0]]);
+                    return true;
+                }
             }
 
             //■従財格
@@ -330,9 +348,12 @@ namespace DivinationApp
             if (IsCheckJukanGokaku(lstTbl, destroyToAttr, null, ref lstNgAttrIndex)) { inf.subName = "従財格"; return true; }
             else if (lstNgAttrIndex.Count == 1)
             {
-                inf.subName = "従財格:一点破格";
-                inf.shugosin = GetShugosin( lstTbl[lstNgAttrIndex[0]]);
-                return true;
+                if (IsIttenHakaku(bIsKangouSigouHankai, nikkanAttr, lstTbl[lstNgAttrIndex[0]].insenGogyo))
+                {
+                    inf.subName = "従財格:一点破格";
+                    inf.shugosin = GetShugosin(lstTbl[lstNgAttrIndex[0]]);
+                    return true;
+                }
             }
 
             //■従生財格
@@ -340,9 +361,12 @@ namespace DivinationApp
             if (IsCheckJukanGokaku(lstTbl, createToAttr, destroyToAttr, ref lstNgAttrIndex)) { inf.subName = "従生財格"; return true; }
             else if (lstNgAttrIndex.Count == 1)
             {
-                inf.subName = "従生財格:一点破格";
-                inf.shugosin = GetShugosin( lstTbl[lstNgAttrIndex[0]]);
-                return true;
+                if (IsIttenHakaku(bIsKangouSigouHankai, nikkanAttr, lstTbl[lstNgAttrIndex[0]].insenGogyo))
+                {
+                    inf.subName = "従生財格:一点破格";
+                    inf.shugosin = GetShugosin(lstTbl[lstNgAttrIndex[0]]);
+                    return true;
+                }
             }
 
             //■従官格
@@ -350,9 +374,12 @@ namespace DivinationApp
             if (IsCheckJukanGokaku(lstTbl, destroyFromAttr, null, ref lstNgAttrIndex)) { inf.subName = "従官格"; return true; }
             else if (lstNgAttrIndex.Count == 1)
             {
-                inf.subName = "従官格:一点破格";
-                inf.shugosin = GetShugosin( lstTbl[lstNgAttrIndex[0]]);
-                return true;
+                if (IsIttenHakaku(bIsKangouSigouHankai, nikkanAttr, lstTbl[lstNgAttrIndex[0]].insenGogyo))
+                {
+                    inf.subName = "従官格:一点破格";
+                    inf.shugosin = GetShugosin(lstTbl[lstNgAttrIndex[0]]);
+                    return true;
+                }
             }
 
             //■殺印相生格
@@ -360,9 +387,12 @@ namespace DivinationApp
             if (IsCheckJukanGokaku(lstTbl, destroyFromAttr, createFromAttr, ref lstNgAttrIndex)) { inf.subName = "殺印相生格"; return true; }
             else if (lstNgAttrIndex.Count == 1)
             {
-                inf.subName = "殺印相生格:一点破格";
-                inf.shugosin = GetShugosin( lstTbl[lstNgAttrIndex[0]] );
-                return true;
+                if (IsIttenHakaku(bIsKangouSigouHankai, nikkanAttr, lstTbl[lstNgAttrIndex[0]].insenGogyo))
+                {
+                    inf.subName = "殺印相生格:一点破格";
+                    inf.shugosin = GetShugosin(lstTbl[lstNgAttrIndex[0]]);
+                    return true;
+                }
             }
 
 
@@ -440,6 +470,32 @@ namespace DivinationApp
                 }
             }
             return lstNgAttrIndex.Count==0?true:false;
+        }
+
+        /// <summary>
+        /// 一点破格判定
+        /// </summary>
+        /// <param name="bIsKangouSigouHankai"></param>
+        /// <param name="nikkanAttr"></param>
+        /// <param name="ngAttr"></param>
+        /// <returns></returns>
+        static bool IsIttenHakaku(bool bIsKangouSigouHankai, string nikkanAttr, string ngAttr)
+        {
+
+            if (bIsKangouSigouHankai) //支合、干合、半会のパターンの場合
+            {
+                //日干と不足干支の五行が異なれば一点破格
+                if (nikkanAttr != ngAttr)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+            return false;
+
         }
 
 

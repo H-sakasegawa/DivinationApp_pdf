@@ -38,7 +38,8 @@ namespace DivinationApp
 
         private void FormExplanation_Load(object sender, EventArgs e)
         {
-            this.TopMost = true;
+            //桑原さんからの要望でTopMostにしない
+           // this.TopMost = true;
 
             picExplanation.Visible = false;
             txtExplanation.Visible = false;
